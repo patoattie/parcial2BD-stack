@@ -12,6 +12,8 @@ import { environment } from '../environments/environment';
 import { LoginComponent } from './componentes/login/login.component';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { AuthService } from './servicios/auth.service';
+import {DatePipe} from '@angular/common';
+
 
 //primeNG
 import {ToolbarModule} from 'primeng/toolbar';
@@ -51,6 +53,7 @@ import { UsuariosService } from './servicios/usuarios.service';
     FormBuilder,
     AuthService,
     UsuariosService,
+    DatePipe,
     { provide: FirestoreSettingsToken, useValue: {} }
   ],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireStorage } from "@angular/fire/storage";
 import { Router } from "@angular/router";
+import {DatePipe} from '@angular/common';
 import * as firebase from 'firebase/app';
 
 import { Usuario } from "../interfaces/usuario";
@@ -19,7 +20,9 @@ export class AuthService {
     public afs: AngularFirestore,   // Inject Firestore service
     public storage: AngularFireStorage,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
-    public router: Router) 
+    public router: Router,
+    public pipe: DatePipe
+    ) 
     {
       /* Saving user data in localstorage when 
       logged in and setting up null when logged out */
@@ -90,7 +93,7 @@ export class AuthService {
             }
           };
 
-          let uploadTask = this.storage.upload('images/' + archivoFoto.name, archivoFoto, metadata);
+          let uploadTask = this.storage.upload('avatares/' + this.pipe.transform(new Date(), 'yyyyMMddHHmmSSS') + archivoFoto.name, archivoFoto, metadata);
 
           uploadTask.task.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
             (snapshot) =>

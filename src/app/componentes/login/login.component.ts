@@ -28,7 +28,13 @@ export class LoginComponent implements OnInit {
 
   clase="progress-bar progress-bar-info progress-bar-striped ";
 
-  constructor(private miConstructor: FormBuilder, private route: ActivatedRoute, private router: Router, public authService: AuthService, private usuariosService: UsuariosService) 
+  constructor(
+    private miConstructor: FormBuilder, 
+    private route: ActivatedRoute, 
+    private router: Router, 
+    public authService: AuthService, 
+    private usuariosService: UsuariosService
+    ) 
     {
       this.progreso=0;
       this.ProgresoDeAncho="0%";
