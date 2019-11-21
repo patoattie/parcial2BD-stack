@@ -21,6 +21,7 @@ import { InputTextModule } from "primeng/inputtext";
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
+import { UsuariosService } from './servicios/usuarios.service';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { RegistroComponent } from './componentes/registro/registro.component';
   providers: [
     FormBuilder,
     AuthService,
+    UsuariosService,
     { provide: FirestoreSettingsToken, useValue: {} }
   ],
   bootstrap: [AppComponent]
