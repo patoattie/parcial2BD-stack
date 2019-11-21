@@ -92,7 +92,7 @@ export class UsuariosService
 
   public SetData(usuario: DocumentReference)
   {
-    const usuarioRef: AngularFirestoreDocument<any> = this.afs.doc(`Usuarios/${usuario.id}`);
+    const usuarioRef: AngularFirestoreDocument<any> = this.afs.doc(`usuarios/${usuario.id}`);
     const usuarioData = {
       idCollection: usuario.id,
       uid: this.authService.getUid()

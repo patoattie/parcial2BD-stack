@@ -18,6 +18,7 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
 import { InputTextModule } from "primeng/inputtext";
+import {ListboxModule} from 'primeng/listbox';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
@@ -43,6 +44,7 @@ import { UsuariosService } from './servicios/usuarios.service';
     ButtonModule,
     CardModule,
     InputTextModule,
+    ListboxModule,
     AppRoutingModule
   ],
   providers: [

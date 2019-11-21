@@ -26,6 +26,9 @@
         <label><b>Repita la clave</b></label>
         <input formControlName="confirmaClave" type="password" placeholder="Aca repeti la misa clave  de arriba" name="psw-repeat" required>
   
+        <label><b>Selecciona una sucursal</b></label>
+        <p-listbox formControlName="sucursal" [options]="sucursales" [(ngModel)]="unaSucursal"></p-listbox>
+        
         <div>
           <label><b>Selecciona una imagen para el perfil</b></label>
         </div>
@@ -49,8 +52,8 @@
             Registrarme
             <i class="fa fa-spinner fa-spin" *ngIf="getEnEspera()"></i>
           </button>
-          <p *ngIf="getErrorDatos()" style="color: #ea6153;">Por favor verificá que hayas ingresado un E-Mail válido y una Clave.</p>
-          <p *ngIf="getErrorClave()" style="color: #ea6153;">La confirmación de la clave no coincide con la clave ingresada.</p>
+          <p *ngIf="getErrorDatos()" style="color: #ea6153;">{{getMsjErrorDatos()}}</p>
+          <p *ngIf="getErrorClave()" style="color: #ea6153;">{{getMsjErrorClave()}}</p>
           <p *ngIf="getError()" style="color: #ea6153">{{authService.getError()}}</p>
         </div>
       </div>

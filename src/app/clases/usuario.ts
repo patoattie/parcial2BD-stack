@@ -7,4 +7,12 @@ export class Usuario
   public uid: string;
   public perfil: EPerfil;
   public sucursal: ESucursal;
+
+  constructor(perfil?: EPerfil, sucursal?: ESucursal, idCollection?: string, uid?: string)
+	{
+    this.perfil = perfil;
+    this.sucursal = sucursal;
+		this.idCollection = idCollection;
+		this.uid = uid;
+	}
 }

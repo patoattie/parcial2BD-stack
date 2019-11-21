@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../servicios/auth.service';
-//import { JugadoresService } from '../../servicios/jugadores.service';
+import { UsuariosService } from '../../servicios/usuarios.service';
 //import { Jugador } from '../../clases/jugador';
 //import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -13,7 +13,7 @@ export class CabeceraComponent implements OnInit {
   //public jugadores: Jugador[] = [];
   //public jugador: Jugador;
 
-  constructor(public authService: AuthService/*, public jugadoresService: JugadoresService, private afs: AngularFirestore*/) {/*this.leerJugador(); */}
+  constructor(public authService: AuthService, public usuariosService: UsuariosService/*, private afs: AngularFirestore*/) {/*this.leerJugador(); */}
 
   ngOnInit() 
   {
@@ -53,7 +53,7 @@ export class CabeceraComponent implements OnInit {
 
   public async salir(): Promise<void>
   {
-    //await this.jugadoresService.SignOut();
+    await this.usuariosService.SignOut();
     await this.authService.SignOut();
   }
 
