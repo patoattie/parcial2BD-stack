@@ -1,0 +1,46 @@
+<app-cabecera>  </app-cabecera>
+
+<div class="container" >
+    <div class="jumbotron" style="padding:50px;">
+      <!-- <form action="return true;"> -->
+      <form [formGroup]="formLogin">
+        <!-- <div class="imgcontainer">
+          <img src="./assets/imagenes/login.png" alt="Avatar" class="avatar" max-width="104" (click)="completarUsuario()">
+        </div> -->
+  
+        <div class="container">
+          <label><b>Usuario</b></label>
+          <!-- <input type="text" placeholder="Usuario"  [(ngModel)]="usuario"  name="uname" required> -->
+          <input formControlName="usuario" type="text" placeholder="Usuario" name="uname" required>
+  
+          <label><b>Clave</b></label>
+          <input formControlName="clave" type="password" placeholder="Clave" name="psw" required>
+              
+          <!-- <button *ngIf="logeando"  (click)="MoverBarraDeProgreso()" >Ingresar</button>
+         
+          <div *ngIf="!logeando" class="progress">
+              <div class="progress-bar progress-bar-info progress-bar-striped active" [class]="clase" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" [style.width]="ProgresoDeAncho" >
+                {{progresoMensaje}} - {{progreso}}%
+              </div>
+          </div> -->
+         
+          <button type="button" (click)="login()">
+            Ingresar
+            <i class="fa fa-spinner fa-spin" *ngIf="getEnEspera()"></i>
+          </button>
+          <p *ngIf="getErrorDatos()" style="color: #ffffff;background-color: #ea6153">Por favor verificá que hayas ingresado un E-Mail válido y una Clave.</p>
+          <p *ngIf="getError()" style="color: #ffffff;background-color: #ea6153">{{authService.getError()}}</p>
+         
+          <!-- <input type="checkbox" checked="checked"> Recordar mis datos -->
+        </div>
+  
+        <div class="container" style="background-color:#f1f1f1">
+          <!-- <button type="button" class="cancelbtn" routerLink="">Cancelar</button> -->
+          <button type="button" class="aceptbtn" routerLink="/Registro" >Registrarse</button>
+          <button type="button" class="userbtn" (click)="completarUsuario()" >Usuario</button>
+          <!-- <span class="psw">Te olvidaste <a href="#">la clave?</a></span> -->
+        </div>
+       
+      </form>
+    </div>
+  </div>

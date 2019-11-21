@@ -1,0 +1,12 @@
+<p-toolbar>
+    <div class="ui-toolbar-group-left">
+      <label style="margin-right: 3em; font-size: large;" *ngIf="!authService.isLoggedIn()">Sistema de Control de Stock</label>
+      <img [src]=getUrlFoto() alt="usuario" *ngIf="authService.isLoggedIn()" width="32" height="32">
+      <!-- <label style="margin-right: 3em; font-size: large;" *ngIf="authService.isLoggedIn() && jugadoresService.getJugador(authService.getUserData().email) != null">{{authService.getUserData().email}}({{jugadoresService.getJugador(authService.getUserData().email).cuit}}|{{jugadoresService.getJugador(authService.getUserData().email).sexo}})</label> -->
+    </div>
+    <div class="ui-toolbar-group-right">
+      <!-- <button pButton type="button" label="Registrarse" icon="pi pi-user-plus" routerLink="/Registro" style="margin-right: .5em" *ngIf="!authService.isLoggedIn()"></button>
+      <button pButton type="button" label="Ingresar" icon="pi pi-sign-in" routerLink="/Login" style="margin-right: .5em" class="ui-button-success" *ngIf="!authService.isLoggedIn()"></button> -->
+      <button pButton type="button" label="Salir" icon="pi pi-sign-out" (click)="salir()" style="margin-right: .5em" class="ui-button-danger" *ngIf="authService.isLoggedIn()"></button>
+    </div>
+</p-toolbar>

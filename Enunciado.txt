@@ -1,0 +1,14 @@
+Control de Stock
+
+Sistema que controla stock y movimientos, quién hizo qué movimiento.
+Traslado de stock, baja en sucursal de origen, queda en tránsito la mercadería, luego cuando llega a destino se incrementa el stock.
+
+Producto imagen igual que usuario, también tiene un listado.
+Busqueda de producto, luego selecciono y me lleva a un detalle, historial con foto del producto y distintas informaciones. 
+Abajo va botón que permita sumar stock y otro que permita sacar stock, detalle de suba o baja.
+Las grillas no tienen interacción.
+
+Dar de alta locales, en el producto tengo que tener el local donde lo doy de alta. Tiene que estar bindeado al local del usuario, pero si es admin puede cargar en cualquier local.
+La relación puede ser compuesta o a través del id.
+
+Agregar informes: jspdf, convert json to csv, hichart
