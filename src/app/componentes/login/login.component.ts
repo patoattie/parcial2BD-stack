@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
       if(usuarioValido)
       {
         //this.completarUsuario('blanquear');
-       await this.usuariosService.getUsua(this.authService.getUid());
+       await this.usuariosService.getUsuario(this.authService.getUid());
       }
     }
     else
