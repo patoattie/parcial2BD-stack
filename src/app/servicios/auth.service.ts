@@ -230,7 +230,7 @@ export class AuthService {
         retorno = 'E-Mail inexistente o Clave incorrecta';
         break;
       case 'auth/email-already-in-use':
-        retorno = 'El jugador ya se encuentra registrado';
+        retorno = 'El usuario ya se encuentra registrado';
         break;
       case 'auth/user-not-found':
         retorno = 'E-Mail inexistente o Clave incorrecta';
