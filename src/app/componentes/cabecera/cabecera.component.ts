@@ -59,6 +59,6 @@ export class CabeceraComponent implements OnInit {
 
   public getUrlFoto(): string
   {
-    return this.authService.getUrlFoto();
+    return this.authService.getUserData().photoURL;
   }
 }

@@ -250,9 +250,4 @@ export class AuthService {
   {
     return this.userData.uid;
   }
-
-  public getUrlFoto(): string
-  {
-    return JSON.parse(localStorage.getItem("user")).photoURL;
-  }
 }
