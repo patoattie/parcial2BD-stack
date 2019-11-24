@@ -59,11 +59,11 @@ export class CabeceraComponent implements OnInit {
 
   public getUrlFoto(): string
   {
-    let urlFoto: string = undefined; //this.authService.getUserData().photoURL;
+    let urlFoto: string = this.authService.getUserData().photoURL;
 
     if(urlFoto == undefined)
     {
-      urlFoto = '../../../assets/avatares/avatardefault.png';
+      urlFoto = 'https://stackblitz.com/files/parcial2bd-stack/github/patoattie/parcial2BD-stack/master/src/assets/avatares/avatardefault.png';
     }
 
     return urlFoto;
