@@ -19,8 +19,6 @@ import {MessageService} from 'primeng/api';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
-  private ok: boolean; //Login OK
-  private error: boolean; //Login fallido
   public formRegistro: FormGroup;
   private enEspera: boolean; //Muestra u oculta el spinner
   public sucursales: SelectItem[];
@@ -87,20 +85,8 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.ok = false;
-    this.error = false;
     this.enEspera = false;
     this.formRegistro.setValue({usuario: '', clave: '', confirmaClave: '', sucursal: '', perfil: '', imagen: ''});
-  }
-
-  public getOk(): boolean
-  {
-    return this.ok;
-  }
-
-  public getError(): boolean
-  {
-    return this.error;
   }
 
   private mostrarMsjErrorDatos(): void
@@ -150,8 +136,6 @@ export class RegistroComponent implements OnInit {
         let file = $("#img-file").get(0).files[0];
         await this.authService.SignUp(this.formRegistro.value.usuario, this.formRegistro.value.clave, null, file);
         usuarioValido = this.authService.isLoggedIn();
-        this.error = !usuarioValido;
-        this.ok = usuarioValido;
         if(usuarioValido)
         {
           await this.usuariosService.addUsuario(new Usuario(EPerfil.Operador, this.formRegistro.value.sucursal));
@@ -163,15 +147,11 @@ export class RegistroComponent implements OnInit {
       }
       else //El usuario no confirmó bien la clave
       {
-        this.error = false;
-        this.ok = false;
         this.mostrarMsjErrorClave();
       }
     }
     else
     {
-      this.error = false;
-      this.ok = false;
       this.mostrarMsjErrorDatos();
     }
 
