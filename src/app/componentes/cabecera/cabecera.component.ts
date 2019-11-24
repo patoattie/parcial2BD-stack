@@ -59,7 +59,7 @@ export class CabeceraComponent implements OnInit {
 
   public getUrlFoto(): string
   {
-    let urlFoto: string = this.authService.getUserData().photoURL;
+    let urlFoto: string = undefined; //this.authService.getUserData().photoURL;
 
     if(urlFoto == undefined)
     {
