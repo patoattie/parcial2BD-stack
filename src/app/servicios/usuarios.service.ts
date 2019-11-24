@@ -106,4 +106,14 @@ export class UsuariosService
   {
     localStorage.removeItem('usuario');
   }
+
+  public getPswAdmin():string
+  {
+    return 'admin1234';
+  }
+
+  public getMsjErrorAdmin(): string
+  {
+    return 'Clave de Administrador incorrecta';
+  }
 }

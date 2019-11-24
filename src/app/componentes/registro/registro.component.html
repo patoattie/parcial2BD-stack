@@ -33,6 +33,7 @@
   
         <label><b>Selecciona un perfil</b></label>
         <p-listbox formControlName="perfil" [options]="perfiles"></p-listbox>
+        <input formControlName="habilitaAdmin" type="password" placeholder="Ingrese clave para habilitar Admin" name="pswAdmin" *ngIf="eligeAdmin()">
         
         <div>
           <label><b>Selecciona una imagen para el perfil</b></label>

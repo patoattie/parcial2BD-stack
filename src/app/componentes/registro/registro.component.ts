@@ -42,7 +42,8 @@ export class RegistroComponent implements OnInit {
       confirmaClave: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       sucursal: ['', Validators.compose([Validators.required])],
       perfil: ['', Validators.compose([Validators.required])],
-      imagen: ['', Validators.compose([])]/*,
+      imagen: ['', Validators.compose([])],
+      habilitaAdmin: ['', Validators.compose([])]/*,
       sexo: ['', Validators.compose([])],
     cuit: ['', Validators.compose([Validators.maxLength(11), Validators.minLength(11)])]*/
     });
@@ -86,7 +87,7 @@ export class RegistroComponent implements OnInit {
   ngOnInit() 
   {
     this.enEspera = false;
-    this.formRegistro.setValue({usuario: '', clave: '', confirmaClave: '', sucursal: '', perfil: '', imagen: ''});
+    this.formRegistro.setValue({usuario: '', clave: '', confirmaClave: '', sucursal: '', perfil: '', imagen: '', habilitaAdmin: ''});
   }
 
   private mostrarMsjErrorDatos(): void
@@ -119,9 +120,19 @@ export class RegistroComponent implements OnInit {
     this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: this.authService.getError()});
   }
 
+  private mostrarMsjErrorAdmin(): void
+  {
+    this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: this.usuariosService.getMsjErrorAdmin()});
+  }
+
   public getEnEspera(): boolean
   {
     return this.enEspera;
+  }
+
+  public eligeAdmin(): boolean
+  {
+    return this.formRegistro.value.perfil == EPerfil.Admin;
   }
 
   public async registrar(): Promise<void>
@@ -133,17 +144,24 @@ export class RegistroComponent implements OnInit {
     {
       if(this.formRegistro.value.clave === this.formRegistro.value.confirmaClave)
       {
-        let file = $("#img-file").get(0).files[0];
-        await this.authService.SignUp(this.formRegistro.value.usuario, this.formRegistro.value.clave, null, file);
-        usuarioValido = this.authService.isLoggedIn();
-        if(usuarioValido)
+        if(this.formRegistro.value.perfil == EPerfil.Admin && this.formRegistro.value.habilitaAdmin != this.usuariosService.getPswAdmin())
         {
-          await this.usuariosService.addUsuario(new Usuario(EPerfil.Operador, this.formRegistro.value.sucursal));
+          this.mostrarMsjErrorAdmin();
         }
         else
         {
-          this.mostrarMsjErrorAuth();
-        }
+          let file = $("#img-file").get(0).files[0];
+          await this.authService.SignUp(this.formRegistro.value.usuario, this.formRegistro.value.clave, null, file);
+          usuarioValido = this.authService.isLoggedIn();
+          if(usuarioValido)
+          {
+            await this.usuariosService.addUsuario(new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal));
+          }
+          else
+          {
+            this.mostrarMsjErrorAuth();
+          }
+          
       }
       else //El usuario no confirmó bien la clave
       {
