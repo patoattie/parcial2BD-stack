@@ -22,8 +22,6 @@ export class RegistroComponent implements OnInit {
   private ok: boolean; //Login OK
   private error: boolean; //Login fallido
   public formRegistro: FormGroup;
-  private errorDatos: boolean; //Error en el formato de datos de correo o clave
-  private errorClave: boolean; //Error en el formato de datos de correo o clave
   private enEspera: boolean; //Muestra u oculta el spinner
   public sucursales: SelectItem[];
   public perfiles: SelectItem[];
@@ -91,8 +89,6 @@ export class RegistroComponent implements OnInit {
   {
     this.ok = false;
     this.error = false;
-    this.errorDatos = false;
-    this.errorClave = false;
     this.enEspera = false;
     this.formRegistro.setValue({usuario: '', clave: '', confirmaClave: '', sucursal: '', perfil: '', imagen: ''});
   }
@@ -107,45 +103,34 @@ export class RegistroComponent implements OnInit {
     return this.error;
   }
 
-  public getErrorDatos(): boolean
+  private mostrarMsjErrorDatos(): void
   {
-    return this.errorDatos;
-  }
-
-  public getErrorClave(): boolean
-  {
-    return this.errorClave;
-  }
-
-  public getMsjErrorDatos(): string
-  {
-    let mensaje: string = '';
-
     if(this.formRegistro.controls['usuario'].invalid)
     {
-      mensaje += 'Ingresaste un E-Mail no válido <br>';
       this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Ingresaste un E-Mail no válido'});
     }
     if(this.formRegistro.controls['clave'].invalid)
     {
-      mensaje += 'Tenes que ingresar una Clave de al menos 6 caracteres <br>';
+      this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar una Clave de al menos 6 caracteres'});
     }
     if(this.formRegistro.controls['sucursal'].invalid)
     {
-      mensaje += 'Tenes que ingresar una Sucursal <br>';
+      this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar una Sucursal'});
     }
     if(this.formRegistro.controls['perfil'].invalid)
     {
-      mensaje += 'Tenes que ingresar un Perfil <br>';
+      this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar un Perfil'});
     }
-
-    return mensaje;
-    //return 'Por favor verificá que hayas ingresado un E-Mail válido, una Clave de al menos 6 caracteres, y una Sucursal';
   }
 
-  public getMsjErrorClave(): string
+  private mostrarMsjErrorClave(): void
   {
-    return 'La confirmación de la clave no coincide con la clave ingresada.';
+    this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'La confirmación de la clave no coincide con la clave ingresada'});
+  }
+
+  private mostrarMsjErrorAuth(): void
+  {
+    this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: this.authService.getError()});
   }
 
   public getEnEspera(): boolean
@@ -167,28 +152,27 @@ export class RegistroComponent implements OnInit {
         usuarioValido = this.authService.isLoggedIn();
         this.error = !usuarioValido;
         this.ok = usuarioValido;
-        this.errorDatos = false;
-        this.errorClave = false;
         if(usuarioValido)
         {
           await this.usuariosService.addUsuario(new Usuario(EPerfil.Operador, this.formRegistro.value.sucursal));
+        }
+        else
+        {
+          this.mostrarMsjErrorAuth();
         }
       }
       else //El usuario no confirmó bien la clave
       {
         this.error = false;
         this.ok = false;
-        this.errorClave = true;
-        this.errorDatos = false;
+        this.mostrarMsjErrorClave();
       }
     }
     else
     {
       this.error = false;
       this.ok = false;
-      this.errorClave = false;
-      this.errorDatos = true;
-this.getMsjErrorDatos();
+      this.mostrarMsjErrorDatos();
     }
 
     this.enEspera = false; //Oculto el spinner
