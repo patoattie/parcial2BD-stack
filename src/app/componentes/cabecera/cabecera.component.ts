@@ -59,6 +59,13 @@ export class CabeceraComponent implements OnInit {
 
   public getUrlFoto(): string
   {
-    return this.authService.getUserData().photoURL;
+    let urlFoto: string = this.authService.getUserData().photoURL;
+
+    if(urlFoto == undefined)
+    {
+      urlFoto = '../../../assets/avatares/avatardefault.png';
+    }
+
+    return urlFoto;
   }
 }

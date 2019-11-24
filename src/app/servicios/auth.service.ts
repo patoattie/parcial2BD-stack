@@ -79,7 +79,7 @@ export class AuthService {
           {
             this.SetUserData(result.user);
           });
-  }
+        }
 
         if(archivoFoto != undefined)
         {
