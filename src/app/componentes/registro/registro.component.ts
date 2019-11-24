@@ -188,6 +188,7 @@ export class RegistroComponent implements OnInit {
       this.ok = false;
       this.errorClave = false;
       this.errorDatos = true;
+this.getMsjErrorDatos();
     }
 
     this.enEspera = false; //Oculto el spinner
