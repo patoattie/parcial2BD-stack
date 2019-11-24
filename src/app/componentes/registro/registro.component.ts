@@ -34,7 +34,7 @@ export class RegistroComponent implements OnInit {
     private location: Location,
     private cd: ChangeDetectorRef,
     private usuariosService: UsuariosService,
-    private messageService: MessageService
+    public messageService: MessageService
     //private jugadoresService: JugadoresService
     )
   {
@@ -124,7 +124,7 @@ export class RegistroComponent implements OnInit {
     if(this.formRegistro.controls['usuario'].invalid)
     {
       mensaje += 'Ingresaste un E-Mail no válido <br>';
-      this.messageService.add({severity:'error', summary:'Error', detail:'Ingresaste un E-Mail no válido'});
+      this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Ingresaste un E-Mail no válido'});
     }
     if(this.formRegistro.controls['clave'].invalid)
     {
