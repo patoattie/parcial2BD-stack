@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -14,7 +15,6 @@ import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { AuthService } from './servicios/auth.service';
 import {DatePipe} from '@angular/common';
 
-
 //primeNG
 import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from 'primeng/button';
@@ -22,6 +22,7 @@ import {CardModule} from 'primeng/card';
 import { InputTextModule } from "primeng/inputtext";
 import {ListboxModule} from 'primeng/listbox';
 import {ToastModule} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
 
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
@@ -38,6 +39,7 @@ import { UsuariosService } from './servicios/usuarios.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
@@ -57,6 +59,7 @@ import { UsuariosService } from './servicios/usuarios.service';
     AuthService,
     UsuariosService,
     DatePipe,
+    MessageService,
     { provide: FirestoreSettingsToken, useValue: {} }
   ],
   bootstrap: [AppComponent]

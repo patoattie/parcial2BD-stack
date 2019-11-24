@@ -10,7 +10,6 @@ import { ESucursal } from '../../enums/esucursal.enum';
 import { EPerfil } from '../../enums/eperfil.enum';
 
 import {SelectItem} from 'primeng/api';
-import {Component} from '@angular/core';
 import {MessageService} from 'primeng/api';
 
 
