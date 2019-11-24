@@ -1,4 +1,5 @@
 <app-cabecera>  </app-cabecera>
+<p-toast position="top-right"></p-toast>
 
 <body>
   <!-- <div class="jumbotron">
@@ -27,7 +28,10 @@
         <input formControlName="confirmaClave" type="password" placeholder="Aca repeti la misa clave  de arriba" name="psw-repeat" required>
   
         <label><b>Selecciona una sucursal</b></label>
-        <p-listbox formControlName="sucursal" [options]="sucursales" [(ngModel)]="unaSucursal"></p-listbox>
+        <p-listbox formControlName="sucursal" [options]="sucursales"></p-listbox>
+  
+        <label><b>Selecciona un perfil</b></label>
+        <p-listbox formControlName="perfil" [options]="perfiles"></p-listbox>
         
         <div>
           <label><b>Selecciona una imagen para el perfil</b></label>

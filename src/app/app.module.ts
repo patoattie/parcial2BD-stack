@@ -21,6 +21,8 @@ import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
 import { InputTextModule } from "primeng/inputtext";
 import {ListboxModule} from 'primeng/listbox';
+import {ToastModule} from 'primeng/toast';
+
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
@@ -47,6 +49,7 @@ import { UsuariosService } from './servicios/usuarios.service';
     CardModule,
     InputTextModule,
     ListboxModule,
+    ToastModule,
     AppRoutingModule
   ],
   providers: [

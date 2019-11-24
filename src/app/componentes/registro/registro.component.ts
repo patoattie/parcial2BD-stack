@@ -8,7 +8,11 @@ import { UsuariosService } from '../../servicios/usuarios.service';
 import { Usuario } from '../../clases/usuario';
 import { ESucursal } from '../../enums/esucursal.enum';
 import { EPerfil } from '../../enums/eperfil.enum';
+
 import {SelectItem} from 'primeng/api';
+import {Component} from '@angular/core';
+import {MessageService} from 'primeng/api';
+
 
 @Component({
   selector: 'app-registro',
@@ -23,14 +27,15 @@ export class RegistroComponent implements OnInit {
   private errorClave: boolean; //Error en el formato de datos de correo o clave
   private enEspera: boolean; //Muestra u oculta el spinner
   public sucursales: SelectItem[];
-  public unaSucursal: ESucursal;
+  public perfiles: SelectItem[];
 
   constructor(
     private miConstructor: FormBuilder, 
     public authService: AuthService, 
     private location: Location,
     private cd: ChangeDetectorRef,
-    private usuariosService: UsuariosService
+    private usuariosService: UsuariosService,
+    private messageService: MessageService
     //private jugadoresService: JugadoresService
     )
   {
@@ -41,6 +46,7 @@ export class RegistroComponent implements OnInit {
       clave: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       confirmaClave: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       sucursal: ['', Validators.compose([Validators.required])],
+      perfil: ['', Validators.compose([Validators.required])],
       imagen: ['', Validators.compose([])]/*,
       sexo: ['', Validators.compose([])],
     cuit: ['', Validators.compose([Validators.maxLength(11), Validators.minLength(11)])]*/
@@ -51,6 +57,11 @@ export class RegistroComponent implements OnInit {
       {label: ESucursal.Caballito, value: ESucursal.Caballito},
       {label: ESucursal.Flores, value: ESucursal.Flores}
     ];
+
+    this.perfiles = [
+      {label: EPerfil.Operador, value: EPerfil.Operador},
+      {label: EPerfil.Admin, value: EPerfil.Admin}
+    ]
   }
 
   //constructor( ) { }
@@ -84,7 +95,7 @@ export class RegistroComponent implements OnInit {
     this.errorDatos = false;
     this.errorClave = false;
     this.enEspera = false;
-    this.formRegistro.setValue({usuario: '', clave: '', confirmaClave: '', sucursal: '', imagen: ''});
+    this.formRegistro.setValue({usuario: '', clave: '', confirmaClave: '', sucursal: '', perfil: '', imagen: ''});
   }
 
   public getOk(): boolean
@@ -109,7 +120,28 @@ export class RegistroComponent implements OnInit {
 
   public getMsjErrorDatos(): string
   {
-    return 'Por favor verificá que hayas ingresado un E-Mail válido, una Clave de al menos 6 caracteres, y una Sucursal';
+    let mensaje: string = '';
+
+    if(this.formRegistro.controls['usuario'].invalid)
+    {
+      mensaje += 'Ingresaste un E-Mail no válido <br>';
+      this.messageService.add({severity:'error', summary:'Error', detail:'Ingresaste un E-Mail no válido'});
+    }
+    if(this.formRegistro.controls['clave'].invalid)
+    {
+      mensaje += 'Tenes que ingresar una Clave de al menos 6 caracteres <br>';
+    }
+    if(this.formRegistro.controls['sucursal'].invalid)
+    {
+      mensaje += 'Tenes que ingresar una Sucursal <br>';
+    }
+    if(this.formRegistro.controls['perfil'].invalid)
+    {
+      mensaje += 'Tenes que ingresar un Perfil <br>';
+    }
+
+    return mensaje;
+    //return 'Por favor verificá que hayas ingresado un E-Mail válido, una Clave de al menos 6 caracteres, y una Sucursal';
   }
 
   public getMsjErrorClave(): string
