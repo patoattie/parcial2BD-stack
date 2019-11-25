@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+//import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 //import { Subscription } from "rxjs";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private miConstructor: FormBuilder, 
-    private route: ActivatedRoute, 
-    private router: Router, 
+    //private route: ActivatedRoute, 
+    //private router: Router, 
     public authService: AuthService, 
     private usuariosService: UsuariosService,
     public messageService: MessageService
