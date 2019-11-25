@@ -2,6 +2,7 @@
 
 <div class="container" >
     <div class="jumbotron" style="padding:50px;">
+      <p-toast key="msjDatos" position="top-right"></p-toast>
       <!-- <form action="return true;"> -->
       <form [formGroup]="formLogin">
         <!-- <div class="imgcontainer">
@@ -28,8 +29,6 @@
             Ingresar
             <i class="fa fa-spinner fa-spin" *ngIf="getEnEspera()"></i>
           </button>
-          <p *ngIf="getErrorDatos()" style="color: #ffffff;background-color: #ea6153">Por favor verificá que hayas ingresado un E-Mail válido y una Clave.</p>
-          <p *ngIf="getError()" style="color: #ffffff;background-color: #ea6153">{{authService.getError()}}</p>
          
           <!-- <input type="checkbox" checked="checked"> Recordar mis datos -->
         </div>

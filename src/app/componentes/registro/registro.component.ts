@@ -161,7 +161,7 @@ export class RegistroComponent implements OnInit {
           {
             this.mostrarMsjErrorAuth();
           }
-          
+        }
       }
       else //El usuario no confirmó bien la clave
       {
