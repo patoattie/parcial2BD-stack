@@ -15,9 +15,9 @@ const routes: Routes =
   {path: 'Login' , component: LoginComponent, canActivate: [SecureInnerPagesGuard]},
   {path: 'Registro' , component: RegistroComponent, canActivate: [SecureInnerPagesGuard]},
   {path: 'Principal' , component: PrincipalComponent, canActivate: [AuthGuard]},
-  {path: 'Abm-Producto' , component: AbmProductoComponent, canActivate: [AuthGuard]},
-  {path: '**' , component: LoginComponent},
-  {path: 'error' , component: LoginComponent}
+  {path: 'Abm-Producto' , component: AbmProductoComponent, canActivate: [AuthGuard]}
+  /*{path: '**' , component: LoginComponent},
+  {path: 'error' , component: LoginComponent}*/
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
