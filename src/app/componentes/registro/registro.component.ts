@@ -151,7 +151,7 @@ export class RegistroComponent implements OnInit {
         }
         else
         {
-          let file = $("#img-file").get(0).files[0];
+          let file = (<HTMLInputElement>document.getElementById("img-file")).files[0];
           await this.authService.SignUp(this.formRegistro.value.usuario, this.formRegistro.value.clave, null, file);
           usuarioValido = this.authService.isLoggedIn();
           if(usuarioValido)
