@@ -12,6 +12,7 @@ import { EPerfil } from '../../enums/eperfil.enum';
 import {SelectItem} from 'primeng/api';
 import {MessageService} from 'primeng/api';
 
+import * as $ from "jquery";
 
 @Component({
   selector: 'app-registro',
