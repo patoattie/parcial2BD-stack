@@ -1,0 +1,41 @@
+<app-cabecera>  </app-cabecera>
+
+<body>
+  <div>
+    <p-toast key="msjDatos" position="top-right"></p-toast>
+
+    <form [formGroup]="formRegistro">
+      <div class="container-fluid">
+        <label><b>Código</b></label>
+        <input formControlName="codigo" type="text" placeholder="Ingresa el código del producto" name="codigoProd" required>
+  
+        <label><b>Nombre</b></label>
+        <input formControlName="nombre" type="text" placeholder="Ingresa el nombre del producto" name="nombreProd" required>
+  
+        <label><b>Descripción</b></label>
+        <input formControlName="descripcion" type="text" placeholder="Descripción del producto" name="descripcionProd" required>
+
+        <label><b>Costo</b></label>
+        <input formControlName="costo" type="text" placeholder="Ingresa el costo del producto" name="costoProd" required>
+  
+        <label><b>Observaciones</b></label>
+        <input formControlName="observaciones" type="text" placeholder="Observaciones" name="observacionesProd">
+        
+        <div>
+          <label><b>Selecciona una imagen para el perfil</b></label>
+        </div>
+        <input formControlName="imagen" type="file" name="img-file" accept="image/png" id="img-file">
+
+        <div class="clearfix">
+          <button type="button" (click)="goBack()" class="cancelbtn">Me arrepenti</button>
+          <button type="button" (click)="registrar()" class="signupbtn">
+            Registrarme
+            <i class="fa fa-spinner fa-spin" *ngIf="getEnEspera()"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  
+</body>

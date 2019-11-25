@@ -20,13 +20,25 @@
     <form [formGroup]="formRegistro">
       <div class="container-fluid">
         <label><b>Email</b></label>
-        <input formControlName="usuario" type="text" placeholder="Ingresa tu correo" name="email" required>
+        <!-- <input formControlName="usuario" type="text" placeholder="Ingresa tu correo" name="email" required> -->
+        <span class="ui-float-label">
+            <input id="float-input" formControlName="usuario" name="uname" type="text" pInputText required> 
+            <label for="float-input">Ingresá tu correo</label>
+        </span>
   
         <label><b>Clave</b></label>
-        <input formControlName="clave" type="password" placeholder="Aca la clave" name="psw" required>
+        <!-- <input formControlName="clave" type="password" placeholder="Aca la clave" name="psw" required> -->
+        <span class="ui-float-label">
+            <input id="float-input" formControlName="clave" name="psw" type="password" pInputText required> 
+            <label for="float-input">Ingresá una clave</label>
+        </span>
   
         <label><b>Repita la clave</b></label>
-        <input formControlName="confirmaClave" type="password" placeholder="Aca repeti la misa clave  de arriba" name="psw-repeat" required>
+        <!-- <input formControlName="confirmaClave" type="password" placeholder="Aca repeti la misa clave  de arriba" name="psw-repeat" required> -->
+        <span class="ui-float-label">
+            <input id="float-input" formControlName="confirmaClave" name="psw-repeat" type="password" pInputText required> 
+            <label for="float-input">Volvé a ingresar la misma clave</label>
+        </span>
   
         <label><b>Selecciona una sucursal</b></label>
         <p-listbox formControlName="sucursal" [options]="sucursales"></p-listbox>

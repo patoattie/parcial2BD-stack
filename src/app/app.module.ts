@@ -28,6 +28,7 @@ import { PrincipalComponent } from './componentes/principal/principal.component'
 import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { UsuariosService } from './servicios/usuarios.service';
+import { AbmProductoComponent } from './componentes/abm-producto/abm-producto.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { UsuariosService } from './servicios/usuarios.service';
     LoginComponent,
     PrincipalComponent,
     CabeceraComponent,
-    RegistroComponent
+    RegistroComponent,
+    AbmProductoComponent
   ],
   imports: [
     BrowserModule,

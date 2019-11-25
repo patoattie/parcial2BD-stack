@@ -11,11 +11,16 @@
   
         <div class="container">
           <label><b>Usuario</b></label>
-          <!-- <input type="text" placeholder="Usuario"  [(ngModel)]="usuario"  name="uname" required> -->
-          <input formControlName="usuario" type="text" placeholder="Usuario" name="uname" required>
+          <span class="ui-float-label">
+              <input id="float-input" formControlName="usuario" name="uname" type="text" pInputText required> 
+              <label for="float-input">Ingresá tu usuario</label>
+          </span>
   
           <label><b>Clave</b></label>
-          <input formControlName="clave" type="password" placeholder="Clave" name="psw" required>
+          <span class="ui-float-label">
+              <input id="float-input" formControlName="clave" name="psw" type="password" pInputText required> 
+              <label for="float-input">Ingresá tu clave</label>
+          </span>
               
           <!-- <button *ngIf="logeando"  (click)="MoverBarraDeProgreso()" >Ingresar</button>
          
