@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   public formLogin: FormGroup;
   private enEspera: boolean; //Muestra u oculta el spinner
 
-  clase="progress-bar progress-bar-info progress-bar-striped ";
+  //clase="progress-bar progress-bar-info progress-bar-striped ";
 
   constructor(
     private miConstructor: FormBuilder, 
