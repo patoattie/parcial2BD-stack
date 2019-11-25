@@ -65,9 +65,10 @@ import { ProductosService } from './servicios/productos.service';
     FormBuilder,
     AuthService,
     UsuariosService,
+    ProductosService,
     DatePipe,
     MessageService,
-    { provide: FirestoreSettingsToken, useValue: {}, providers: [ProductosService] }
+    { provide: FirestoreSettingsToken, useValue: {} }
   ],
   bootstrap: [AppComponent]
 })
