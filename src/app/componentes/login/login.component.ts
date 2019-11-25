@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
 import { UsuariosService } from '../../servicios/usuarios.service';
 
-import {MessageService} from 'primeng/api';
+//import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
     //private route: ActivatedRoute, 
     //private router: Router, 
     public authService: AuthService, 
-    private usuariosService: UsuariosService,
-    public messageService: MessageService
+    private usuariosService: UsuariosService
+    //public messageService: MessageService
     ) 
     {
       //this.progreso=0;
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
     return this.enEspera;
   }
 
-  private mostrarMsjErrorDatos(): void
+  /*private mostrarMsjErrorDatos(): void
   {
     this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Por favor verificá que hayas ingresado un E-Mail válido y una Clave'});
   }
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
   private mostrarMsjErrorAuth(): void
   {
     this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: this.authService.getError()});
-  }
+  }*/
 
   public async login(): Promise<void>
   {
@@ -81,12 +81,12 @@ export class LoginComponent implements OnInit {
       }
       else
       {
-        this.mostrarMsjErrorAuth();
+        //this.mostrarMsjErrorAuth();
       }
     }
     else
     {
-      this.mostrarMsjErrorDatos();
+      /this.mostrarMsjErrorDatos();
     }
 
     this.enEspera = false; //Oculto el spinner
