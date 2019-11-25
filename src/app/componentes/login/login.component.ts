@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
     }
     else
     {
-      /this.mostrarMsjErrorDatos();
+      //this.mostrarMsjErrorDatos();
     }
 
     this.enEspera = false; //Oculto el spinner
