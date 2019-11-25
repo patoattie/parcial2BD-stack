@@ -22,22 +22,22 @@
         <label><b>Email</b></label>
         <!-- <input formControlName="usuario" type="text" placeholder="Ingresa tu correo" name="email" required> -->
         <span class="ui-float-label">
-            <input id="float-input" formControlName="usuario" name="uname" type="text" pInputText required> 
-            <label for="float-input">Ingresá tu correo</label>
+            <input id="usuario" formControlName="usuario" name="uname" type="text" pInputText required> 
+            <label for="usuario">Ingresá tu correo</label>
         </span>
   
         <label><b>Clave</b></label>
         <!-- <input formControlName="clave" type="password" placeholder="Aca la clave" name="psw" required> -->
         <span class="ui-float-label">
-            <input id="float-input" formControlName="clave" name="psw" type="password" pInputText required> 
-            <label for="float-input">Ingresá una clave</label>
+            <input id="clave" formControlName="clave" name="psw" type="password" [feedback]="false" pPassword required> 
+            <label for="clave">Ingresá una clave</label>
         </span>
   
         <label><b>Repita la clave</b></label>
         <!-- <input formControlName="confirmaClave" type="password" placeholder="Aca repeti la misa clave  de arriba" name="psw-repeat" required> -->
         <span class="ui-float-label">
-            <input id="float-input" formControlName="confirmaClave" name="psw-repeat" type="password" pInputText required> 
-            <label for="float-input">Volvé a ingresar la misma clave</label>
+            <input id="confirmaClave" formControlName="confirmaClave" name="psw-repeat" type="password" [feedback]="false" pPassword required> 
+            <label for="confirmaClave">Volvé a ingresar la misma clave</label>
         </span>
   
         <label><b>Selecciona una sucursal</b></label>
@@ -45,7 +45,11 @@
   
         <label><b>Selecciona un perfil</b></label>
         <p-listbox formControlName="perfil" [options]="perfiles"></p-listbox>
-        <input formControlName="habilitaAdmin" type="password" placeholder="Ingrese clave para habilitar Admin" name="pswAdmin" *ngIf="eligeAdmin()">
+        <!-- <input formControlName="habilitaAdmin" type="password" placeholder="Ingrese clave para habilitar Admin" name="pswAdmin" *ngIf="eligeAdmin()"> -->
+        <span class="ui-float-label" *ngIf="eligeAdmin()">
+            <input id="habilitaAdmin" formControlName="habilitaAdmin" name="pswAdmin" type="password" [feedback]="false" pPassword> 
+            <label for="habilitaAdmin">Ingresá la clave para habilitar Admin</label>
+        </span>
         
         <div>
           <label><b>Selecciona una imagen para el perfil</b></label>

@@ -12,14 +12,14 @@
         <div class="container">
           <label><b>Usuario</b></label>
           <span class="ui-float-label">
-              <input id="float-input" formControlName="usuario" name="uname" type="text" pInputText required> 
-              <label for="float-input">Ingresá tu usuario</label>
+              <input id="usuario" formControlName="usuario" name="uname" type="text" pInputText required> 
+              <label for="usuario">Ingresá tu usuario</label>
           </span>
   
           <label><b>Clave</b></label>
           <span class="ui-float-label">
-              <input id="float-input" formControlName="clave" name="psw" type="password" pInputText required> 
-              <label for="float-input">Ingresá tu clave</label>
+              <input id="clave" formControlName="clave" name="psw" type="password" [feedback]="false" pPassword required> 
+              <label for="clave">Ingresá tu clave</label>
           </span>
               
           <!-- <button *ngIf="logeando"  (click)="MoverBarraDeProgreso()" >Ingresar</button>

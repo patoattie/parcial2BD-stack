@@ -20,6 +20,8 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
 import { InputTextModule } from "primeng/inputtext";
+import {PasswordModule} from 'primeng/password';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ListboxModule} from 'primeng/listbox';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
@@ -29,6 +31,7 @@ import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { UsuariosService } from './servicios/usuarios.service';
 import { AbmProductoComponent } from './componentes/abm-producto/abm-producto.component';
+import { ProductosService } from './servicios/productos.service';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,8 @@ import { AbmProductoComponent } from './componentes/abm-producto/abm-producto.co
     ButtonModule,
     CardModule,
     InputTextModule,
+    PasswordModule,
+    InputTextareaModule,
     ListboxModule,
     ToastModule,
     AppRoutingModule
@@ -62,7 +67,7 @@ import { AbmProductoComponent } from './componentes/abm-producto/abm-producto.co
     UsuariosService,
     DatePipe,
     MessageService,
-    { provide: FirestoreSettingsToken, useValue: {} }
+    { provide: FirestoreSettingsToken, useValue: {}, providers: [ProductosService] }
   ],
   bootstrap: [AppComponent]
 })

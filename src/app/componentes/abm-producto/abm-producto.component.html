@@ -7,29 +7,49 @@
     <form [formGroup]="formRegistro">
       <div class="container-fluid">
         <label><b>Código</b></label>
-        <input formControlName="codigo" type="text" placeholder="Ingresa el código del producto" name="codigoProd" required>
+        <!-- <input formControlName="codigo" type="text" placeholder="Ingresa el código del producto" name="codigoProd" required> -->
+        <span class="ui-float-label">
+            <input id="float-input" formControlName="codigo" name="codigoProd" type="text" pInputText required> 
+            <label for="float-input">Ingresa el código del producto</label>
+        </span>
   
         <label><b>Nombre</b></label>
-        <input formControlName="nombre" type="text" placeholder="Ingresa el nombre del producto" name="nombreProd" required>
+        <!-- <input formControlName="nombre" type="text" placeholder="Ingresa el nombre del producto" name="nombreProd" required> -->
+        <span class="ui-float-label">
+            <input id="float-input" formControlName="nombre" name="nombreProd" type="text" pInputText required> 
+            <label for="float-input">Ingresa el nombre del producto</label>
+        </span>
   
         <label><b>Descripción</b></label>
-        <input formControlName="descripcion" type="text" placeholder="Descripción del producto" name="descripcionProd" required>
+        <!-- <input formControlName="descripcion" type="text" placeholder="Descripción del producto" name="descripcionProd" required> -->
+        <span class="ui-float-label">
+            <input id="float-input" formControlName="descripcion" name="descripcionProd" type="text" pInputText required> 
+            <label for="float-input">Descripción del producto</label>
+        </span>
 
         <label><b>Costo</b></label>
-        <input formControlName="costo" type="text" placeholder="Ingresa el costo del producto" name="costoProd" required>
+        <!-- <input formControlName="costo" type="text" placeholder="Ingresa el costo del producto" name="costoProd" required> -->
+        <span class="ui-float-label">
+            <input id="float-input" formControlName="costo" name="costoProd" type="text" pInputText required> 
+            <label for="float-input">Ingresa el costo del producto</label>
+        </span>
   
         <label><b>Observaciones</b></label>
-        <input formControlName="observaciones" type="text" placeholder="Observaciones" name="observacionesProd">
+        <!-- <input formControlName="observaciones" type="text" placeholder="Observaciones" name="observacionesProd"> -->
+        <span class="ui-float-label">
+            <textarea id="float-input" formControlName="observaciones" name="observacionesProd" rows="5" cols="30" autoResize="autoResize" pInputTextarea></textarea>
+            <label for="float-input">Observaciones (opcional)</label>
+        </span>
         
         <div>
-          <label><b>Selecciona una imagen para el perfil</b></label>
+          <label><b>Selecciona una imagen para el producto</b></label>
         </div>
         <input formControlName="imagen" type="file" name="img-file" accept="image/png" id="img-file">
 
         <div class="clearfix">
           <button type="button" (click)="goBack()" class="cancelbtn">Me arrepenti</button>
           <button type="button" (click)="registrar()" class="signupbtn">
-            Registrarme
+            Guardar
             <i class="fa fa-spinner fa-spin" *ngIf="getEnEspera()"></i>
           </button>
         </div>
