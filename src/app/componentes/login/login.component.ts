@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
 import { UsuariosService } from '../../servicios/usuarios.service';
 
-import {SelectItem} from 'primeng/api';
 import {MessageService} from 'primeng/api';
 
 @Component({
