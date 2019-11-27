@@ -113,6 +113,7 @@ export class AbmProductoComponent implements OnInit
 
   public goBack(): void 
   {
-    this.location.back();
+    //this.location.back();
+    console.log(this.productosService.getFecha());
   }
 }

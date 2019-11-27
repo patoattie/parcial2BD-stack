@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference } from '@angular/fire/firestore';
 import { map, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -110,5 +111,10 @@ export class ProductosService
   public SignOut(): void 
   {
     localStorage.removeItem('producto');
+  }
+
+  public getFecha(): string
+  {
+    return new DatePipe('es-AR').transform(Date.now(), 'yyyyMMddHHmmsss');
   }
 }

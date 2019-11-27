@@ -8,9 +8,9 @@ export class Producto
   public costo: number;
   public observaciones: string;
   public stock: number;
-  public fechaCreacion: Date;
+  public fechaCreacion: string;
 
-  constructor(codigo?: string, nombre?: string, descripcion?: string, costo?: number, observaciones?: string, stock?: number, fechaCreacion?: Date, idCollection?: string, uid?: string)
+  constructor(codigo?: string, nombre?: string, descripcion?: string, costo?: number, observaciones?: string, stock?: number, fechaCreacion?: string, idCollection?: string, uid?: string)
 	{
     this.codigo = codigo;
     this.nombre = nombre;
