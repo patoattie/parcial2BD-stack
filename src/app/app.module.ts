@@ -25,6 +25,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ListboxModule} from 'primeng/listbox';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
+import {MenuModule} from 'primeng/menu';
+import {TieredMenuModule} from 'primeng/tieredmenu';
 
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
@@ -60,6 +62,8 @@ import { ProductosService } from './servicios/productos.service';
     InputTextareaModule,
     ListboxModule,
     ToastModule,
+    MenuModule,
+    TieredMenuModule,
     AppRoutingModule
   ],
   providers: [

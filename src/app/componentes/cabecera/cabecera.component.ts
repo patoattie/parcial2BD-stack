@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../servicios/auth.service';
 import { UsuariosService } from '../../servicios/usuarios.service';
+import { ProductosService } from "../../servicios/productos.service";
+import { MenuItem } from 'primeng/api';
 //import { Jugador } from '../../clases/jugador';
 //import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -12,47 +14,22 @@ import { UsuariosService } from '../../servicios/usuarios.service';
 export class CabeceraComponent implements OnInit {
   //public jugadores: Jugador[] = [];
   //public jugador: Jugador;
+  items: MenuItem[];
 
-  constructor(public authService: AuthService, public usuariosService: UsuariosService/*, private afs: AngularFirestore*/) {/*this.leerJugador(); */}
+  constructor(public authService: AuthService, public usuariosService: UsuariosService, private productosService: ProductosService) { }
 
-  ngOnInit() 
+  ngOnInit()  
   {
-    /*if(this.authService.isLoggedIn())
-    {
-       this.leerJugador();
-    }*/
+    this.items = [
+      { label: 'Producto', routerLink: '/Abm-Producto' },
+      { separator: true },
+      { label: 'Salir', icon: 'pi pi-sign-out', command: () => {this.salir() } }
+    ];
   }
-
-  /*public async leerJugador(): Promise<void>
-  {
-    if(this.authService.isLoggedIn())
-    {
-        this.jugador = await this.jugadoresService.getJugador(this.authService.getUserData().email);//.forEach(unJugador =>
-    }
-  }
-
-  public getDatoJugador(atributo: string): string
-  {
-    let retorno: string = '';
-
-    if(this.jugador != undefined)
-    {
-      switch(atributo)
-      {
-        case 'cuit':
-          retorno = this.jugador.cuit.toString();
-          break;
-        case 'sexo':
-          retorno = this.jugador.sexo;
-          break;
-      }
-    }
-
-    return retorno;
-  }*/
 
   public async salir(): Promise<void>
   {
+    await this.productosService.SignOut();
     await this.usuariosService.SignOut();
     await this.authService.SignOut();
   }
