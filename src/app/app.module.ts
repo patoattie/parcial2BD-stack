@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -32,11 +32,6 @@ import { RegistroComponent } from './componentes/registro/registro.component';
 import { UsuariosService } from './servicios/usuarios.service';
 import { AbmProductoComponent } from './componentes/abm-producto/abm-producto.component';
 import { ProductosService } from './servicios/productos.service';
-
-//locale
-import { registerLocaleData } from '@angular/common';
-import localeAr from '@angular/common/locales/ar';
-registerLocaleData(localeAr);
 
 
 @NgModule({
@@ -74,7 +69,6 @@ registerLocaleData(localeAr);
     ProductosService,
     DatePipe,
     MessageService,
-    { provide: LOCALE_ID, useValue: 'es-AR'},
     { provide: FirestoreSettingsToken, useValue: {} }
   ],
   bootstrap: [AppComponent]

@@ -115,6 +115,6 @@ export class ProductosService
 
   public getFecha(): string
   {
-    return new DatePipe('es-AR').transform(Date.now(), 'yyyyMMddHHmmsss');
+    return new DatePipe('en-US').transform(Date.now(), 'yyyyMMddHHmmssSSS', '-0300');
   }
 }
