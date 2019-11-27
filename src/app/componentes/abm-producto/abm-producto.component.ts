@@ -33,7 +33,7 @@ export class AbmProductoComponent implements OnInit
       codigo: ['', Validators.compose([Validators.required])],
       nombre: ['', Validators.compose([Validators.required])],
       descripcion: ['', Validators.compose([Validators.required])],
-      costo: ['', Validators.compose([Validators.required])],
+      costo: ['', Validators.compose([Validators.required, Validators.pattern('/^([0-9])*$/')])],
       observaciones: ['', Validators.compose([])],
       imagen: ['', Validators.compose([])]
     });
