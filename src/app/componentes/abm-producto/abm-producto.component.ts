@@ -3,6 +3,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
 import { Location } from '@angular/common';
+import { ProductosService } from '../../servicios/productos.service';
 import { Producto } from '../../clases/producto';
 
 import {MessageService} from 'primeng/api';
@@ -16,12 +17,14 @@ export class AbmProductoComponent implements OnInit
 {
   public formRegistro: FormGroup;
   private enEspera: boolean; //Muestra u oculta el spinner
+  private stockInicial: number = 0;
 
   constructor(
     private miConstructor: FormBuilder, 
     public authService: AuthService, 
     private location: Location,
     private cd: ChangeDetectorRef,
+    private productosService: ProductosService,
     public messageService: MessageService
   ) 
   {
@@ -87,6 +90,25 @@ export class AbmProductoComponent implements OnInit
   public getEnEspera(): boolean
   {
     return this.enEspera;
+  }
+
+  public async registrar(): Promise<void>
+  {
+    let usuarioValido: boolean;
+    this.enEspera = true; //Muestro el spinner
+
+    if(this.formRegistro.valid)
+    {
+      let file = (<HTMLInputElement>document.getElementById("img-file")).files[0];
+
+      await this.productosService.addProducto(new Producto(this.formRegistro.value.codigo, this.formRegistro.value.nombre, this.formRegistro.value.descripcion, this.formRegistro.value.costo, this.formRegistro.value.observaciones, this.stockInicial));
+    }
+    else
+    {
+      this.mostrarMsjErrorDatos();
+    }
+
+    this.enEspera = false; //Oculto el spinner
   }
 
   public goBack(): void 
