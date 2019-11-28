@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit {
 
   private mostrarMsjErrorDatos(): void
   {
-    this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Por favor verificá que hayas ingresado un E-Mail válido y una Clave'});
     if(this.formLogin.controls['usuario'].invalid)
     {
       if(this.formLogin.controls['usuario'].hasError('required'))
