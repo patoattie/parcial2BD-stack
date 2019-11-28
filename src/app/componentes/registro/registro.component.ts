@@ -95,16 +95,41 @@ export class RegistroComponent implements OnInit {
   {
     if(this.formRegistro.controls['usuario'].invalid)
     {
-      this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Ingresaste un E-Mail no válido'});
+      if(this.formRegistro.controls['usuario'].hasError('required'))
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar un E-Mail para identificarte'});
+      }
+      else if(this.formRegistro.controls['usuario'].hasError('email'))
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'El E-Mail que ingresaste no es válido'});
+      }
+      else
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Error al validar el Usuario'});
+      }
     }
+
     if(this.formRegistro.controls['clave'].invalid)
     {
-      this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar una Clave de al menos 6 caracteres'});
+      if(this.formRegistro.controls['clave'].hasError('required'))
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar una Clave'});
+      }
+      else if(this.formRegistro.controls['clave'].hasError('minLength'))
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'La Clave debe tener como mínimo 6 caracteres'});
+      }
+      else
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Error al validar la Clave'});
+      }
     }
+
     if(this.formRegistro.controls['sucursal'].invalid)
     {
       this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar una Sucursal'});
     }
+    
     if(this.formRegistro.controls['perfil'].invalid)
     {
       this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar un Perfil'});

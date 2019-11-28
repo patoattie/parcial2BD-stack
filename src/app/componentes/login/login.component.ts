@@ -58,6 +58,37 @@ export class LoginComponent implements OnInit {
   private mostrarMsjErrorDatos(): void
   {
     this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Por favor verificá que hayas ingresado un E-Mail válido y una Clave'});
+    if(this.formLogin.controls['usuario'].invalid)
+    {
+      if(this.formLogin.controls['usuario'].hasError('required'))
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar un E-Mail para identificarte'});
+      }
+      else if(this.formLogin.controls['usuario'].hasError('email'))
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'El E-Mail que ingresaste no es válido'});
+      }
+      else
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Error al validar el Usuario'});
+      }
+    }
+
+    if(this.formLogin.controls['clave'].invalid)
+    {
+      if(this.formLogin.controls['clave'].hasError('required'))
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar una Clave'});
+      }
+      else if(this.formLogin.controls['clave'].hasError('minLength'))
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'La Clave debe tener como mínimo 6 caracteres'});
+      }
+      else
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Error al validar la Clave'});
+      }
+    }
   }
 
   private mostrarMsjErrorAuth(): void

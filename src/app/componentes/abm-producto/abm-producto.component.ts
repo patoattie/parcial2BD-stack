@@ -33,7 +33,7 @@ export class AbmProductoComponent implements OnInit
       codigo: ['', Validators.compose([Validators.required])],
       nombre: ['', Validators.compose([Validators.required])],
       descripcion: ['', Validators.compose([Validators.required])],
-      costo: ['', Validators.compose([Validators.required, Validators.pattern('/^([0-9])*$/')])],
+      costo: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]+([,][0-9]+)?$')])], //expresion regular para validar importes numericos que pueden o no ser decimales
       observaciones: ['', Validators.compose([])],
       imagen: ['', Validators.compose([])]
     });
@@ -73,17 +73,31 @@ export class AbmProductoComponent implements OnInit
     {
       this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar un Código de producto'});
     }
+
     if(this.formRegistro.controls['nombre'].invalid)
     {
       this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar un Nombre para el producto'});
     }
+
     if(this.formRegistro.controls['descripcion'].invalid)
     {
       this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar una Descripción para el producto'});
     }
+    
     if(this.formRegistro.controls['costo'].invalid)
     {
-      this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar un Costo para el producto'});
+      if(this.formRegistro.controls['costo'].hasError('required'))
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar un Costo para el producto'});
+      }
+      else if(this.formRegistro.controls['costo'].hasError('pattern'))
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar un importe numérico válido para el Costo del producto'});
+      }
+      else
+      {
+        this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Error al validar el Costo del producto'});
+      }
     }
   }
 
