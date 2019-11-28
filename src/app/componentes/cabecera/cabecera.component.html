@@ -1,8 +1,8 @@
 <p-toolbar>
     <div class="ui-toolbar-group-left">
-      <label style="margin-right: 3em; font-size: large;" *ngIf="!authService.isLoggedIn()">Sistema de Control de Stock</label>
       <button type="button" #btn pButton icon="pi pi-bars" (click)="menu.toggle($event)" *ngIf="authService.isLoggedIn()"></button>
       <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
+      <label style="margin-left: 3em; margin-right: 3em; font-size: large;">Sistema de Control de Stock</label>
       <!-- <label style="margin-right: 3em; font-size: large;" *ngIf="authService.isLoggedIn() && jugadoresService.getJugador(authService.getUserData().email) != null">{{authService.getUserData().email}}({{jugadoresService.getJugador(authService.getUserData().email).cuit}}|{{jugadoresService.getJugador(authService.getUserData().email).sexo}})</label> -->
     </div>
     <div class="ui-toolbar-group-right">
