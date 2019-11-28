@@ -5,6 +5,8 @@ import { AuthService } from '../../servicios/auth.service';
 import { Location } from '@angular/common';
 import { ProductosService } from '../../servicios/productos.service';
 import { Producto } from '../../clases/producto';
+import { Stock } from '../../clases/stock';
+import { ESucursal } from '../../enums/esucursal.enum';
 
 import {MessageService} from 'primeng/api';
 
@@ -120,7 +122,7 @@ export class AbmProductoComponent implements OnInit
     {
       let file = (<HTMLInputElement>document.getElementById("img-file")).files[0];
 
-      await this.productosService.addProducto(new Producto(this.formRegistro.value.codigo, this.formRegistro.value.nombre, this.formRegistro.value.descripcion, this.convertirEnNumero(this.formRegistro.value.costo), this.formRegistro.value.observaciones, this.stockInicial, this.productosService.getFecha()), file);
+      await this.productosService.addProducto(new Producto(this.formRegistro.value.codigo, this.formRegistro.value.nombre, this.formRegistro.value.descripcion, this.convertirEnNumero(this.formRegistro.value.costo), this.formRegistro.value.observaciones, this.guardarStockInicial(), this.productosService.getFecha()), file);
 
       this.mostrarMsjOk();
       this.formRegistro.reset();
@@ -151,6 +153,14 @@ export class AbmProductoComponent implements OnInit
     {
       retorno = 0;
     }
+
+    return retorno;
+  }
+
+  private guardarStockInicial(): Stock[]
+  {
+    let retorno: Stock[] = [];
+    retorno.push(new Stock(ESucursal.Almagro, this.stockInicial), new Stock(ESucursal.Caballito, this.stockInicial), new Stock(ESucursal.Flores, this.stockInicial))
 
     return retorno;
   }
