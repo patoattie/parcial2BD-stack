@@ -80,7 +80,7 @@ export class ProductosService
       descripcion: producto.descripcion,
       costo: producto.costo,
       observaciones: producto.observaciones,
-      stock: producto.stock,
+      stock: producto.stock.map((obj)=> {return Object.assign({}, obj)}),
       fechaCreacion: producto.fechaCreacion
     })
     .then((doc) =>
