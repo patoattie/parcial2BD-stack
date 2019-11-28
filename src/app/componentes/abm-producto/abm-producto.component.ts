@@ -101,6 +101,11 @@ export class AbmProductoComponent implements OnInit
     }
   }
 
+  private mostrarMsjOk(): void
+  {
+    this.messageService.add({key: 'msjDatos', severity: 'success', summary: 'Actualización Exitosa', detail: 'Se registró correctamente el producto'});
+  }
+
   public getEnEspera(): boolean
   {
     return this.enEspera;
@@ -116,6 +121,9 @@ export class AbmProductoComponent implements OnInit
       let file = (<HTMLInputElement>document.getElementById("img-file")).files[0];
 
       await this.productosService.addProducto(new Producto(this.formRegistro.value.codigo, this.formRegistro.value.nombre, this.formRegistro.value.descripcion, this.formRegistro.value.costo, this.formRegistro.value.observaciones, this.stockInicial, this.productosService.getFecha()), file);
+
+      this.mostrarMsjOk();
+      this.formRegistro.setValue({codigo: '', nombre: '', descripcion: '', costo: '', observaciones: '', imagen: ''});
     }
     else
     {

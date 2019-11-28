@@ -93,7 +93,9 @@ export class ProductosService
           customMetadata: 
           {
             'usuario': this.authService.getEmail(),
-            'id': this.authService.getUid()
+            'uid': this.authService.getUid(),
+            'producto': producto.codigo,
+            'id': doc.id
           }
         };
 
