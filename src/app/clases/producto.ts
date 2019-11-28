@@ -1,3 +1,5 @@
+import { Stock } from './stock';
+
 export class Producto 
 {
   public idCollection: string;
@@ -7,11 +9,11 @@ export class Producto
   public descripcion: string;
   public costo: number;
   public observaciones: string;
-  public stock: number;
+  public stock: Stock;
   public fechaCreacion: string;
   public photoURL: string;
 
-  constructor(codigo?: string, nombre?: string, descripcion?: string, costo?: number, observaciones?: string, stock?: number, fechaCreacion?: string, idCollection?: string, uid?: string, photoURL?: string)
+  constructor(codigo?: string, nombre?: string, descripcion?: string, costo?: number, observaciones?: string, stock?: Stock, fechaCreacion?: string, idCollection?: string, uid?: string, photoURL?: string)
 	{
     this.codigo = codigo;
     this.nombre = nombre;

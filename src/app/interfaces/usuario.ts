@@ -1,5 +1,3 @@
-import { ESucursal } from "../enums/esucursal.enum";
-
 export interface Usuario 
 {
     uid: string;
