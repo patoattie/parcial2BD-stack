@@ -99,7 +99,7 @@ export class ProductosService
           }
         };
 
-        let uploadTask = this.storage.upload('productos/' + this.pipe.transform(new Date(), 'yyyyMMddHHmmssSSS') + archivoFoto.name, archivoFoto, metadata);
+        let uploadTask = this.storage.upload('productos/' + producto.fechaCreacion + archivoFoto.name, archivoFoto, metadata);
 
         uploadTask.task.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
           (snapshot) =>

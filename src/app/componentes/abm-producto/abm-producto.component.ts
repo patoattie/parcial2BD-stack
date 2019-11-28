@@ -33,7 +33,7 @@ export class AbmProductoComponent implements OnInit
       codigo: ['', Validators.compose([Validators.required])],
       nombre: ['', Validators.compose([Validators.required])],
       descripcion: ['', Validators.compose([Validators.required])],
-      costo: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]+([,][0-9]+)?$')])], //expresion regular para validar importes numericos que pueden o no ser decimales
+      costo: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]+([,.][0-9]+)?$')])], //expresion regular para validar importes numericos que pueden o no ser decimales
       observaciones: ['', Validators.compose([])],
       imagen: ['', Validators.compose([])]
     });
@@ -120,10 +120,10 @@ export class AbmProductoComponent implements OnInit
     {
       let file = (<HTMLInputElement>document.getElementById("img-file")).files[0];
 
-      await this.productosService.addProducto(new Producto(this.formRegistro.value.codigo, this.formRegistro.value.nombre, this.formRegistro.value.descripcion, this.formRegistro.value.costo, this.formRegistro.value.observaciones, this.stockInicial, this.productosService.getFecha()), file);
+      await this.productosService.addProducto(new Producto(this.formRegistro.value.codigo, this.formRegistro.value.nombre, this.formRegistro.value.descripcion, this.convertirEnNumero(this.formRegistro.value.costo), this.formRegistro.value.observaciones, this.stockInicial, this.productosService.getFecha()), file);
 
       this.mostrarMsjOk();
-      this.formRegistro.setValue({codigo: '', nombre: '', descripcion: '', costo: '', observaciones: '', imagen: ''});
+      this.formRegistro.reset();
     }
     else
     {
@@ -137,5 +137,21 @@ export class AbmProductoComponent implements OnInit
   {
     this.location.back();
     //console.log(this.productosService.getFecha());
+  }
+
+  private convertirEnNumero(cadena: string): number
+  {
+    let retorno: number;
+
+    cadena = cadena.replace(',', '.');
+
+    retorno = parseFloat(cadena);
+
+    if(Number.isNaN(retorno))
+    {
+      retorno = 0;
+    }
+
+    return retorno;
   }
 }
