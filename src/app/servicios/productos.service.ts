@@ -80,7 +80,7 @@ export class ProductosService
       descripcion: producto.descripcion,
       costo: producto.costo,
       observaciones: producto.observaciones,
-      stock: producto.stock.map((obj)=> {return Object.assign({}, obj)}),
+      stock: producto.stock.map((obj)=> {return Object.assign({}, obj)}), //convierte el array producto.stock (Stock[]) a un tipo map para poder guardarlo en la BD.
       fechaCreacion: producto.fechaCreacion
     })
     .then((doc) =>
