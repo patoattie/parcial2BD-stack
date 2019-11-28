@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
       {
         this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar una Clave'});
       }
-      else if(this.formLogin.controls['clave'].hasError('minLength'))
+      else if(this.formLogin.controls['clave'].hasError('minlength'))
       {
         this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'La Clave debe tener como mínimo 6 caracteres'});
       }
