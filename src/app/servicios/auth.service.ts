@@ -93,7 +93,7 @@ export class AuthService {
             }
           };
 
-          let uploadTask = this.storage.upload('avatares/' + this.pipe.transform(new Date(), 'yyyyMMddHHmmSSS') + archivoFoto.name, archivoFoto, metadata);
+          let uploadTask = this.storage.upload('avatares/' + this.pipe.transform(new Date(), 'yyyyMMddHHmmssSSS') + archivoFoto.name, archivoFoto, metadata);
 
           uploadTask.task.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
             (snapshot) =>
@@ -252,5 +252,10 @@ export class AuthService {
   public getUid(): string
   {
     return this.userData.uid;
+  }
+
+  public getEmail(): string
+  {
+    return this.userData.email;
   }
 }

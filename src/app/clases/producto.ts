@@ -9,8 +9,9 @@ export class Producto
   public observaciones: string;
   public stock: number;
   public fechaCreacion: string;
+  public photoURL: string;
 
-  constructor(codigo?: string, nombre?: string, descripcion?: string, costo?: number, observaciones?: string, stock?: number, fechaCreacion?: string, idCollection?: string, uid?: string)
+  constructor(codigo?: string, nombre?: string, descripcion?: string, costo?: number, observaciones?: string, stock?: number, fechaCreacion?: string, idCollection?: string, uid?: string, photoURL?: string)
 	{
     this.codigo = codigo;
     this.nombre = nombre;
@@ -21,5 +22,6 @@ export class Producto
     this.fechaCreacion = fechaCreacion;
 		this.idCollection = idCollection;
 		this.uid = uid;
+    this.photoURL = photoURL;
 	}
 }

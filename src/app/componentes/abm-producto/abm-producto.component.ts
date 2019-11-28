@@ -115,7 +115,7 @@ export class AbmProductoComponent implements OnInit
     {
       let file = (<HTMLInputElement>document.getElementById("img-file")).files[0];
 
-      await this.productosService.addProducto(new Producto(this.formRegistro.value.codigo, this.formRegistro.value.nombre, this.formRegistro.value.descripcion, this.formRegistro.value.costo, this.formRegistro.value.observaciones, this.stockInicial, this.productosService.getFecha()));
+      await this.productosService.addProducto(new Producto(this.formRegistro.value.codigo, this.formRegistro.value.nombre, this.formRegistro.value.descripcion, this.formRegistro.value.costo, this.formRegistro.value.observaciones, this.stockInicial, this.productosService.getFecha()), file);
     }
     else
     {
