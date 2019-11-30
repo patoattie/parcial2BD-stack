@@ -32,31 +32,36 @@ export class ProductosService
     );
   }
 
-  public getProductos(): Observable<Producto[]>
+  public getProductos(): Producto[]
   {
-    return this.productos;
-  }
-
-  public getProducto(codigo: string): Producto
-  {
-    let retorno: Producto = JSON.parse(localStorage.getItem('producto'));
+    let retorno: Producto[] = JSON.parse(localStorage.getItem('productos'));
 
     if(retorno == null)
     {
       this.productos.forEach(arrProductos =>
-        {
-          arrProductos.forEach(unProducto =>
-            {
-              if(unProducto.codigo == codigo)
-              {
-                retorno = unProducto;
-                localStorage.setItem('producto', JSON.stringify(retorno));
-              }
-            });
-        });
-        //this.poblarLocal(uid);
-      retorno = JSON.parse(localStorage.getItem('producto'));
+      {
+        retorno = arrProductos;
+        localStorage.setItem('productos', JSON.stringify(retorno));
+      });
+
+      retorno = JSON.parse(localStorage.getItem('productos'));
     }
+
+    return retorno;
+  }
+
+  public getProducto(codigo: string): Producto
+  {
+    let retorno: Producto = null;
+    let arrProductos: Producto[] = this.getProductos();
+
+    arrProductos.forEach(unProducto =>
+    {
+      if(unProducto.codigo == codigo)
+      {
+        retorno = unProducto;
+      }
+    });
 
     return retorno;
   }

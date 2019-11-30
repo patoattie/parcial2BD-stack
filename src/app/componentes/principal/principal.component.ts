@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../servicios/auth.service';
+import { ProductosService } from "../../servicios/productos.service";
+import { Producto } from "../../clases/producto";
 
 
 @Component({
@@ -12,9 +14,15 @@ export class PrincipalComponent implements OnInit {
     isFirstOpen: true,
     isFirstDisabled: false
   };
-  constructor(public authService: AuthService) {  }
+  public productos: Producto[] = [];
+  public productoSeleccionada: Producto;
+
+  constructor(public authService: AuthService,private productosService: ProductosService)
+  {
+    this.productos = this.productosService.getProductos();
+console.log(this.productos);
+  }
 
   ngOnInit() {
   }
-
 }
