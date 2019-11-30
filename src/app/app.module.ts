@@ -34,6 +34,7 @@ import { RegistroComponent } from './componentes/registro/registro.component';
 import { UsuariosService } from './servicios/usuarios.service';
 import { AbmProductoComponent } from './componentes/abm-producto/abm-producto.component';
 import { ProductosService } from './servicios/productos.service';
+import { ListadoProductosComponent } from './componentes/listado-productos/listado-productos.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ProductosService } from './servicios/productos.service';
     PrincipalComponent,
     CabeceraComponent,
     RegistroComponent,
-    AbmProductoComponent
+    AbmProductoComponent,
+    ListadoProductosComponent
   ],
   imports: [
     BrowserModule,

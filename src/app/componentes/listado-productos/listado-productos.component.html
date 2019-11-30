@@ -1,0 +1,26 @@
+<h1>PRODUCTOS</h1>
+<table>
+  <tr>
+    <!-- <th style="width: 25%;">Foto</th> -->
+    <th>Foto</th>
+    <th>Código</th>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Costo</th>
+    <th>Fecha</th>
+    <th>Observaciones</th>
+    <!-- <th *ngIf="accionBorrar">Acción</th> -->
+  </tr>
+
+  <tr *ngFor="let producto of productos">
+    <td><img (click)="leerProducto(producto)" src="{{producto.photoURL}}" alt="" style="width: 50%;"></td>
+    <td>{{producto.codigo}}</td>
+    <td>{{producto.nombre}}</td>
+    <td>{{producto.descripcion}}</td>
+    <td>{{producto.costo}}</td>
+    <td>{{producto.fechaAlta}}</td>
+    <td>{{producto.observaciones}}</td>
+    <!-- <td *ngIf="accionBorrar"><app-borrar-elemento [productoParaBorrar]="producto" (novedadBaja)="procesarBaja()"></app-borrar-elemento></td> -->
+  </tr>
+
+</table>
