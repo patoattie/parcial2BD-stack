@@ -27,6 +27,7 @@ import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {MenuModule} from 'primeng/menu';
 import {TieredMenuModule} from 'primeng/tieredmenu';
+import {TableModule} from 'primeng/table';
 
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
@@ -66,6 +67,7 @@ import { ListadoProductosComponent } from './componentes/listado-productos/lista
     ToastModule,
     MenuModule,
     TieredMenuModule,
+    TableModule,
     AppRoutingModule
   ],
   providers: [

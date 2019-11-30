@@ -1,26 +1,43 @@
 <h1>PRODUCTOS</h1>
-<table>
+<!-- <table>
   <tr>
-    <!-- <th style="width: 25%;">Foto</th> -->
-    <th>Foto</th>
+    <th style="width: 25%;">Foto</th>
     <th>Código</th>
     <th>Nombre</th>
     <th>Descripción</th>
     <th>Costo</th>
     <th>Fecha</th>
     <th>Observaciones</th>
-    <!-- <th *ngIf="accionBorrar">Acción</th> -->
   </tr>
 
   <tr *ngFor="let producto of productos">
-    <td><img (click)="leerProducto(producto)" src="{{producto.photoURL}}" alt="" style="width: 50%;"></td>
+    <td><img (click)="leerProducto(producto)" src="{{producto.photoURL}}" alt="" style="width: 25%;"></td>
     <td>{{producto.codigo}}</td>
     <td>{{producto.nombre}}</td>
     <td>{{producto.descripcion}}</td>
     <td>{{producto.costo}}</td>
-    <td>{{producto.fechaAlta}}</td>
+    <td>{{transformaFecha(producto.fechaCreacion)}}</td>
     <td>{{producto.observaciones}}</td>
-    <!-- <td *ngIf="accionBorrar"><app-borrar-elemento [productoParaBorrar]="producto" (novedadBaja)="procesarBaja()"></app-borrar-elemento></td> -->
   </tr>
 
-</table>
+</table> -->
+
+<p-table [columns]="cols" [value]="productos" sortMode="multiple">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon *ngIf="col.field != 'photoURL'" [field]="col.field"></p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+               <p *ngIf="col.field != 'photoURL' && col.field != 'fechaCreacion'">{{rowData[col.field]}}</p>
+               <p *ngIf="col.field == 'fechaCreacion'">{{transformaFecha(rowData[col.field])}}</p>
+               <img *ngIf="col.field == 'photoURL'" src="{{rowData[col.field]}}" alt="" style="width: 50%;">
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

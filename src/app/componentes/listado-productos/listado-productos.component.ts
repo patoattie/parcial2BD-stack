@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 //import { ProductosService } from "../../servicios/productos.service";
 import { Producto } from "../../clases/producto";
+import { SortEvent } from 'primeng/api';
 
 @Component({
   selector: 'app-listado-productos',
@@ -9,27 +10,34 @@ import { Producto } from "../../clases/producto";
 })
 export class ListadoProductosComponent implements OnInit {
   @Input() productos: Producto[];
-  //@Input() accionBorrar: boolean;
+  public cols: any[];
 
   constructor(/*private productosService: ProductosService*/) { }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
+    this.cols = [
+      { field: 'photoURL', header: 'Foto' },
+      { field: 'codigo', header: 'Código' },
+      { field: 'nombre', header: 'Nombre' },
+      { field: 'descripcion', header: 'Descripción' },
+      { field: 'costo', header: 'Costo' },
+      { field: 'fechaCreacion', header: 'Fecha' },
+      { field: 'observaciones', header: 'Observaciones' }
+    ];
   }
 
-  /*private leerProductos(): Producto[]
+  public transformaFecha(timestamp: string): string
   {
-    let retorno: Producto[] = [];
-    this.productosService.getProductos().subscribe(
-      (productos) => {
-          retorno = productos;
-        }
-    );
+    let año: string = timestamp.substr(0, 4);
+    let mes: string = timestamp.substr(4, 2);
+    let dia: string = timestamp.substr(6, 2);
+    let hora: string = timestamp.substr(8, 2);
+    let minuto: string = timestamp.substr(10, 2);
+    let segundo: string = timestamp.substr(12, 2);
+    const sepFecha: string = '/';
+    const sepHora: string = ':';
 
-    return retorno;
+    return dia + sepFecha + mes + sepFecha + año + ' ' + hora + sepHora + minuto + sepHora + segundo;
   }
-
-  public procesarBaja(): void
-  {
-    this.peliculas = this.leerProductos();
-  }*/
 }

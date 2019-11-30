@@ -121,11 +121,13 @@ export class ProductosService
             {
               console.log('File available at', downloadURL);
               this.SetURL(doc, downloadURL);
+              this.SignOut();
             });
           });
       }
 
       this.SetData(doc);
+      this.SignOut();
     });
   }
  
@@ -164,7 +166,7 @@ export class ProductosService
 
   public SignOut(): void 
   {
-    localStorage.removeItem('producto');
+    localStorage.removeItem('productos');
   }
 
   public getFecha(): string
