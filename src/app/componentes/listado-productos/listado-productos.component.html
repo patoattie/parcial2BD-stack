@@ -24,10 +24,16 @@
 
 <p-table #dt [columns]="cols" [value]="productos" sortMode="multiple" [paginator]="true" [rows]="6">
     <ng-template pTemplate="caption">
-        <div style="text-align: right">        
+      <p-toolbar>
+        <div class="ui-toolbar-group-left">
+          <button type="button" #btn pButton icon="pi pi-plus" (click)="this.productosService.muestraAbm = true;"></button>
+          <button *ngIf="productoSeleccionado != null" type="button" #btn pButton icon="pi pi-pencil" (click)="this.productosService.muestraAbm = true;"></button>
+        </div>
+        <div class="ui-toolbar-group-right">        
             <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
             <input type="text" pInputText size="50" placeholder="Filtro global" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
         </div>
+      </p-toolbar>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
@@ -53,7 +59,7 @@
       </tr>
   </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr>
+        <tr [ngClass]="(productoSeleccionado != null && rowData.idCollection == productoSeleccionado.idCollection) ? 'filaSeleccionada' : null" (click)="eligeProducto($event, rowData)">
             <td *ngFor="let col of columns">
                <p *ngIf="col.field != 'photoURL' && col.field != 'fechaCreacion'">{{rowData[col.field]}}</p>
                <p *ngIf="col.field == 'fechaCreacion'">{{transformaFecha(rowData[col.field])}}</p>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 //para poder hacer las validaciones
 import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
@@ -20,6 +20,7 @@ export class AbmProductoComponent implements OnInit
   public formRegistro: FormGroup;
   private enEspera: boolean; //Muestra u oculta el spinner
   private stockInicial: number = 0;
+  @Input() producto: Producto;
 
   constructor(
     private miConstructor: FormBuilder, 

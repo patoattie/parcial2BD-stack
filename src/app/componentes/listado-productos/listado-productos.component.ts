@@ -11,7 +11,8 @@ import { ProductosService } from '../../servicios/productos.service';
 })
 export class ListadoProductosComponent implements OnInit {
   @Input() productos: Producto[];
-  @Input() datosListos: boolean;
+  //@Input() datosListos: boolean;
+  public productoSeleccionado: Producto = null;
   public cols: any[];
 
   constructor(public productosService: ProductosService) { }
@@ -41,5 +42,17 @@ export class ListadoProductosComponent implements OnInit {
     const sepHora: string = ':';
 
     return dia + sepFecha + mes + sepFecha + año + ' ' + hora + sepHora + minuto + sepHora + segundo;
+  }
+
+  public eligeProducto(event, unProducto: Producto): void
+  {
+    if(event.ctrlKey)
+    {
+      this.productoSeleccionado = null;
+    }
+    else
+    {
+      this.productoSeleccionado = unProducto;
+    }
   }
 }

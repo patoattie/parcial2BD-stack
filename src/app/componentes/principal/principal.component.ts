@@ -15,7 +15,7 @@ export class PrincipalComponent implements OnInit {
     isFirstDisabled: false
   };
   public productos: Producto[];
-  public productoSeleccionada: Producto;
+  //public productoSeleccionada: Producto;
 
   constructor(public authService: AuthService, public productosService: ProductosService)
   {
