@@ -115,7 +115,6 @@ export class AbmProductoComponent implements OnInit
 
   public async registrar(): Promise<void>
   {
-    let usuarioValido: boolean;
     this.enEspera = true; //Muestro el spinner
 
     if(this.formRegistro.valid)
@@ -133,6 +132,7 @@ export class AbmProductoComponent implements OnInit
     }
 
     this.enEspera = false; //Oculto el spinner
+    this.productosService.muestraAbm = false;
   }
 
   public goBack(): void 
