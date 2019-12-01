@@ -67,7 +67,22 @@ export class AbmProductoComponent implements OnInit
   ngOnInit() 
   {
     this.enEspera = false;
-    this.formRegistro.setValue({codigo: '', nombre: '', descripcion: '', costo: '', observaciones: '', imagen: ''});
+
+    if(this.producto != null)
+    {
+      this.formRegistro.setValue({
+        codigo: this.producto.codigo, 
+        nombre: this.producto.nombre, 
+        descripcion: this.producto.descripcion, 
+        costo: this.producto.costo, 
+        observaciones: this.producto.observaciones, 
+        imagen: ''
+      });
+    }
+    else
+    {
+      this.formRegistro.setValue({codigo: '', nombre: '', descripcion: '', costo: '', observaciones: '', imagen: ''});
+    }
   }
 
   private mostrarMsjErrorDatos(): void

@@ -1,4 +1,3 @@
 <app-cabecera>  </app-cabecera>
 
-<app-listado-productos *ngIf="!productosService.muestraAbm" [productos]="productos"></app-listado-productos>
-<app-abm-producto *ngIf="productosService.muestraAbm" [producto]="productoSeleccionado"></app-abm-producto>
+<app-listado-productos [productos]="productos"></app-listado-productos>

@@ -14,6 +14,8 @@ export class ListadoProductosComponent implements OnInit {
   //@Input() datosListos: boolean;
   public productoSeleccionado: Producto = null;
   public cols: any[];
+  public colStock: any[];
+  private display: boolean = false;
 
   constructor(public productosService: ProductosService) { }
 
@@ -28,6 +30,11 @@ export class ListadoProductosComponent implements OnInit {
       { field: 'fechaCreacion', header: 'Fecha' },
       { field: 'observaciones', header: 'Observaciones' }
     ];
+
+    this.colStock = [
+      { field: 'sucursal', header: 'Sucursal' },
+      { field: 'cantidad', header: 'Cantidad' }
+    ]
   }
 
   public transformaFecha(timestamp: string): string
@@ -54,5 +61,20 @@ export class ListadoProductosComponent implements OnInit {
     {
       this.productoSeleccionado = unProducto;
     }
+  }
+
+  public habilitaAbm(agrega: boolean): void
+  {
+    if(agrega)
+    {
+      this.productoSeleccionado = null;
+    }
+
+    this.productosService.muestraAbm = true;
+  }
+
+  public muestraStock(muestra: boolean): void
+  {
+    this.display = muestra;
   }
 }
