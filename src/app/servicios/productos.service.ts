@@ -17,6 +17,7 @@ export class ProductosService
 {
   private productos: Observable<Producto[]>;
   private productoCollection: AngularFirestoreCollection<any>;
+  public muestraAbm: boolean;
 
   constructor(private afs: AngularFirestore, private authService: AuthService, public storage: AngularFireStorage, public pipe: DatePipe)
   {
@@ -30,34 +31,19 @@ export class ProductosService
         });
       })
     );
+    this.muestraAbm = false;
   }
 
-  public async getProductos(): Promise<Producto[]>
+  public getProductos(): Observable<Producto[]>
   {
-    let retorno: Producto[] = JSON.parse(localStorage.getItem('productos'));
-console.info('1r: ', retorno);
-    if(retorno == null)
-    {
-      await this.productos.forEach(arrProductos =>
-      {
-        retorno = arrProductos;
-console.info('2r: ', retorno);
-        localStorage.setItem('productos', JSON.stringify(retorno));
-      });
-
-      retorno = JSON.parse(localStorage.getItem('productos'));
-    }
-console.info('3r: ', retorno);
-
-    return retorno;
+    return this.productos;
   }
 
   public getProducto(codigo: string): Producto
   {
     let retorno: Producto = null;
-    //let arrProductos: Producto[] = this.getProductos();
 
-    this.getProductos().then((arrProductos) =>
+    this.getProductos().forEach((arrProductos) =>
     {
       arrProductos.forEach(unProducto =>
       {
@@ -126,13 +112,11 @@ console.info('3r: ', retorno);
             {
               console.log('File available at', downloadURL);
               this.SetURL(doc, downloadURL);
-              this.SignOut();
             });
           });
       }
 
       this.SetData(doc);
-      this.SignOut();
     });
   }
  
@@ -169,18 +153,8 @@ console.info('3r: ', retorno);
     });
   }
 
-  public SignOut(): void 
-  {
-    localStorage.removeItem('productos');
-  }
-
   public getFecha(): string
   {
     return new DatePipe('en-US').transform(Date.now(), 'yyyyMMddHHmmssSSS', '-0300');
-  }
-
-  public productosCargados(): boolean 
-  {
-    return JSON.parse(localStorage.getItem('productos')) !== null;
   }
 }

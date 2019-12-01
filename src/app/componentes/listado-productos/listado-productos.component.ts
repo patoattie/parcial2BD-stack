@@ -11,6 +11,7 @@ import { ProductosService } from '../../servicios/productos.service';
 })
 export class ListadoProductosComponent implements OnInit {
   @Input() productos: Producto[];
+  @Input() datosListos: boolean;
   public cols: any[];
 
   constructor(public productosService: ProductosService) { }

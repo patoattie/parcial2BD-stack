@@ -16,20 +16,21 @@ export class CabeceraComponent implements OnInit {
   //public jugador: Jugador;
   items: MenuItem[];
 
-  constructor(public authService: AuthService, public usuariosService: UsuariosService, private productosService: ProductosService) { }
+  constructor(public authService: AuthService, public usuariosService: UsuariosService, public productosService: ProductosService) { }
 
   ngOnInit()  
   {
     this.items = [
-      { label: 'Producto', icon: 'pi pi-plus', routerLink: '/Abm-Producto' },
+      //{ label: 'Producto', icon: 'pi pi-plus', routerLink: '/Abm-Producto' },
+      { label: 'Producto', icon: 'pi pi-plus', command: () => {this.productosService.muestraAbm = true; } },
       { separator: true },
-      { label: 'Salir', icon: 'pi pi-sign-out', command: () => {this.salir() } }
+      { label: 'Salir', icon: 'pi pi-sign-out', command: () => {this.salir(); } }
     ];
   }
 
   public async salir(): Promise<void>
   {
-    await this.productosService.SignOut();
+    //await this.productosService.SignOut();
     await this.usuariosService.SignOut();
     await this.authService.SignOut();
   }

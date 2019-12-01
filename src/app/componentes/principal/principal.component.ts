@@ -14,7 +14,7 @@ export class PrincipalComponent implements OnInit {
     isFirstOpen: true,
     isFirstDisabled: false
   };
-  public productos: Producto[] = [];
+  public productos: Producto[];
   public productoSeleccionada: Producto;
 
   constructor(public authService: AuthService, public productosService: ProductosService)
@@ -23,14 +23,7 @@ export class PrincipalComponent implements OnInit {
 
   ngOnInit() 
   {
-console.info('1: ', this.productos);
     this.productosService.getProductos()
-    .then((arrProductos) =>
-    {
-      this.productos = arrProductos;
-console.info('2: ', this.productos);
-    });
-    //this.productos = this.productosService.getProductos();
-//console.log(this.productos);
+    .subscribe(productos => this.productos = productos);
   }
 }

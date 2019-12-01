@@ -1,4 +1,4 @@
-<app-cabecera>  </app-cabecera>
+<!-- <app-cabecera>  </app-cabecera> -->
 
 <body>
   <div>
@@ -47,7 +47,7 @@
         <input formControlName="imagen" type="file" name="img-file" accept="image/png" id="img-file">
 
         <div class="clearfix">
-          <button type="button" (click)="goBack()" class="cancelbtn">Me arrepenti</button>
+          <button type="button" (click)="productosService.muestraAbm=false" class="cancelbtn">Me arrepenti</button>
           <button type="button" (click)="registrar()" class="signupbtn">
             Guardar
             <i class="fa fa-spinner fa-spin" *ngIf="getEnEspera()"></i>
