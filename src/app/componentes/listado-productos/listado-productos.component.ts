@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 //import { ProductosService } from "../../servicios/productos.service";
 import { Producto } from "../../clases/producto";
-import { SortEvent } from 'primeng/api';
+//import { SortEvent } from 'primeng/api';
+import { ProductosService } from '../../servicios/productos.service';
 
 @Component({
   selector: 'app-listado-productos',
@@ -12,7 +13,7 @@ export class ListadoProductosComponent implements OnInit {
   @Input() productos: Producto[];
   public cols: any[];
 
-  constructor(/*private productosService: ProductosService*/) { }
+  constructor(public productosService: ProductosService) { }
 
   ngOnInit() 
   {

@@ -32,20 +32,22 @@ export class ProductosService
     );
   }
 
-  public getProductos(): Producto[]
+  public async getProductos(): Promise<Producto[]>
   {
     let retorno: Producto[] = JSON.parse(localStorage.getItem('productos'));
-
+console.info('1r: ', retorno);
     if(retorno == null)
     {
-      this.productos.forEach(arrProductos =>
+      await this.productos.forEach(arrProductos =>
       {
         retorno = arrProductos;
+console.info('2r: ', retorno);
         localStorage.setItem('productos', JSON.stringify(retorno));
       });
 
       retorno = JSON.parse(localStorage.getItem('productos'));
     }
+console.info('3r: ', retorno);
 
     return retorno;
   }
@@ -53,14 +55,17 @@ export class ProductosService
   public getProducto(codigo: string): Producto
   {
     let retorno: Producto = null;
-    let arrProductos: Producto[] = this.getProductos();
+    //let arrProductos: Producto[] = this.getProductos();
 
-    arrProductos.forEach(unProducto =>
+    this.getProductos().then((arrProductos) =>
     {
-      if(unProducto.codigo == codigo)
+      arrProductos.forEach(unProducto =>
       {
-        retorno = unProducto;
-      }
+        if(unProducto.codigo == codigo)
+        {
+          retorno = unProducto;
+        }
+      });
     });
 
     return retorno;
@@ -172,5 +177,10 @@ export class ProductosService
   public getFecha(): string
   {
     return new DatePipe('en-US').transform(Date.now(), 'yyyyMMddHHmmssSSS', '-0300');
+  }
+
+  public productosCargados(): boolean 
+  {
+    return JSON.parse(localStorage.getItem('productos')) !== null;
   }
 }

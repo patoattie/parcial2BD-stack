@@ -17,12 +17,20 @@ export class PrincipalComponent implements OnInit {
   public productos: Producto[] = [];
   public productoSeleccionada: Producto;
 
-  constructor(public authService: AuthService,private productosService: ProductosService)
+  constructor(public authService: AuthService, public productosService: ProductosService)
   {
-    this.productos = this.productosService.getProductos();
-console.log(this.productos);
   }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
+console.info('1: ', this.productos);
+    this.productosService.getProductos()
+    .then((arrProductos) =>
+    {
+      this.productos = arrProductos;
+console.info('2: ', this.productos);
+    });
+    //this.productos = this.productosService.getProductos();
+//console.log(this.productos);
   }
 }
