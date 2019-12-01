@@ -74,7 +74,7 @@ export class AbmProductoComponent implements OnInit
         codigo: this.producto.codigo, 
         nombre: this.producto.nombre, 
         descripcion: this.producto.descripcion, 
-        costo: this.producto.costo, 
+        costo: this.producto.costo.toString(), 
         observaciones: this.producto.observaciones, 
         imagen: ''
       });
@@ -137,7 +137,14 @@ export class AbmProductoComponent implements OnInit
     {
       let file = (<HTMLInputElement>document.getElementById("img-file")).files[0];
 
-      await this.productosService.addProducto(new Producto(this.formRegistro.value.codigo, this.formRegistro.value.nombre, this.formRegistro.value.descripcion, this.convertirEnNumero(this.formRegistro.value.costo), this.formRegistro.value.observaciones, this.guardarStockInicial(), this.productosService.getFecha()), file);
+      if(this.producto != null)
+      {
+        await this.productosService.updateProducto(new Producto(this.formRegistro.value.codigo, this.formRegistro.value.nombre, this.formRegistro.value.descripcion, this.convertirEnNumero(this.formRegistro.value.costo), this.formRegistro.value.observaciones, this.producto.stock, this.producto.fechaCreacion, this.producto.idCollection, this.producto.uid, this.producto.photoURL));
+      }
+      else
+      {
+        await this.productosService.addProducto(new Producto(this.formRegistro.value.codigo, this.formRegistro.value.nombre, this.formRegistro.value.descripcion, this.convertirEnNumero(this.formRegistro.value.costo), this.formRegistro.value.observaciones, this.guardarStockInicial(), this.productosService.getFecha()), file);
+      }
 
       this.mostrarMsjOk();
       this.formRegistro.reset();
