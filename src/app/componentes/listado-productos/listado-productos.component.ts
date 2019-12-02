@@ -15,7 +15,7 @@ export class ListadoProductosComponent implements OnInit {
   public productoSeleccionado: Producto = null;
   public cols: any[];
   public colStock: any[];
-  private display: boolean = false;
+  public display: boolean = false;
 
   constructor(public productosService: ProductosService) { }
 

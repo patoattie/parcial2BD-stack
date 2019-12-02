@@ -27,7 +27,7 @@ export class AbmProductoComponent implements OnInit
     public authService: AuthService, 
     private location: Location,
     private cd: ChangeDetectorRef,
-    private productosService: ProductosService,
+    public productosService: ProductosService,
     public messageService: MessageService
   ) 
   {
