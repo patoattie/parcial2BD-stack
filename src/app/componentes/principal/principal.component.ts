@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../servicios/auth.service';
 import { ProductosService } from "../../servicios/productos.service";
 import { Producto } from "../../clases/producto";
+import { MenuItem } from 'primeng/api';
 
 
 @Component({
@@ -15,7 +16,9 @@ export class PrincipalComponent implements OnInit {
     isFirstDisabled: false
   };
   public productos: Producto[];
-  //public productoSeleccionada: Producto;
+  public items: MenuItem[];
+  public listaProductos: boolean = true;
+  public listaMovimientos: boolean = false;
 
   constructor(public authService: AuthService, public productosService: ProductosService)
   {
@@ -25,5 +28,22 @@ export class PrincipalComponent implements OnInit {
   {
     this.productosService.getProductos()
     .subscribe(productos => this.productos = productos);
+
+    this.items = [
+      {label: 'Productos', command: () => {this.mostrarListaProductos(); }},
+      {label: 'Movimientos', command: () => {this.mostrarListaMovimientos(); }}
+    ]
+  }
+
+  private mostrarListaProductos(): void
+  {
+    this.listaProductos = true;
+    this.listaMovimientos = false;
+  }
+
+  private mostrarListaMovimientos(): void
+  {
+    this.listaProductos = false;
+    this.listaMovimientos = true;
   }
 }

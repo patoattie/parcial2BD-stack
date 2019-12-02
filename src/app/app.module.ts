@@ -25,6 +25,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ListboxModule} from 'primeng/listbox';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
+import {TabMenuModule} from 'primeng/tabmenu';
 import {MenuModule} from 'primeng/menu';
 import {TieredMenuModule} from 'primeng/tieredmenu';
 import {TableModule} from 'primeng/table';
@@ -66,6 +67,7 @@ import { ListadoProductosComponent } from './componentes/listado-productos/lista
     InputTextareaModule,
     ListboxModule,
     ToastModule,
+    TabMenuModule,
     MenuModule,
     TieredMenuModule,
     TableModule,

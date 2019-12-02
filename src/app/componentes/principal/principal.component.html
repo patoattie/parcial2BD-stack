@@ -1,3 +1,3 @@
 <app-cabecera>  </app-cabecera>
-
-<app-listado-productos [productos]="productos"></app-listado-productos>
+<p-tabMenu [model]="items" [activeItem]="items[0]"></p-tabMenu>
+<app-listado-productos *ngIf="listaProductos" [productos]="productos"></app-listado-productos>

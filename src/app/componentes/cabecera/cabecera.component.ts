@@ -21,9 +21,6 @@ export class CabeceraComponent implements OnInit {
   ngOnInit()  
   {
     this.items = [
-      //{ label: 'Producto', icon: 'pi pi-plus', routerLink: '/Abm-Producto' },
-      { label: 'Producto', icon: 'pi pi-plus', command: () => {this.productosService.muestraAbm = true; } },
-      { separator: true },
       { label: 'Salir', icon: 'pi pi-sign-out', command: () => {this.salir(); } }
     ];
   }
