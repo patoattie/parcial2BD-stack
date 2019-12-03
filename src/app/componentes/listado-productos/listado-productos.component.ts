@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-//import { ProductosService } from "../../servicios/productos.service";
 import { Producto } from "../../clases/producto";
-//import { SortEvent } from 'primeng/api';
 import { ProductosService } from '../../servicios/productos.service';
 
 @Component({
@@ -11,7 +9,6 @@ import { ProductosService } from '../../servicios/productos.service';
 })
 export class ListadoProductosComponent implements OnInit {
   @Input() productos: Producto[];
-  //@Input() datosListos: boolean;
   public productoSeleccionado: Producto = null;
   public cols: any[];
   public colStock: any[];
