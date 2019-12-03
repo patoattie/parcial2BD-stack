@@ -37,7 +37,7 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
-          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumnDisabled]="col.field === 'photoURL'">
             {{col.header}}
             <p-sortIcon *ngIf="col.field != 'photoURL'" [field]="col.field"></p-sortIcon>
           </th>
