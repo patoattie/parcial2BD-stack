@@ -40,6 +40,8 @@ import { ProductosService } from './servicios/productos.service';
 import { ListadoProductosComponent } from './componentes/listado-productos/listado-productos.component';
 import { ListadoMovimientosComponent } from './componentes/listado-movimientos/listado-movimientos.component';
 import { ListadoStockComponent } from './componentes/listado-stock/listado-stock.component';
+import { AbmSucursalComponent } from './componentes/abm-sucursal/abm-sucursal.component';
+import { ListadoSucursalesComponent } from './componentes/listado-sucursales/listado-sucursales.component';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { ListadoStockComponent } from './componentes/listado-stock/listado-stock
     AbmProductoComponent,
     ListadoProductosComponent,
     ListadoMovimientosComponent,
-    ListadoStockComponent
+    ListadoStockComponent,
+    AbmSucursalComponent,
+    ListadoSucursalesComponent
   ],
   imports: [
     BrowserModule,

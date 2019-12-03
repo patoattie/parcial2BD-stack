@@ -1,0 +1,30 @@
+<body>
+    <div>
+      <p-toast key="msjDatos" position="top-right"></p-toast>
+  
+      <form [formGroup]="formRegistro">
+        <div class="container-fluid">
+          <label><b>Sucursal</b></label>
+          <span class="ui-float-label">
+              <input id="float-input" formControlName="sucursal" name="sucursal" type="text" pInputText required> 
+              <label for="float-input">Ingresa la sucursal</label>
+          </span>
+
+          <div>
+            <label><b>Selecciona una imagen para la sucursal</b></label>
+          </div>
+          <input formControlName="imagen" type="file" name="img-file" accept="image/png" id="img-file">
+  
+          <div class="clearfix">
+            <button type="button" (click)="sucursalesService.muestraAbm=false" class="cancelbtn">Me arrepenti</button>
+            <button type="button" (click)="registrar()" class="signupbtn">
+              Guardar
+              <i class="fa fa-spinner fa-spin" *ngIf="getEnEspera()"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+  
+    </div>
+    
+  </body>

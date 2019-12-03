@@ -1,8 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 //para poder hacer las validaciones
-import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import { Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
-import { Location } from '@angular/common';
 import { ProductosService } from '../../servicios/productos.service';
 import { Producto } from '../../clases/producto';
 import { Stock } from '../../clases/stock';
@@ -25,7 +24,6 @@ export class AbmProductoComponent implements OnInit
   constructor(
     private miConstructor: FormBuilder, 
     public authService: AuthService, 
-    private location: Location,
     private cd: ChangeDetectorRef,
     public productosService: ProductosService,
     public messageService: MessageService
@@ -156,12 +154,6 @@ export class AbmProductoComponent implements OnInit
 
     this.enEspera = false; //Oculto el spinner
     this.productosService.muestraAbm = false;
-  }
-
-  public goBack(): void 
-  {
-    this.location.back();
-    //console.log(this.productosService.getFecha());
   }
 
   private convertirEnNumero(cadena: string): number

@@ -18,7 +18,7 @@ export class PrincipalComponent implements OnInit {
   public productos: Producto[];
   public items: MenuItem[];
   public listaProductos: boolean = true;
-  public listaMovimientos: boolean = false;
+  public listaSucursales: boolean = false;
 
   constructor(public authService: AuthService, public productosService: ProductosService)
   {
@@ -31,19 +31,19 @@ export class PrincipalComponent implements OnInit {
 
     this.items = [
       {label: 'Productos', command: () => {this.mostrarListaProductos(); }},
-      {label: 'Movimientos', command: () => {this.mostrarListaMovimientos(); }}
+      {label: 'Sucursales', command: () => {this.mostrarListaSucursales(); }}
     ]
   }
 
   private mostrarListaProductos(): void
   {
     this.listaProductos = true;
-    this.listaMovimientos = false;
+    this.listaSucursales = false;
   }
 
-  private mostrarListaMovimientos(): void
+  private mostrarListaSucursales(): void
   {
     this.listaProductos = false;
-    this.listaMovimientos = true;
+    this.listaSucursales = true;
   }
 }

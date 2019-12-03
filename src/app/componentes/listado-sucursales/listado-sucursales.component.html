@@ -1,0 +1,49 @@
+<p-table *ngIf="!sucursalesService.muestraAbm" #dt [columns]="cols" [value]="sucursales" sortMode="multiple" [paginator]="true" [rows]="6">
+    <ng-template pTemplate="caption">
+      <p-toolbar>
+        <div class="ui-toolbar-group-left">
+          <button type="button" #btn pButton icon="pi pi-plus" (click)="habilitaAbm(true)"></button>
+          <button *ngIf="sucursalSeleccionada != null" type="button" #btn pButton icon="pi pi-pencil" (click)="habilitaAbm(false)" style="margin-left: 2px;"></button>
+          <button *ngIf="sucursalSeleccionada != null" type="button" #btn pButton icon="pi pi-table" (click)="muestraStock(true)" style="margin-left: 2px;"></button>
+        </div>
+        <div class="ui-toolbar-group-right">        
+            <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="50" placeholder="Filtro global" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </div>
+      </p-toolbar>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumnDisabled]="col.field === 'photoURL'">
+            {{col.header}}
+            <p-sortIcon *ngIf="col.field != 'photoURL'" [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+        <tr>
+          <th *ngFor="let col of columns">
+            <input *ngIf="col.field != 'photoURL'" style="width: 100%;" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+          <!-- <th *ngFor="let col of columns" [ngSwitch]="col.field">
+              <input *ngSwitchCase="'vin'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+              <div *ngSwitchCase="'year'">
+                  Value > {{yearFilter}}
+                  <i class="fa fa-close" (click)="yearFilter=null;dt.filter(null, col.field, col.filterMatchMode)" style="cursor:pointer" *ngIf="yearFilter"></i>
+                  <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="yearFilter" [min]="1970" [max]="2010" (onChange)="onYearChange($event, dt)"></p-slider>
+              </div>
+              <p-dropdown *ngSwitchCase="'brand'" [options]="brands" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+              <p-multiSelect *ngSwitchCase="'color'" [options]="colors" defaultLabel="All Colors" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
+              <input *ngSwitchCase="'price'" pInputText type="text" placeholder="Custom - Greater Than" (input)="dt.filter($event.target.value, col.field, 'custom')"> -->
+          </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [ngClass]="(sucursalSeleccionada != null && rowData.idCollection == sucursalSeleccionada.idCollection) ? 'filaSeleccionada' : null" (click)="eligeProducto($event, rowData)">
+        <td *ngFor="let col of columns">
+          <p *ngIf="col.field != 'photoURL' && col.field != 'fechaCreacion'">{{rowData[col.field]}}</p>
+          <p *ngIf="col.field == 'fechaCreacion'">{{transformaFecha(rowData[col.field])}}</p>
+          <img *ngIf="col.field == 'photoURL'" src="{{rowData[col.field]}}" alt="" style="width: 50%;">
+        </td>
+      </tr>
+    </ng-template>
+</p-table>
+
+<app-abm-sucursal *ngIf="sucursalesService.muestraAbm" [sucursal]="sucursalSeleccionada"></app-abm-sucursal>
