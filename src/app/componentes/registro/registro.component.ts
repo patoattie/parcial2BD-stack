@@ -8,6 +8,8 @@ import { UsuariosService } from '../../servicios/usuarios.service';
 import { Usuario } from '../../clases/usuario';
 import { ESucursal } from '../../enums/esucursal.enum';
 import { EPerfil } from '../../enums/eperfil.enum';
+import { SucursalesService } from "../../servicios/sucursales.service";
+import { Sucursal } from "../../clases/sucursal";
 
 import {SelectItem} from 'primeng/api';
 import {MessageService} from 'primeng/api';
@@ -22,7 +24,8 @@ import * as $ from "jquery";
 export class RegistroComponent implements OnInit {
   public formRegistro: FormGroup;
   private enEspera: boolean; //Muestra u oculta el spinner
-  public sucursales: SelectItem[];
+  //public sucursales: SelectItem[];
+  public sucursales: Sucursal[];
   public perfiles: SelectItem[];
 
   constructor(
@@ -31,6 +34,7 @@ export class RegistroComponent implements OnInit {
     private location: Location,
     private cd: ChangeDetectorRef,
     private usuariosService: UsuariosService,
+    private sucursalesService: SucursalesService,
     public messageService: MessageService
     //private jugadoresService: JugadoresService
     )
@@ -49,11 +53,11 @@ export class RegistroComponent implements OnInit {
     cuit: ['', Validators.compose([Validators.maxLength(11), Validators.minLength(11)])]*/
     });
 
-    this.sucursales = [
+    /*this.sucursales = [
       {label: ESucursal.Almagro, value: ESucursal.Almagro},
       {label: ESucursal.Caballito, value: ESucursal.Caballito},
       {label: ESucursal.Flores, value: ESucursal.Flores}
-    ];
+    ];*/
 
     this.perfiles = [
       {label: EPerfil.Operador, value: EPerfil.Operador},
@@ -87,6 +91,9 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit() 
   {
+    this.sucursalesService.getSucursales()
+    .subscribe(sucursales => this.sucursales = sucursales);
+
     this.enEspera = false;
     this.formRegistro.setValue({usuario: '', clave: '', confirmaClave: '', sucursal: '', perfil: '', imagen: '', habilitaAdmin: ''});
   }

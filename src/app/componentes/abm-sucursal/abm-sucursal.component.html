@@ -13,10 +13,10 @@
           <div>
             <label><b>Selecciona una imagen para la sucursal</b></label>
           </div>
-          <input formControlName="imagen" type="file" name="img-file" accept="image/png" id="img-file">
+          <input formControlName="imagen" type="file" name="img-file" accept="image/*" id="img-file">
   
           <div class="clearfix">
-            <button type="button" (click)="sucursalesService.muestraAbm=false" class="cancelbtn">Me arrepenti</button>
+            <button type="button" (click)="sucursalesService.muestraAbm=false" class="cancelbtn">Volver</button>
             <button type="button" (click)="registrar()" class="signupbtn">
               Guardar
               <i class="fa fa-spinner fa-spin" *ngIf="getEnEspera()"></i>

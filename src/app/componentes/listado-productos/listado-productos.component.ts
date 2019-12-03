@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Producto } from "../../clases/producto";
 import { ProductosService } from '../../servicios/productos.service';
+import { Sucursal } from '../../clases/sucursal';
 
 @Component({
   selector: 'app-listado-productos',
@@ -9,6 +10,7 @@ import { ProductosService } from '../../servicios/productos.service';
 })
 export class ListadoProductosComponent implements OnInit {
   @Input() productos: Producto[];
+  @Input() sucursales: Sucursal[];
   public productoSeleccionado: Producto = null;
   public cols: any[];
   public verStock: boolean = false;

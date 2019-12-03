@@ -150,4 +150,15 @@ export class SucursalesService {
   {
     return new DatePipe('en-US').transform(Date.now(), 'yyyyMMddHHmmssSSS', '-0300');
   }
+
+  public getError(sucursal: Sucursal): string
+  {
+    let error: string = '';
+    if(this.getSucursal(sucursal.sucursal) != null)
+    {
+      error = 'La sucursal ya se encuentra registrada';
+    }
+
+    return error;
+  }
 }

@@ -5,7 +5,10 @@ import { AuthService } from '../../servicios/auth.service';
 import { ProductosService } from '../../servicios/productos.service';
 import { Producto } from '../../clases/producto';
 import { Stock } from '../../clases/stock';
-import { ESucursal } from '../../enums/esucursal.enum';
+//import { ESucursal } from '../../enums/esucursal.enum';
+import { SucursalesService } from "../../servicios/sucursales.service";
+import { Sucursal } from "../../clases/sucursal";
+
 
 import {MessageService} from 'primeng/api';
 
@@ -19,6 +22,7 @@ export class AbmProductoComponent implements OnInit
   public formRegistro: FormGroup;
   private enEspera: boolean; //Muestra u oculta el spinner
   private stockInicial: number = 0;
+  @Input() sucursales: Sucursal[];
   @Input() producto: Producto;
 
   constructor(
@@ -26,6 +30,7 @@ export class AbmProductoComponent implements OnInit
     public authService: AuthService, 
     private cd: ChangeDetectorRef,
     public productosService: ProductosService,
+    private sucursalesService: SucursalesService,
     public messageService: MessageService
   ) 
   {
@@ -65,6 +70,8 @@ export class AbmProductoComponent implements OnInit
   ngOnInit() 
   {
     this.enEspera = false;
+    this.sucursalesService.getSucursales()
+    .subscribe(sucursales => this.sucursales = sucursales);
 
     if(this.producto != null)
     {
@@ -153,7 +160,7 @@ export class AbmProductoComponent implements OnInit
     }
 
     this.enEspera = false; //Oculto el spinner
-    this.productosService.muestraAbm = false;
+    //this.productosService.muestraAbm = false;
   }
 
   private convertirEnNumero(cadena: string): number
@@ -175,7 +182,11 @@ export class AbmProductoComponent implements OnInit
   private guardarStockInicial(): Stock[]
   {
     let retorno: Stock[] = [];
-    retorno.push(new Stock(ESucursal.Almagro, this.stockInicial), new Stock(ESucursal.Caballito, this.stockInicial), new Stock(ESucursal.Flores, this.stockInicial))
+    //retorno.push(new Stock(ESucursal.Almagro, this.stockInicial), new Stock(ESucursal.Caballito, this.stockInicial), new Stock(ESucursal.Flores, this.stockInicial))
+    this.sucursales.forEach((unaSucursal) => 
+    {
+      retorno.push(new Stock(unaSucursal.sucursal, 0));
+    });
 
     return retorno;
   }

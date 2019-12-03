@@ -4,7 +4,6 @@
         <div class="ui-toolbar-group-left">
           <button type="button" #btn pButton icon="pi pi-plus" (click)="habilitaAbm(true)"></button>
           <button *ngIf="sucursalSeleccionada != null" type="button" #btn pButton icon="pi pi-pencil" (click)="habilitaAbm(false)" style="margin-left: 2px;"></button>
-          <button *ngIf="sucursalSeleccionada != null" type="button" #btn pButton icon="pi pi-table" (click)="muestraStock(true)" style="margin-left: 2px;"></button>
         </div>
         <div class="ui-toolbar-group-right">        
             <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
@@ -36,11 +35,11 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
-      <tr [ngClass]="(sucursalSeleccionada != null && rowData.idCollection == sucursalSeleccionada.idCollection) ? 'filaSeleccionada' : null" (click)="eligeProducto($event, rowData)">
+      <tr [ngClass]="(sucursalSeleccionada != null && rowData.idCollection == sucursalSeleccionada.idCollection) ? 'filaSeleccionada' : null" (click)="eligeSucursal($event, rowData)">
         <td *ngFor="let col of columns">
           <p *ngIf="col.field != 'photoURL' && col.field != 'fechaCreacion'">{{rowData[col.field]}}</p>
           <p *ngIf="col.field == 'fechaCreacion'">{{transformaFecha(rowData[col.field])}}</p>
-          <img *ngIf="col.field == 'photoURL'" src="{{rowData[col.field]}}" alt="" style="width: 50%;">
+          <img *ngIf="col.field == 'photoURL'" src="{{rowData[col.field]}}" alt="" style="width: 25%;">
         </td>
       </tr>
     </ng-template>

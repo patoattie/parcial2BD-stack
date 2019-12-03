@@ -87,6 +87,11 @@ export class AbmSucursalComponent implements OnInit
     }
   }
 
+  private mostrarMsjErrorBD(mensaje: string): void
+  {
+    this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: mensaje});
+  }
+
   private mostrarMsjOk(): void
   {
     this.messageService.add({key: 'msjDatos', severity: 'success', summary: 'Actualización Exitosa', detail: 'Se registró correctamente la sucursal'});
@@ -123,6 +128,6 @@ export class AbmSucursalComponent implements OnInit
     }
 
     this.enEspera = false; //Oculto el spinner
-    this.sucursalesService.muestraAbm = false;
+    //this.sucursalesService.muestraAbm = false;
   }
 }

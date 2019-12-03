@@ -69,7 +69,7 @@
     </ng-template>
 </p-table>
 
-<app-abm-producto *ngIf="productosService.muestraAbm" [producto]="productoSeleccionado"></app-abm-producto>
+<app-abm-producto *ngIf="productosService.muestraAbm" [producto]="productoSeleccionado" [sucursales]="sucursales"></app-abm-producto>
 
 <p-dialog *ngIf="productoSeleccionado != null" header="Stock" [(visible)]="verStock" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70" 
         [maximizable]="false" [baseZIndex]="10000">
