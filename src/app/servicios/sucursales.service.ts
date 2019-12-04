@@ -70,7 +70,8 @@ export class SucursalesService {
   public addSucursal(sucursal: Sucursal, archivoFoto?: any): Promise<void | DocumentReference> 
   {
     return this.sucursalCollection.add({
-      sucursal: sucursal.sucursal
+      sucursal: sucursal.sucursal,
+      usuarios: sucursal.usuarios.map((obj)=> {return Object.assign({}, obj)}), //convierte el array sucursal.usuarios (Usuario[]) a un tipo map para poder guardarlo en la BD.
     })
     .then((doc) =>
     {
@@ -115,7 +116,7 @@ export class SucursalesService {
  
   public updateSucursal(sucursal: Sucursal): Promise<void> 
   {
-    return this.sucursalCollection.doc(sucursal.idCollection).update({ sucursal: sucursal.sucursal });
+    return this.sucursalCollection.doc(sucursal.idCollection).update({ sucursal: sucursal.sucursal, usuarios: sucursal.usuarios });
   }
  
   public deleteSucursal(idCollection: string): Promise<void> 

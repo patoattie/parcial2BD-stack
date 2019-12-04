@@ -13,6 +13,7 @@ export class UsuariosService
 {
   private usuarios: Observable<Usuario[]>;
   private usuarioCollection: AngularFirestoreCollection<any>;
+  public muestraAbm: boolean;
 
   constructor(private afs: AngularFirestore, private authService: AuthService)
   {
@@ -26,6 +27,7 @@ export class UsuariosService
         });
       })
     );
+    this.muestraAbm = false;
   }
 
   public getUsuarios(): Observable<Usuario[]>
@@ -95,7 +97,8 @@ export class UsuariosService
     const usuarioRef: AngularFirestoreDocument<any> = this.afs.doc(`usuarios/${usuario.id}`);
     const usuarioData = {
       idCollection: usuario.id,
-      uid: this.authService.getUid()
+      uid: this.authService.getUid(),
+      user: this.authService.getUserData()
     }
     return usuarioRef.set(usuarioData, {
       merge: true

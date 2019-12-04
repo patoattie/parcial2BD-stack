@@ -21,7 +21,7 @@ export class AbmProductoComponent implements OnInit
 {
   public formRegistro: FormGroup;
   private enEspera: boolean; //Muestra u oculta el spinner
-  private stockInicial: number = 0;
+  //private stockInicial: number = 0;
   @Input() sucursales: Sucursal[];
   @Input() producto: Producto;
 

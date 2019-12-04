@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 //import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 //para poder hacer las validaciones
 import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
@@ -6,7 +6,7 @@ import { AuthService } from '../../servicios/auth.service';
 import { Location } from '@angular/common';
 import { UsuariosService } from '../../servicios/usuarios.service';
 import { Usuario } from '../../clases/usuario';
-import { ESucursal } from '../../enums/esucursal.enum';
+//import { ESucursal } from '../../enums/esucursal.enum';
 import { EPerfil } from '../../enums/eperfil.enum';
 import { SucursalesService } from "../../servicios/sucursales.service";
 import { Sucursal } from "../../clases/sucursal";
@@ -25,8 +25,10 @@ export class RegistroComponent implements OnInit {
   public formRegistro: FormGroup;
   private enEspera: boolean; //Muestra u oculta el spinner
   //public sucursales: SelectItem[];
-  public sucursales: Sucursal[];
   public perfiles: SelectItem[];
+  @Input() sucursales: Sucursal[];
+  @Input() usuario: Usuario;
+  public listaSucursales: any[] = [];
 
   constructor(
     private miConstructor: FormBuilder, 
@@ -58,6 +60,10 @@ export class RegistroComponent implements OnInit {
       {label: ESucursal.Caballito, value: ESucursal.Caballito},
       {label: ESucursal.Flores, value: ESucursal.Flores}
     ];*/
+    this.sucursales.forEach((unaSucursal) =>
+    {
+      this.listaSucursales.push({label: unaSucursal.sucursal, value: unaSucursal.sucursal});
+    });
 
     this.perfiles = [
       {label: EPerfil.Operador, value: EPerfil.Operador},
@@ -91,11 +97,24 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.sucursalesService.getSucursales()
-    .subscribe(sucursales => this.sucursales = sucursales);
-
     this.enEspera = false;
-    this.formRegistro.setValue({usuario: '', clave: '', confirmaClave: '', sucursal: '', perfil: '', imagen: '', habilitaAdmin: ''});
+
+    if(this.usuario != null)
+    {
+      this.formRegistro.setValue({
+        usuario: this.usuario.user.email,
+        clave: '', 
+        confirmaClave: '', 
+        sucursal: this.usuario.sucursal,
+        perfil: this.usuario.perfil,
+        imagen: '',
+        habilitaAdmin: ''
+      });
+    }
+    else
+    {
+      this.formRegistro.setValue({usuario: '', clave: '', confirmaClave: '', sucursal: '', perfil: '', imagen: '', habilitaAdmin: ''});
+    }
   }
 
   private mostrarMsjErrorDatos(): void
@@ -184,11 +203,20 @@ export class RegistroComponent implements OnInit {
         else
         {
           let file = (<HTMLInputElement>document.getElementById("img-file")).files[0];
+
           await this.authService.SignUp(this.formRegistro.value.usuario, this.formRegistro.value.clave, null, file);
+
           usuarioValido = this.authService.isLoggedIn();
           if(usuarioValido)
           {
-            await this.usuariosService.addUsuario(new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal));
+            if(this.usuario != null)
+            {
+              await this.usuariosService.updateUsuario(new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal));
+            }
+            else
+            {
+              await this.usuariosService.addUsuario(new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal));
+            }
           }
           else
           {

@@ -2,3 +2,4 @@
 <p-tabMenu [model]="items" [activeItem]="items[0]"></p-tabMenu>
 <app-listado-productos *ngIf="listaProductos" [productos]="productos" [sucursales]="sucursales"></app-listado-productos>
 <app-listado-sucursales *ngIf="listaSucursales" [sucursales]="sucursales"></app-listado-sucursales>
+<app-listado-usuarios *ngIf="listaUsuarios" [sucursales]="sucursales" [usuarios]="usuarios"></app-listado-usuarios>

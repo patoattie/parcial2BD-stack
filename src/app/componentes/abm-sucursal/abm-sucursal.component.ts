@@ -6,6 +6,8 @@ import { SucursalesService } from '../../servicios/sucursales.service';
 import { Sucursal } from '../../clases/sucursal';
 
 import {MessageService} from 'primeng/api';
+import { Usuario } from '../../clases/usuario';
+import { UsuariosService } from '../../servicios/usuarios.service';
 
 @Component({
   selector: 'app-abm-sucursal',
@@ -17,12 +19,14 @@ export class AbmSucursalComponent implements OnInit
   public formRegistro: FormGroup;
   private enEspera: boolean; //Muestra u oculta el spinner
   @Input() sucursal: Sucursal;
+  @Input() usuarios: Usuario[];
 
   constructor(
     private miConstructor: FormBuilder, 
     public authService: AuthService, 
     private cd: ChangeDetectorRef,
     public sucursalesService: SucursalesService,
+    private usuariosService: UsuariosService,
     public messageService: MessageService
   ) 
   {
@@ -112,11 +116,11 @@ export class AbmSucursalComponent implements OnInit
 
       if(this.sucursal != null)
       {
-        await this.sucursalesService.updateSucursal(new Sucursal(this.formRegistro.value.sucursal, this.sucursal.idCollection, this.sucursal.uid, this.sucursal.photoURL));
+        await this.sucursalesService.updateSucursal(new Sucursal(this.formRegistro.value.sucursal, this.sucursal.idCollection, this.sucursal.uid, this.sucursal.photoURL, this.sucursal.usuarios));
       }
       else
       {
-        await this.sucursalesService.addSucursal(new Sucursal(this.formRegistro.value.sucursal), file);
+        await this.sucursalesService.addSucursal(new Sucursal(this.formRegistro.value.sucursal, null, null, null, this.guardarUsuarioInicial()), file);
       }
 
       this.mostrarMsjOk();
@@ -129,5 +133,17 @@ export class AbmSucursalComponent implements OnInit
 
     this.enEspera = false; //Oculto el spinner
     //this.sucursalesService.muestraAbm = false;
+  }
+
+  private guardarUsuarioInicial(): Usuario[]
+  {
+    let retorno: Usuario[] = [];
+
+    this.usuarios.forEach((unUsuario) => 
+    {
+      retorno.push(new Usuario(unUsuario.perfil, unUsuario.sucursal, unUsuario.idCollection, unUsuario.uid, unUsuario.user));
+    });
+
+    return retorno;
   }
 }

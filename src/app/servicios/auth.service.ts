@@ -6,13 +6,13 @@ import { Router } from "@angular/router";
 import {DatePipe} from '@angular/common';
 import * as firebase from 'firebase/app';
 
-import { Usuario } from "../interfaces/usuario";
+import { User } from "../interfaces/user";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userData: Usuario; // Save logged in user data
+  userData: User; // Save logged in user data
   private error: string;
 
   constructor(
@@ -190,7 +190,7 @@ export class AuthService {
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   public SetUserData(user) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    const userData: Usuario = {
+    const userData: User = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
@@ -218,7 +218,7 @@ export class AuthService {
     });
   }
 
-  public getUserData(): Usuario 
+  public getUserData(): User 
   {
     return JSON.parse(localStorage.getItem('user'));
   }
