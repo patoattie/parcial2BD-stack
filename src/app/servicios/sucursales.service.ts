@@ -38,19 +38,16 @@ export class SucursalesService {
     return this.sucursales;
   }
 
-  public getSucursal(sucursal: string): Sucursal
+  public getSucursal(sucursal: string, sucursales: Sucursal[]): Sucursal
   {
     let retorno: Sucursal = null;
 
-    this.getSucursales().forEach((arrSucursales) =>
+    sucursales.forEach((unSucursal) =>
     {
-      arrSucursales.forEach(unSucursal =>
+      if(unSucursal.sucursal == sucursal)
       {
-        if(unSucursal.sucursal == sucursal)
-        {
-          retorno = unSucursal;
-        }
-      });
+        retorno = unSucursal;
+      }
     });
 
     return retorno;
@@ -152,10 +149,10 @@ export class SucursalesService {
     return new DatePipe('en-US').transform(Date.now(), 'yyyyMMddHHmmssSSS', '-0300');
   }
 
-  public getError(sucursal: Sucursal): string
+  public getError(sucursal: Sucursal, sucursales: Sucursal[]): string
   {
     let error: string = '';
-    if(this.getSucursal(sucursal.sucursal) != null)
+    if(this.getSucursal(sucursal.sucursal, sucursales) != null)
     {
       error = 'La sucursal ya se encuentra registrada';
     }

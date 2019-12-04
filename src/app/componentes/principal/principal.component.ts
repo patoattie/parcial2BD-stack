@@ -45,9 +45,7 @@ export class PrincipalComponent implements OnInit {
 
     this.usuariosService.getUsuarios()
     .subscribe(usuarios => this.usuarios = usuarios);
-console.log(this.sucursales);
-console.log(this.usuarios);
-console.log(this.productos);
+
     this.items = [
       {label: 'Productos', command: () => {this.mostrarListaProductos(); }},
       {label: 'Sucursales', command: () => {this.mostrarListaSucursales(); }},

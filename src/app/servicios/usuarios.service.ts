@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import {Usuario} from '../clases/usuario';
 import {AuthService} from './auth.service';
+import { Sucursal } from '../clases/sucursal';
 
 @Injectable({
   providedIn: 'root'
@@ -69,8 +70,23 @@ export class UsuariosService
       })
     );
   }
+  
+  public getUsuarioPorEmail(email: string, usuarios: Usuario[]): Usuario
+  {
+    let retorno: Usuario = null;
 
-  public addUsuario(usuario: Usuario): Promise<void | DocumentReference> 
+    usuarios.forEach((unUsuario) =>
+    {
+      if(unUsuario.user != undefined && unUsuario.user.email == email)
+      {
+        retorno = unUsuario;
+      }
+    });
+
+    return retorno;
+  }
+
+  public addUsuario(usuario: Usuario, usuarios: Usuario[], sucursales: Sucursal[]): Promise<void | DocumentReference> 
   {
     return this.usuarioCollection.add({
       perfil: usuario.perfil,
@@ -78,7 +94,23 @@ export class UsuariosService
     })
     .then((doc) =>
     {
-      this.SetData(doc);
+      this.SetData(doc)
+      .then(() =>
+      {
+//console.log('Alta');
+let usuarioNuevo: Usuario = this.getUsuarioPorEmail(this.formRegistro.value.usuario, this.usuarios);
+console.info('usuarioNuevo', usuarioNuevo);
+console.info('this.formRegistro.value.usuario', this.formRegistro.value.usuario);
+console.info('this.usuarios', this.usuarios);
+              let sucursalUsuario: Sucursal = this.sucursalesService.getSucursal(this.formRegistro.value.sucursal, this.sucursales);
+console.info('sucursalUsuario', sucursalUsuario);
+              if(sucursalUsuario.usuarios == undefined)
+              {
+                sucursalUsuario.usuarios = [];
+              }
+              sucursalUsuario.usuarios.push(usuarioNuevo);
+              this.sucursalesService.updateSucursal(sucursalUsuario);
+      });
     });
   }
  
@@ -92,7 +124,7 @@ export class UsuariosService
     return this.usuarioCollection.doc(idCollection).delete();
   }
 
-  public SetData(usuario: DocumentReference)
+  public SetData(usuario: DocumentReference): Promise<void>
   {
     const usuarioRef: AngularFirestoreDocument<any> = this.afs.doc(`usuarios/${usuario.id}`);
     const usuarioData = {
@@ -102,7 +134,7 @@ export class UsuariosService
     }
     return usuarioRef.set(usuarioData, {
       merge: true
-    })
+    });
   }
 
   public SignOut(): void 

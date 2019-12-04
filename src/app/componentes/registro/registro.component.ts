@@ -28,6 +28,8 @@ export class RegistroComponent implements OnInit {
   public perfiles: SelectItem[];
   @Input() sucursales: Sucursal[];
   @Input() usuario: Usuario;
+  //private usuarios: Usuario[];
+  @Input() usuarios: Usuario[];
   public listaSucursales: any[] = [];
 
   constructor(
@@ -36,7 +38,7 @@ export class RegistroComponent implements OnInit {
     private location: Location,
     private cd: ChangeDetectorRef,
     private usuariosService: UsuariosService,
-    private sucursalesService: SucursalesService,
+    public sucursalesService: SucursalesService,
     public messageService: MessageService
     //private jugadoresService: JugadoresService
     )
@@ -60,10 +62,6 @@ export class RegistroComponent implements OnInit {
       {label: ESucursal.Caballito, value: ESucursal.Caballito},
       {label: ESucursal.Flores, value: ESucursal.Flores}
     ];*/
-    this.sucursales.forEach((unaSucursal) =>
-    {
-      this.listaSucursales.push({label: unaSucursal.sucursal, value: unaSucursal.sucursal});
-    });
 
     this.perfiles = [
       {label: EPerfil.Operador, value: EPerfil.Operador},
@@ -115,6 +113,14 @@ export class RegistroComponent implements OnInit {
     {
       this.formRegistro.setValue({usuario: '', clave: '', confirmaClave: '', sucursal: '', perfil: '', imagen: '', habilitaAdmin: ''});
     }
+
+    this.sucursales.forEach((unaSucursal) =>
+    {
+      this.listaSucursales.push({label: unaSucursal.sucursal, value: unaSucursal.sucursal});
+    });
+
+    //this.usuariosService.getUsuarios()
+    //.subscribe(usuarios => this.usuarios = usuarios);
   }
 
   private mostrarMsjErrorDatos(): void
@@ -215,7 +221,7 @@ export class RegistroComponent implements OnInit {
             }
             else
             {
-              await this.usuariosService.addUsuario(new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal));
+              await this.usuariosService.addUsuario(new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal), this.usuarios, this.sucursales);
             }
           }
           else
@@ -241,4 +247,10 @@ export class RegistroComponent implements OnInit {
   {
     this.location.back();
   }
+
+  /*public mostrarLog(): void
+  {
+    //console.log(this.formRegistro.value.sucursal);
+    console.log(this.sucursalesService.getSucursal(this.formRegistro.value.sucursal, this.sucursales));
+  }*/
 }
