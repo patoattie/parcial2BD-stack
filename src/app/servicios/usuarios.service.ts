@@ -71,7 +71,7 @@ export class UsuariosService
     );
   }
   
-  public getUsuarioPorEmail(email: string, usuarios: Usuario[]): Usuario
+  /*public getUsuarioPorEmail(email: string, usuarios: Usuario[]): Usuario
   {
     let retorno: Usuario = null;
 
@@ -84,9 +84,9 @@ export class UsuariosService
     });
 
     return retorno;
-  }
+  }*/
 
-  public addUsuario(usuario: Usuario, usuarios: Usuario[], sucursales: Sucursal[]): Promise<void | DocumentReference> 
+  /*public addUsuario(usuario: Usuario, usuarios: Usuario[], sucursales: Sucursal[]): Promise<void | DocumentReference> 
   {
     return this.usuarioCollection.add({
       perfil: usuario.perfil,
@@ -97,8 +97,8 @@ export class UsuariosService
       this.SetData(doc)
       .then(() =>
       {
-//console.log('Alta');
-let usuarioNuevo: Usuario = this.getUsuarioPorEmail(this.formRegistro.value.usuario, this.usuarios);
+console.log('Alta');*/
+/*let usuarioNuevo: Usuario = this.getUsuarioPorEmail(this.formRegistro.value.usuario, this.usuarios);
 console.info('usuarioNuevo', usuarioNuevo);
 console.info('this.formRegistro.value.usuario', this.formRegistro.value.usuario);
 console.info('this.usuarios', this.usuarios);
@@ -109,14 +109,14 @@ console.info('sucursalUsuario', sucursalUsuario);
                 sucursalUsuario.usuarios = [];
               }
               sucursalUsuario.usuarios.push(usuarioNuevo);
-              this.sucursalesService.updateSucursal(sucursalUsuario);
-      });
+              this.sucursalesService.updateSucursal(sucursalUsuario);*/
+ /*     });
     });
-  }
+  }*/
  
   public updateUsuario(usuario: Usuario): Promise<void> 
   {
-    return this.usuarioCollection.doc(usuario.idCollection).update({ perfil: usuario.perfil, sucursal: usuario.sucursal });
+    return this.usuarioCollection.doc(usuario.uid).update({ perfil: usuario.perfil, sucursal: usuario.sucursal });
   }
  
   public deleteUsuario(idCollection: string): Promise<void> 
@@ -137,10 +137,10 @@ console.info('sucursalUsuario', sucursalUsuario);
     });
   }
 
-  public SignOut(): void 
+  /*public SignOut(): void 
   {
     localStorage.removeItem('usuario');
-  }
+  }*/
 
   public getPswAdmin():string
   {

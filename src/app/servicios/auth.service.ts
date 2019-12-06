@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import {DatePipe} from '@angular/common';
 import * as firebase from 'firebase/app';
 
-import { User } from "../interfaces/user";
+import { User } from "../clases/user";
 
 @Injectable({
   providedIn: 'root'
@@ -31,14 +31,14 @@ export class AuthService {
         if (user) 
         {
           this.userData = user;
-          localStorage.setItem('user', JSON.stringify(this.userData));
+          localStorage.setItem('usuario', JSON.stringify(this.userData));
         } 
         else 
         {
-          localStorage.setItem('user', null);
+          localStorage.setItem('usuario', null);
         }
 
-        //JSON.parse(localStorage.getItem('user'));
+        //JSON.parse(localStorage.getItem('usuario'));
       });
     }
 
@@ -162,9 +162,9 @@ export class AuthService {
 
   // Returns true when user is looged in and email is verified
   /*get*/public  isLoggedIn(): boolean {
-    //const user = JSON.parse(localStorage.getItem('user'));
+    //const user = JSON.parse(localStorage.getItem('usuario'));
     //return this.afAuth.auth.currentUser !== null;
-    return JSON.parse(localStorage.getItem('user')) !== null;
+    return JSON.parse(localStorage.getItem('usuario')) !== null;
   }
 
   // Sign in with Google
@@ -189,7 +189,7 @@ export class AuthService {
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   public SetUserData(user) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`usuarios/${user.uid}`);
     const userData: User = {
       uid: user.uid,
       email: user.email,
@@ -208,7 +208,7 @@ export class AuthService {
     return this.afAuth.auth.signOut()
     .then(() => 
     {
-      localStorage.removeItem('user');
+      localStorage.removeItem('usuario');
       this.router.navigate(['']);
       console.log("Logout OK");
     })
@@ -220,7 +220,7 @@ export class AuthService {
 
   public getUserData(): User 
   {
-    return JSON.parse(localStorage.getItem('user'));
+    return JSON.parse(localStorage.getItem('usuario'));
   }
 
   public getError(): string

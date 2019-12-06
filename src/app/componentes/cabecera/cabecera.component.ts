@@ -28,7 +28,7 @@ export class CabeceraComponent implements OnInit {
   public async salir(): Promise<void>
   {
     //await this.productosService.SignOut();
-    await this.usuariosService.SignOut();
+    //await this.usuariosService.SignOut();
     await this.authService.SignOut();
   }
 
@@ -38,7 +38,8 @@ export class CabeceraComponent implements OnInit {
 
     if(urlFoto == undefined)
     {
-      urlFoto = 'https://stackblitz.com/files/parcial2bd-stack/github/patoattie/parcial2BD-stack/master/src/assets/avatares/avatardefault.png';
+      //urlFoto = 'https://stackblitz.com/files/parcial2bd-stack/github/patoattie/parcial2BD-stack/master/src/assets/avatares/avatardefault.png';
+      urlFoto = '../../../assets/avatares/avatardefault.png';
     }
 
     return urlFoto;

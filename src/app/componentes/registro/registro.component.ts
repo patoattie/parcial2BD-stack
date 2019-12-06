@@ -40,21 +40,17 @@ export class RegistroComponent implements OnInit {
     private usuariosService: UsuariosService,
     public sucursalesService: SucursalesService,
     public messageService: MessageService
-    //private jugadoresService: JugadoresService
     )
   {
-    //email = new FormControl('', [Validators.email, Validators.required]);
     this.formRegistro = this.miConstructor.group(
     {
-      usuario: ['', Validators.compose([Validators.email, Validators.required])],//this.email
+      usuario: ['', Validators.compose([Validators.email, Validators.required])],
       clave: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       confirmaClave: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       sucursal: ['', Validators.compose([Validators.required])],
       perfil: ['', Validators.compose([Validators.required])],
       imagen: ['', Validators.compose([])],
-      habilitaAdmin: ['', Validators.compose([])]/*,
-      sexo: ['', Validators.compose([])],
-    cuit: ['', Validators.compose([Validators.maxLength(11), Validators.minLength(11)])]*/
+      habilitaAdmin: ['', Validators.compose([])]
     });
 
     /*this.sucursales = [
@@ -68,8 +64,6 @@ export class RegistroComponent implements OnInit {
       {label: EPerfil.Admin, value: EPerfil.Admin}
     ]
   }
-
-  //constructor( ) { }
 
   onFileChange(event) 
   {
@@ -100,7 +94,7 @@ export class RegistroComponent implements OnInit {
     if(this.usuario != null)
     {
       this.formRegistro.setValue({
-        usuario: this.usuario.user.email,
+        usuario: this.usuario.email,
         clave: '', 
         confirmaClave: '', 
         sucursal: this.usuario.sucursal,
@@ -217,11 +211,15 @@ export class RegistroComponent implements OnInit {
           {
             if(this.usuario != null)
             {
-              await this.usuariosService.updateUsuario(new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal));
+              this.usuario.perfil = this.formRegistro.value.perfil;
+              this.usuario.sucursal = this.formRegistro.value.sucursal;
+              await this.usuariosService.updateUsuario(this.usuario);
             }
             else
             {
-              await this.usuariosService.addUsuario(new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal), this.usuarios, this.sucursales);
+              let usuarioNuevo: Usuario = new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal, this.authService.getUserData());
+              //await this.usuariosService.addUsuario(new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal), this.usuarios, this.sucursales);
+              await this.usuariosService.updateUsuario(usuarioNuevo);
             }
           }
           else
