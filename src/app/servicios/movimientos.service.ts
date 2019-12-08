@@ -84,11 +84,7 @@ export class MovimientosService
       fecha: movimiento.fecha,
       cantidad: movimiento.cantidad,
       detalle: movimiento.detalle,
-      idProducto: movimiento.idProducto,
-      codigoProducto: movimiento.codigoProducto,
-      nombreProducto: movimiento.nombreProducto,
-      descripcionProducto: movimiento.descripcionProducto,
-      costoProducto: movimiento.costoProducto
+      codigoProducto: movimiento.codigoProducto
     })
     .then((doc) =>
     {
@@ -105,11 +101,7 @@ export class MovimientosService
       fecha: movimiento.fecha,
       cantidad: movimiento.cantidad,
       detalle: movimiento.detalle,
-      idProducto: movimiento.idProducto,
-      codigoProducto: movimiento.codigoProducto,
-      nombreProducto: movimiento.nombreProducto,
-      descripcionProducto: movimiento.descripcionProducto,
-      costoProducto: movimiento.costoProducto
+      codigoProducto: movimiento.codigoProducto
     });
   }
  
@@ -126,9 +118,7 @@ export class MovimientosService
     const movimientoData = {
       idCollection: movimiento.id,
       uid: usuarioUID,
-      email: usuario.email,
-      perfilUsuario: usuario.perfil,
-      sucursalUsuario: usuario.sucursal
+      emailUsuario: usuario.email
     };
     return movimientoRef.set(movimientoData, {
       merge: true

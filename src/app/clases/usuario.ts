@@ -1,11 +1,13 @@
 import {EPerfil} from '../enums/eperfil.enum';
 //import {ESucursal} from '../enums/esucursal.enum';
 import { User } from "./user";
+import { Movimiento } from './movimiento';
 
 export class Usuario extends User
 {
   public perfil: EPerfil;
   public sucursal: string;
+  public movimientosUsuario: Movimiento[];
 
   constructor(
     perfil?: EPerfil, 
@@ -15,7 +17,8 @@ export class Usuario extends User
     email?: string,
     displayName?: string,
     photoURL?: string,
-    emailVerified?: boolean)
+    emailVerified?: boolean,
+    movimientosUsuario?: Movimiento[])
   {
     if(user == null)
     {
@@ -28,5 +31,6 @@ export class Usuario extends User
     
     this.perfil = perfil;
     this.sucursal = sucursal;
+    this.movimientosUsuario = movimientosUsuario;
 	}
 }

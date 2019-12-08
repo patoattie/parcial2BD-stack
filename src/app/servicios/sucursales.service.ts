@@ -42,11 +42,11 @@ export class SucursalesService {
   {
     let retorno: Sucursal = null;
 
-    sucursales.forEach((unSucursal) =>
+    sucursales.forEach((unaSucursal) =>
     {
-      if(unSucursal.sucursal == sucursal)
+      if(unaSucursal.sucursal == sucursal)
       {
-        retorno = unSucursal;
+        retorno = unaSucursal;
       }
     });
 

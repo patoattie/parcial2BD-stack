@@ -1,4 +1,5 @@
 import { Stock } from './stock';
+import { Movimiento } from './movimiento';
 
 export class Producto 
 {
@@ -12,8 +13,9 @@ export class Producto
   public stock: Stock[];
   public fechaCreacion: string;
   public photoURL: string;
+  public movimientosProducto: Movimiento[];
 
-  constructor(codigo?: string, nombre?: string, descripcion?: string, costo?: number, observaciones?: string, stock?: Stock[], fechaCreacion?: string, idCollection?: string, uid?: string, photoURL?: string)
+  constructor(codigo?: string, nombre?: string, descripcion?: string, costo?: number, observaciones?: string, stock?: Stock[], fechaCreacion?: string, idCollection?: string, uid?: string, photoURL?: string, movimientosProducto?: Movimiento[])
 	{
     this.codigo = codigo;
     this.nombre = nombre;
@@ -25,5 +27,6 @@ export class Producto
 		this.idCollection = idCollection;
 		this.uid = uid;
     this.photoURL = photoURL;
+    this.movimientosProducto = movimientosProducto;
 	}
 }
