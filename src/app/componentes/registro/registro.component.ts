@@ -246,16 +246,28 @@ export class RegistroComponent implements OnInit {
     if(this.usuario != null)
     {
       let sucursalAnterior: Sucursal = this.sucursalesService.getSucursal(this.usuario.sucursal, this.sucursales);
+      let usuarioAnterior: Usuario = new Usuario(this.usuario.perfil, this.usuario.sucursal, null, this.usuario.uid, this.usuario.email, this.usuario.displayName, this.usuario.photoURL, this.usuario.emailVerified);
       let sucursalNueva: Sucursal;
-
       this.usuario.perfil = this.formRegistro.value.perfil;
       this.usuario.sucursal = this.formRegistro.value.sucursal;
       await this.usuariosService.updateUsuario(this.usuario);
 
       if(sucursalAnterior != null && sucursalAnterior.sucursal != "")
       {
-        const index = sucursalAnterior.usuarios.indexOf(this.usuario, 0);
-        if (index > -1) {
+        //const index = sucursalAnterior.usuarios.indexOf(usuarioAnterior, 0);
+        let index: number = -1;
+        sucursalAnterior.usuarios.forEach((unUsuario, indice) => 
+        {
+          if(unUsuario.uid == usuarioAnterior.uid)
+          {
+            index = indice;
+          }
+        });
+//console.info('sucursalAnterior.usuarios',sucursalAnterior.usuarios);
+//console.info('usuarioAnterior',usuarioAnterior);
+//console.info('index',index);
+        if (index > -1) 
+        {
           sucursalAnterior.usuarios.splice(index, 1);
         }
         await this.sucursalesService.updateSucursal(sucursalAnterior);

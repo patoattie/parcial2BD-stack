@@ -25,7 +25,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
-      <tr [ngClass]="(usuarioSeleccionado != null && rowData.idCollection == usuarioSeleccionado.idCollection) ? 'filaSeleccionada' : null" (click)="eligeUsuario($event, rowData)">
+      <tr [ngClass]="(usuarioSeleccionado != null && rowData.uid == usuarioSeleccionado.uid) ? 'filaSeleccionada' : null" (click)="eligeUsuario($event, rowData)">
         <td *ngFor="let col of columns">
           <p *ngIf="col.field != 'photoURL'">{{rowData[col.field]}}</p>
           <img *ngIf="col.field == 'photoURL'" src="{{rowData[col.field]}}" alt="" style="width: 25%;">

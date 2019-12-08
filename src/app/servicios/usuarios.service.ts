@@ -23,8 +23,8 @@ export class UsuariosService
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
-          const idCollection = a.payload.doc.id;
-          return { idCollection, ...data };
+          const uid = a.payload.doc.id;
+          return { uid, ...data };
         });
       })
     );
@@ -60,12 +60,12 @@ export class UsuariosService
     return retorno;
   }
 
-  public getUsuarioPorId(idCollection: string): Observable<Usuario> 
+  public getUsuarioPorId(uid: string): Observable<Usuario> 
   {
-    return this.usuarioCollection.doc<any>(idCollection).valueChanges().pipe(
+    return this.usuarioCollection.doc<any>(uid).valueChanges().pipe(
       take(1),
       map(usuario => {
-        usuario.idCollection = idCollection;
+        usuario.uid = uid;
         return usuario
       })
     );
@@ -119,17 +119,16 @@ console.info('sucursalUsuario', sucursalUsuario);
     return this.usuarioCollection.doc(usuario.uid).update({ perfil: usuario.perfil, sucursal: usuario.sucursal });
   }
  
-  public deleteUsuario(idCollection: string): Promise<void> 
+  public deleteUsuario(uid: string): Promise<void> 
   {
-    return this.usuarioCollection.doc(idCollection).delete();
+    return this.usuarioCollection.doc(uid).delete();
   }
 
   public SetData(usuario: DocumentReference): Promise<void>
   {
     const usuarioRef: AngularFirestoreDocument<any> = this.afs.doc(`usuarios/${usuario.id}`);
     const usuarioData = {
-      idCollection: usuario.id,
-      uid: this.authService.getUid(),
+      uid: usuario.id,
       user: this.authService.getUserData()
     }
     return usuarioRef.set(usuarioData, {
