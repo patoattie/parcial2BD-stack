@@ -6,14 +6,14 @@ export class Sucursal
     public uid: string;
     public sucursal: string;
     public photoURL: string;
-    public usuarios: Usuario[];
+    public usuariosSucursal: Usuario[];
 
-    constructor(sucursal?: string, idCollection?: string, uid?: string, photoURL?: string, usuarios?: Usuario[])
+    constructor(sucursal?: string, idCollection?: string, uid?: string, photoURL?: string, usuariosSucursal?: Usuario[])
 	{
         this.sucursal = sucursal;
         this.idCollection = idCollection;
         this.uid = uid;
         this.photoURL = photoURL;
-        this.usuarios = usuarios;
+        this.usuariosSucursal = usuariosSucursal;
 	}
 }

@@ -116,7 +116,7 @@ export class AbmSucursalComponent implements OnInit
 
       if(this.sucursal != null)
       {
-        await this.sucursalesService.updateSucursal(new Sucursal(this.formRegistro.value.sucursal, this.sucursal.idCollection, this.sucursal.uid, this.sucursal.photoURL, this.sucursal.usuarios));
+        await this.sucursalesService.updateSucursal(new Sucursal(this.formRegistro.value.sucursal, this.sucursal.idCollection, this.sucursal.uid, this.sucursal.photoURL, this.sucursal.usuariosSucursal));
       }
       else
       {

@@ -256,7 +256,7 @@ export class RegistroComponent implements OnInit {
       if(sucursalAnterior != null && sucursalAnterior.sucursal != "")
       {
         let index: number = -1;
-        sucursalAnterior.usuarios.forEach((unUsuario, indice) => 
+        sucursalAnterior.usuariosSucursal.forEach((unUsuario, indice) => 
         {
           if(unUsuario.uid == usuarioAnterior.uid)
           {
@@ -266,7 +266,7 @@ export class RegistroComponent implements OnInit {
 
         if (index > -1) 
         {
-          sucursalAnterior.usuarios.splice(index, 1);
+          sucursalAnterior.usuariosSucursal.splice(index, 1);
         }
         await this.sucursalesService.updateSucursal(sucursalAnterior);
       }
@@ -276,12 +276,12 @@ export class RegistroComponent implements OnInit {
       {
         sucursalNueva = this.sucursalesService.getSucursal(this.usuario.sucursal, this.sucursales);
 
-        if(sucursalNueva.usuarios == undefined)
+        if(sucursalNueva.usuariosSucursal == undefined)
         {
-          sucursalNueva.usuarios = [];
+          sucursalNueva.usuariosSucursal = [];
         }
 
-        sucursalNueva.usuarios.push(this.usuario);
+        sucursalNueva.usuariosSucursal.push(this.usuario);
         await this.sucursalesService.updateSucursal(sucursalNueva);
       }
 

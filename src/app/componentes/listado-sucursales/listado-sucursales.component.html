@@ -41,7 +41,7 @@
 <p-dialog *ngIf="sucursalSeleccionada != null" header="Usuarios" [(visible)]="verUsuarios" [modal]="true" [responsive]="true" [style]="{width: '800px', minWidth: '200px'}" [minY]="70" 
         [maximizable]="false" [baseZIndex]="10000">
 
-      <app-listado-usuarios [esLov]="true" [usuarios]="sucursalSeleccionada.usuarios"></app-listado-usuarios>
+      <app-listado-usuarios [esLov]="true" [usuarios]="sucursalSeleccionada.usuariosSucursal"></app-listado-usuarios>
 
       <p-footer>
           <button type="button" pButton icon="pi pi-times" (click)="muestraUsuarios(false)" label="Cerrar" class="ui-button-secondary"></button>

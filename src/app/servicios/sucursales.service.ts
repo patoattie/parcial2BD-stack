@@ -68,7 +68,7 @@ export class SucursalesService {
   {
     return this.sucursalCollection.add({
       sucursal: sucursal.sucursal/*,
-      usuarios: sucursal.usuarios.map((obj)=> {return Object.assign({}, obj)}),*/ //convierte el array sucursal.usuarios (Usuario[]) a un tipo map para poder guardarlo en la BD.
+      usuariosSucursal: sucursal.usuariosSucursal.map((obj)=> {return Object.assign({}, obj)}),*/ //convierte el array sucursal.usuariosSucursal (Usuario[]) a un tipo map para poder guardarlo en la BD.
     })
     .then((doc) =>
     {
@@ -113,7 +113,7 @@ export class SucursalesService {
  
   public updateSucursal(sucursal: Sucursal): Promise<void> 
   {
-    return this.sucursalCollection.doc(sucursal.idCollection).update({ sucursal: sucursal.sucursal, usuarios: sucursal.usuarios });
+    return this.sucursalCollection.doc(sucursal.idCollection).update({ sucursal: sucursal.sucursal, usuariosSucursal: sucursal.usuariosSucursal });
   }
  
   public deleteSucursal(idCollection: string): Promise<void> 
