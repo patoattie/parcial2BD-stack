@@ -1,6 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { Sucursal } from "../../clases/sucursal";
 import { SucursalesService } from '../../servicios/sucursales.service';
+import { UsuariosService } from '../../servicios/usuarios.service';
 
 @Component({
   selector: 'app-listado-sucursales',
@@ -14,7 +15,7 @@ export class ListadoSucursalesComponent implements OnInit
   public cols: any[];
   public verUsuarios: boolean = false;
 
-  constructor(public sucursalesService: SucursalesService) { }
+  constructor(public sucursalesService: SucursalesService, public usuariosService: UsuariosService) { }
 
   ngOnInit() 
   {

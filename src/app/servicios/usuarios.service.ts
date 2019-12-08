@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import {Usuario} from '../clases/usuario';
 import {AuthService} from './auth.service';
+import { EPerfil } from '../enums/eperfil.enum';
 //import { Sucursal } from '../clases/sucursal';
 
 @Injectable({
@@ -40,7 +41,7 @@ export class UsuariosService
   {
     let retorno: Usuario = JSON.parse(localStorage.getItem('usuario'));
 
-    if(retorno == null)
+    if(retorno == null || retorno.perfil == undefined || retorno.sucursal == undefined)
     {
       this.usuarios.forEach(arrUsuarios =>
         {
@@ -149,5 +150,20 @@ console.info('sucursalUsuario', sucursalUsuario);
   public getMsjErrorAdmin(): string
   {
     return 'Clave de Administrador incorrecta';
+  }
+
+  public esAdmin(): boolean
+  {
+    return this.getUsuario(this.authService.getUid()).perfil == EPerfil.Admin;
+  }
+
+  public getEmail(): string
+  {
+    return this.authService.getEmail();
+  }
+
+  public getSucursal(): string
+  {
+    return this.getUsuario(this.authService.getUid()).sucursal;
   }
 }
