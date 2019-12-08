@@ -40,8 +40,8 @@
             <label for="confirmaClave">Volvé a ingresar la misma clave</label>
         </span>
   
-        <label><b>Selecciona una sucursal</b></label>
-        <p-listbox formControlName="sucursal" [options]="listaSucursales"></p-listbox>
+        <label *ngIf="authService.isLoggedIn()"><b>Selecciona una sucursal</b></label>
+        <p-listbox *ngIf="authService.isLoggedIn()" formControlName="sucursal" [options]="listaSucursales"></p-listbox>
   
         <label><b>Selecciona un perfil</b></label>
         <p-listbox formControlName="perfil" [options]="perfiles"></p-listbox>
@@ -69,7 +69,8 @@
         <input formControlName="cuit" type="text" placeholder="Ingresa tu CUIT" name="email" required> -->
 
         <div class="clearfix">
-          <button type="button" (click)="usuariosService.muestraAbm=false" class="cancelbtn">Volver</button>
+          <button *ngIf="authService.isLoggedIn()" type="button" (click)="usuariosService.muestraAbm=false" class="cancelbtn">Volver</button>
+          <button *ngIf="!authService.isLoggedIn()" type="button" (click)="goBack()" class="cancelbtn">Volver</button>
           <button type="button" (click)="registrar()" class="signupbtn">
             Registrarme
             <i class="fa fa-spinner fa-spin" *ngIf="getEnEspera()"></i>

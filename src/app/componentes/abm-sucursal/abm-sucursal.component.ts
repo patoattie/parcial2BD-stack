@@ -120,7 +120,7 @@ export class AbmSucursalComponent implements OnInit
       }
       else
       {
-        await this.sucursalesService.addSucursal(new Sucursal(this.formRegistro.value.sucursal, null, null, null, this.guardarUsuarioInicial()), file);
+        await this.sucursalesService.addSucursal(new Sucursal(this.formRegistro.value.sucursal), file);
       }
 
       this.mostrarMsjOk();
@@ -141,7 +141,7 @@ export class AbmSucursalComponent implements OnInit
 
     this.usuarios.forEach((unUsuario) => 
     {
-      retorno.push(new Usuario(unUsuario.perfil, unUsuario.sucursal, unUsuario.idCollection, unUsuario.uid, unUsuario.user));
+      retorno.push(new Usuario(unUsuario.perfil, unUsuario.sucursal, null, unUsuario.uid, unUsuario.email, unUsuario.displayName, unUsuario.photoURL, unUsuario.emailVerified));
     });
 
     return retorno;

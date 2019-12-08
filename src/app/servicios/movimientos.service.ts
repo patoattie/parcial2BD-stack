@@ -126,7 +126,7 @@ export class MovimientosService
     const movimientoData = {
       idCollection: movimiento.id,
       uid: usuarioUID,
-      idUsuario: usuario.idCollection,
+      email: usuario.email,
       perfilUsuario: usuario.perfil,
       sucursalUsuario: usuario.sucursal
     };

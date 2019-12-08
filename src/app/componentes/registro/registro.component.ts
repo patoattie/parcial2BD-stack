@@ -108,10 +108,13 @@ export class RegistroComponent implements OnInit {
       this.formRegistro.setValue({usuario: '', clave: '', confirmaClave: '', sucursal: '', perfil: '', imagen: '', habilitaAdmin: ''});
     }
 
-    this.sucursales.forEach((unaSucursal) =>
+    if(this.sucursales != undefined)
     {
-      this.listaSucursales.push({label: unaSucursal.sucursal, value: unaSucursal.sucursal});
-    });
+      this.sucursales.forEach((unaSucursal) =>
+      {
+        this.listaSucursales.push({label: unaSucursal.sucursal, value: unaSucursal.sucursal});
+      });
+    }
 
     //this.usuariosService.getUsuarios()
     //.subscribe(usuarios => this.usuarios = usuarios);
