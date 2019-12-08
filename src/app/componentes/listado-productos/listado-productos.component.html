@@ -25,8 +25,8 @@
     <ng-template pTemplate="caption">
       <p-toolbar>
         <div class="ui-toolbar-group-left">
-          <button type="button" #btn pButton icon="pi pi-plus" (click)="habilitaAbm(true)"></button>
-          <button *ngIf="productoSeleccionado != null" type="button" #btn pButton icon="pi pi-pencil" (click)="habilitaAbm(false)" style="margin-left: 2px;"></button>
+          <button *ngIf="usuariosService.esAdmin()" type="button" #btn pButton icon="pi pi-plus" (click)="habilitaAbm(true)"></button>
+          <button *ngIf="productoSeleccionado != null && usuariosService.esAdmin()" type="button" #btn pButton icon="pi pi-pencil" (click)="habilitaAbm(false)" style="margin-left: 2px;"></button>
           <button *ngIf="productoSeleccionado != null" type="button" #btn pButton icon="pi pi-table" (click)="muestraStock(true)" style="margin-left: 2px;"></button>
         </div>
         <div class="ui-toolbar-group-right">        

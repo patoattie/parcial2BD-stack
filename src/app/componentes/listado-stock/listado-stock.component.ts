@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Stock } from "../../clases/stock";
+import { UsuariosService } from '../../servicios/usuarios.service';
 
 @Component({
   selector: 'app-listado-stock',
@@ -11,7 +12,7 @@ export class ListadoStockComponent implements OnInit
   @Input() stock: Stock[];
   public cols: any[];
 
-  constructor() { }
+  constructor(public usuariosService: UsuariosService) { }
 
   ngOnInit() 
   {

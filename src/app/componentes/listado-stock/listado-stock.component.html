@@ -7,7 +7,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
-      <tr>
+      <tr *ngIf="usuariosService.esAdmin() || rowData['sucursal'] == usuariosService.getSucursal()">
         <td *ngFor="let col of columns">
           <p>{{rowData[col.field]}}</p>
         </td>

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Producto } from "../../clases/producto";
 import { ProductosService } from '../../servicios/productos.service';
 import { Sucursal } from '../../clases/sucursal';
+import { UsuariosService } from '../../servicios/usuarios.service';
 
 @Component({
   selector: 'app-listado-productos',
@@ -15,7 +16,7 @@ export class ListadoProductosComponent implements OnInit {
   public cols: any[];
   public verStock: boolean = false;
 
-  constructor(public productosService: ProductosService) { }
+  constructor(public productosService: ProductosService, public usuariosService: UsuariosService) { }
 
   ngOnInit() 
   {
