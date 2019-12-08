@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import {Usuario} from '../clases/usuario';
 import {AuthService} from './auth.service';
-import { Sucursal } from '../clases/sucursal';
+//import { Sucursal } from '../clases/sucursal';
 
 @Injectable({
   providedIn: 'root'

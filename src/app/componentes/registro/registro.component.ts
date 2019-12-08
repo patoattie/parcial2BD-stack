@@ -217,7 +217,7 @@ export class RegistroComponent implements OnInit {
           usuarioValido = this.authService.isLoggedIn();
           if(usuarioValido)
           {
-            let usuarioNuevo: Usuario = new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal, this.authService.getUserData());
+            let usuarioNuevo: Usuario = new Usuario(this.formRegistro.value.perfil, '', this.authService.getUserData());
             //await this.usuariosService.addUsuario(new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal), this.usuarios, this.sucursales);
             await this.usuariosService.updateUsuario(usuarioNuevo);
             this.mostrarMsjOk();
@@ -252,9 +252,9 @@ export class RegistroComponent implements OnInit {
       this.usuario.sucursal = this.formRegistro.value.sucursal;
       await this.usuariosService.updateUsuario(this.usuario);
 
+      //Remuevo al usuario de la sucursal donde estaba antes
       if(sucursalAnterior != null && sucursalAnterior.sucursal != "")
       {
-        //const index = sucursalAnterior.usuarios.indexOf(usuarioAnterior, 0);
         let index: number = -1;
         sucursalAnterior.usuarios.forEach((unUsuario, indice) => 
         {
@@ -263,9 +263,7 @@ export class RegistroComponent implements OnInit {
             index = indice;
           }
         });
-//console.info('sucursalAnterior.usuarios',sucursalAnterior.usuarios);
-//console.info('usuarioAnterior',usuarioAnterior);
-//console.info('index',index);
+
         if (index > -1) 
         {
           sucursalAnterior.usuarios.splice(index, 1);
@@ -273,6 +271,7 @@ export class RegistroComponent implements OnInit {
         await this.sucursalesService.updateSucursal(sucursalAnterior);
       }
 
+      //Asigno al usuario a la nueva sucursal
       if(this.usuario.sucursal != "")
       {
         sucursalNueva = this.sucursalesService.getSucursal(this.usuario.sucursal, this.sucursales);
