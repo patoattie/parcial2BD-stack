@@ -67,8 +67,8 @@ export class SucursalesService {
   public addSucursal(sucursal: Sucursal, archivoFoto?: any): Promise<void | DocumentReference> 
   {
     return this.sucursalCollection.add({
-      sucursal: sucursal.sucursal,
-      usuarios: sucursal.usuarios.map((obj)=> {return Object.assign({}, obj)}), //convierte el array sucursal.usuarios (Usuario[]) a un tipo map para poder guardarlo en la BD.
+      sucursal: sucursal.sucursal/*,
+      usuarios: sucursal.usuarios.map((obj)=> {return Object.assign({}, obj)}),*/ //convierte el array sucursal.usuarios (Usuario[]) a un tipo map para poder guardarlo en la BD.
     })
     .then((doc) =>
     {

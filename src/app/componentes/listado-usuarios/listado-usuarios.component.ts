@@ -12,6 +12,7 @@ export class ListadoUsuariosComponent implements OnInit
 {
   @Input() usuarios: Usuario[];
   @Input() sucursales: Sucursal[];
+  @Input() esLov: boolean;
   public usuarioSeleccionado: Usuario = null;
   public cols: any[];
 
@@ -19,12 +20,23 @@ export class ListadoUsuariosComponent implements OnInit
 
   ngOnInit() 
   {
-    this.cols = [
-      { field: 'user.photoURL', header: 'Avatar' },
-      { field: 'user.email', header: 'Email' },
-      { field: 'perfil', header: 'Perfil' },
-      { field: 'sucursal', header: 'Sucursal' }
-    ];
+    if(this.esLov)
+    {
+      this.cols = [
+        { field: 'photoURL', header: 'Avatar' },
+        { field: 'email', header: 'Email' },
+        { field: 'perfil', header: 'Perfil' }
+      ];
+    }
+    else
+    {
+      this.cols = [
+        { field: 'photoURL', header: 'Avatar' },
+        { field: 'email', header: 'Email' },
+        { field: 'perfil', header: 'Perfil' },
+        { field: 'sucursal', header: 'Sucursal' }
+      ];
+    }
   }
 
   public eligeUsuario(event, unUsuario: Usuario): void

@@ -180,6 +180,11 @@ export class RegistroComponent implements OnInit {
     this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: this.usuariosService.getMsjErrorAdmin()});
   }
 
+  private mostrarMsjOk(): void
+  {
+    this.messageService.add({key: 'msjDatos', severity: 'success', summary: 'Actualización Exitosa', detail: 'Se registró correctamente el usuario'});
+  }
+
   public getEnEspera(): boolean
   {
     return this.enEspera;
@@ -212,19 +217,10 @@ export class RegistroComponent implements OnInit {
           usuarioValido = this.authService.isLoggedIn();
           if(usuarioValido)
           {
-            if(this.usuario != null)
-            {
-              this.usuario.perfil = this.formRegistro.value.perfil;
-              this.usuario.sucursal = this.formRegistro.value.sucursal;
-              await this.usuariosService.updateUsuario(this.usuario);
-            }
-            else
-            {
-              let usuarioNuevo: Usuario = new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal, this.authService.getUserData());
-              //await this.usuariosService.addUsuario(new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal), this.usuarios, this.sucursales);
-              await this.usuariosService.updateUsuario(usuarioNuevo);
-              
-            }
+            let usuarioNuevo: Usuario = new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal, this.authService.getUserData());
+            //await this.usuariosService.addUsuario(new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal), this.usuarios, this.sucursales);
+            await this.usuariosService.updateUsuario(usuarioNuevo);
+            this.mostrarMsjOk();
           }
           else
           {
@@ -243,6 +239,43 @@ export class RegistroComponent implements OnInit {
     }
 
     this.enEspera = false; //Oculto el spinner
+  }
+
+  public async actualizar(): Promise<void>
+  {
+    if(this.usuario != null)
+    {
+      let sucursalAnterior: Sucursal = this.sucursalesService.getSucursal(this.usuario.sucursal, this.sucursales);
+      let sucursalNueva: Sucursal;
+
+      this.usuario.perfil = this.formRegistro.value.perfil;
+      this.usuario.sucursal = this.formRegistro.value.sucursal;
+      await this.usuariosService.updateUsuario(this.usuario);
+
+      if(sucursalAnterior != null && sucursalAnterior.sucursal != "")
+      {
+        const index = sucursalAnterior.usuarios.indexOf(this.usuario, 0);
+        if (index > -1) {
+          sucursalAnterior.usuarios.splice(index, 1);
+        }
+        await this.sucursalesService.updateSucursal(sucursalAnterior);
+      }
+
+      if(this.usuario.sucursal != "")
+      {
+        sucursalNueva = this.sucursalesService.getSucursal(this.usuario.sucursal, this.sucursales);
+
+        if(sucursalNueva.usuarios == undefined)
+        {
+          sucursalNueva.usuarios = [];
+        }
+
+        sucursalNueva.usuarios.push(this.usuario);
+        await this.sucursalesService.updateSucursal(sucursalNueva);
+      }
+
+      this.mostrarMsjOk();
+    }
   }
 
   public goBack(): void 

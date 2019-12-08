@@ -12,6 +12,7 @@ export class ListadoSucursalesComponent implements OnInit
   @Input() sucursales: Sucursal[];
   public sucursalSeleccionada: Sucursal = null;
   public cols: any[];
+  public verUsuarios: boolean = false;
 
   constructor(public sucursalesService: SucursalesService) { }
 
@@ -43,5 +44,10 @@ export class ListadoSucursalesComponent implements OnInit
     }
 
     this.sucursalesService.muestraAbm = true;
+  }
+
+  public muestraUsuarios(muestra: boolean): void
+  {
+    this.verUsuarios = muestra;
   }
 }
