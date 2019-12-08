@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 //import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 //para poder hacer las validaciones
-import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import { Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
 import { Location } from '@angular/common';
 import { UsuariosService } from '../../servicios/usuarios.service';
@@ -47,7 +47,7 @@ export class RegistroComponent implements OnInit {
       usuario: ['', Validators.compose([Validators.email, Validators.required])],
       clave: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       confirmaClave: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-      sucursal: ['', Validators.compose([Validators.required])],
+      sucursal: ['', Validators.compose([])],
       perfil: ['', Validators.compose([Validators.required])],
       imagen: ['', Validators.compose([])],
       habilitaAdmin: ['', Validators.compose([])]
@@ -154,10 +154,10 @@ export class RegistroComponent implements OnInit {
       }
     }
 
-    if(this.formRegistro.controls['sucursal'].invalid)
+    /*if(this.formRegistro.controls['sucursal'].invalid)
     {
       this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'Tenés que ingresar una Sucursal'});
-    }
+    }*/
     
     if(this.formRegistro.controls['perfil'].invalid)
     {
@@ -223,6 +223,7 @@ export class RegistroComponent implements OnInit {
               let usuarioNuevo: Usuario = new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal, this.authService.getUserData());
               //await this.usuariosService.addUsuario(new Usuario(this.formRegistro.value.perfil, this.formRegistro.value.sucursal), this.usuarios, this.sucursales);
               await this.usuariosService.updateUsuario(usuarioNuevo);
+              
             }
           }
           else

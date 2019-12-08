@@ -125,13 +125,13 @@ export class AuthService {
         //Call the SendVerificaitonMail() function when new user sign up and returns promise
         //this.SendVerificationMail();
         this.SetUserData(result.user);
-        /*console.log("Login OK");
+        console.log("Login OK");
         this.error = '';
 
         this.ngZone.run(() => 
         {
           this.router.navigate(['Principal']);
-        });*/
+        });
       })
       .catch((error) => 
       {

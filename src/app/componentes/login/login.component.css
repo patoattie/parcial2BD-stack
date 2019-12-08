@@ -32,6 +32,11 @@ button:hover {
     padding: 10px 18px;
     background-color: orange;
 }
+.adminbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: maroon;
+}
 .cancelbtn {
     width: auto;
     padding: 10px 18px;

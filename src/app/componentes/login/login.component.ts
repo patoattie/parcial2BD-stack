@@ -124,7 +124,11 @@ export class LoginComponent implements OnInit {
 
   public completarUsuario(): void
   {
-    //this.formLogin.setValue({usuario: 'admin@admin.com', clave: '111111'});
     this.formLogin.setValue({usuario: 'pepe@pepe.com', clave: '123456'});
+  }
+
+  public completarAdmin(): void
+  {
+    this.formLogin.setValue({usuario: 'admin@admin.com', clave: '111111'});
   }
 }
