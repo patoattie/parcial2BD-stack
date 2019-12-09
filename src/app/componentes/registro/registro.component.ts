@@ -37,7 +37,7 @@ export class RegistroComponent implements OnInit {
     public authService: AuthService, 
     private location: Location,
     private cd: ChangeDetectorRef,
-    private usuariosService: UsuariosService,
+    public usuariosService: UsuariosService,
     public sucursalesService: SucursalesService,
     public messageService: MessageService
     )
