@@ -1,0 +1,42 @@
+<body>
+  <div>
+    <p-toast key="msjDatos" position="top-right"></p-toast>
+
+    <form [formGroup]="formRegistro">
+      <div class="container-fluid">
+        <label><b>Código</b></label>
+        <!-- <input formControlName="codigo" type="text" placeholder="Ingresa el código del producto" name="codigoProd" required> -->
+        <span class="ui-float-label">
+            <input id="float-input" formControlName="codigoProducto" name="codigoProd" type="text" pInputText required> 
+            <label for="float-input">Ingresa el código del producto</label>
+        </span>
+  
+        <label><b>Selecciona un tipo de movimiento</b></label>
+        <p-listbox formControlName="tipo" [options]="tipos"></p-listbox>
+
+        <label><b>Cantidad</b></label>
+        <!-- <input formControlName="costo" type="text" placeholder="Ingresa el costo del producto" name="costoProd" required> -->
+        <span class="ui-float-label">
+            <input id="float-input" formControlName="cantidad" name="cantidadProd" type="text" pInputText required> 
+            <label for="float-input">Ingresa la cantidad</label>
+        </span>
+  
+        <label><b>Detalle</b></label>
+        <span class="ui-float-label">
+            <textarea id="float-input" formControlName="detalle" name="detalleMov" rows="5" cols="30" autoResize="autoResize" pInputTextarea></textarea>
+            <label for="float-input">Detalle del movimiento</label>
+        </span>
+
+        <div class="clearfix">
+          <button type="button" (click)="movimientosService.muestraAbm=false" class="cancelbtn">Volver</button>
+          <button type="button" (click)="registrar()" class="signupbtn">
+            Guardar
+            <i class="fa fa-spinner fa-spin" *ngIf="getEnEspera()"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  
+</body>

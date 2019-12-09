@@ -8,6 +8,8 @@ import { UsuariosService } from "../../servicios/usuarios.service";
 import { Usuario } from '../../clases/usuario';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { Movimiento } from '../../clases/movimiento';
+import { MovimientosService } from '../../servicios/movimientos.service';
 
 
 @Component({
@@ -23,17 +25,20 @@ export class PrincipalComponent implements OnInit, OnDestroy {
   public productos: Producto[];
   public sucursales: Sucursal[];
   public usuarios: Usuario[];
+  public movimientos: Movimiento[];
   public items: MenuItem[];
   public listaProductos: boolean = true;
   public listaSucursales: boolean = false;
   public listaUsuarios: boolean = false;
+  public listaMovimientos: boolean = false;
   private subscriptions: Subscription[] = [];
 
   constructor(
     public authService: AuthService, 
     public productosService: ProductosService, 
     public sucursalesService: SucursalesService,
-    public usuariosService: UsuariosService)
+    public usuariosService: UsuariosService,
+    public movimientosService: MovimientosService)
   {
   }
 
@@ -81,10 +86,25 @@ export class PrincipalComponent implements OnInit, OnDestroy {
       })
     );
 
+    this.subscriptions.push(
+      this.movimientosService.getMovimientos()
+      .subscribe((movimientos) => 
+      {
+        this.movimientos = movimientos;
+        //Elimina los duplicados que se generan al suscribir después de desloguearse, no lo pude resolver de una forma más elegante
+        this.movimientos = this.movimientos.filter((test, index, array) =>
+          index === array.findIndex((findTest) =>
+           findTest.idCollection === test.idCollection
+          )
+        );
+      })
+    );
+
     this.items = [
       {label: 'Productos', command: () => {this.mostrarListaProductos(); }},
       {label: 'Sucursales', command: () => {this.mostrarListaSucursales(); }},
-      {label: 'Usuarios', command: () => {this.mostrarListaUsuarios(); }}
+      {label: 'Usuarios', command: () => {this.mostrarListaUsuarios(); }},
+      {label: 'Movimientos', command: () => {this.mostrarListaMovimientos(); }}
     ]
   }
 
@@ -104,6 +124,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
     this.listaProductos = true;
     this.listaSucursales = false;
     this.listaUsuarios = false;
+    this.listaMovimientos = false;
   }
 
   private mostrarListaSucursales(): void
@@ -111,6 +132,7 @@ export class PrincipalComponent implements OnInit, OnDestroy {
     this.listaProductos = false;
     this.listaSucursales = true;
     this.listaUsuarios = false;
+    this.listaMovimientos = false;
   }
 
   private mostrarListaUsuarios(): void
@@ -118,5 +140,14 @@ export class PrincipalComponent implements OnInit, OnDestroy {
     this.listaProductos = false;
     this.listaSucursales = false;
     this.listaUsuarios = true;
+    this.listaMovimientos = false;
+  }
+
+  private mostrarListaMovimientos(): void
+  {
+    this.listaProductos = false;
+    this.listaSucursales = false;
+    this.listaUsuarios = false;
+    this.listaMovimientos = true;
   }
 }

@@ -7,7 +7,7 @@ import { Sucursal } from '../../clases/sucursal';
 
 import {MessageService} from 'primeng/api';
 import { Usuario } from '../../clases/usuario';
-import { UsuariosService } from '../../servicios/usuarios.service';
+//import { UsuariosService } from '../../servicios/usuarios.service';
 
 @Component({
   selector: 'app-abm-sucursal',
@@ -26,7 +26,7 @@ export class AbmSucursalComponent implements OnInit
     public authService: AuthService, 
     private cd: ChangeDetectorRef,
     public sucursalesService: SucursalesService,
-    private usuariosService: UsuariosService,
+    //private usuariosService: UsuariosService,
     public messageService: MessageService
   ) 
   {

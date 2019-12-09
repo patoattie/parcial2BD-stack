@@ -62,7 +62,7 @@ export class RegistroComponent implements OnInit {
     this.perfiles = [
       {label: EPerfil.Operador, value: EPerfil.Operador},
       {label: EPerfil.Admin, value: EPerfil.Admin}
-    ]
+    ];
   }
 
   onFileChange(event) 
