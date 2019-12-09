@@ -117,7 +117,7 @@ console.info('sucursalUsuario', sucursalUsuario);
  
   public updateUsuario(usuario: Usuario): Promise<void> 
   {
-    return this.usuarioCollection.doc(usuario.uid).update({ perfil: usuario.perfil, sucursal: usuario.sucursal });
+    return this.usuarioCollection.doc(usuario.uid).update({ perfil: usuario.perfil, sucursal: usuario.sucursal, movimientosUsuario: usuario.movimientosUsuario.map((obj)=> {return Object.assign({}, obj)}) });
   }
  
   public deleteUsuario(uid: string): Promise<void> 

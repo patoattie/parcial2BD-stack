@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { UsuariosService } from '../../servicios/usuarios.service';
 import { Movimiento } from '../../clases/movimiento';
 import { MovimientosService } from "../../servicios/movimientos.service";
+import { Sucursal } from '../../clases/sucursal';
+import { Producto } from '../../clases/producto';
 
 @Component({
   selector: 'app-listado-movimientos',
@@ -10,6 +12,9 @@ import { MovimientosService } from "../../servicios/movimientos.service";
 })
 export class ListadoMovimientosComponent implements OnInit 
 {
+  @Input() sucursales: Sucursal[];
+  @Input() productos: Producto[];
+  @Input() movimientos: Movimiento[];
   @Input() esLov: boolean;
   public movimientoSeleccionado: Movimiento = null;
   public cols: any[];
@@ -43,7 +48,7 @@ export class ListadoMovimientosComponent implements OnInit
     return dia + sepFecha + mes + sepFecha + año + ' ' + hora + sepHora + minuto + sepHora + segundo;
   }
 
-  public eligeUsuario(event, unMovimiento: Movimiento): void
+  public eligeMovimiento(event, unMovimiento: Movimiento): void
   {
     if(event.ctrlKey)
     {

@@ -7,8 +7,8 @@
         <label><b>Código</b></label>
         <!-- <input formControlName="codigo" type="text" placeholder="Ingresa el código del producto" name="codigoProd" required> -->
         <span class="ui-float-label">
-            <input id="float-input" formControlName="codigoProducto" name="codigoProd" type="text" pInputText required> 
-            <label for="float-input">Ingresa el código del producto</label>
+            <input id="float-input" formControlName="codigoProducto" name="codigoProd" type="text" readonly pInputText required> 
+            <!-- <label for="float-input">Ingresa el código del producto</label> -->
         </span>
   
         <label><b>Selecciona un tipo de movimiento</b></label>
@@ -28,7 +28,7 @@
         </span>
 
         <div class="clearfix">
-          <button type="button" (click)="movimientosService.muestraAbm=false" class="cancelbtn">Volver</button>
+          <button type="button" (click)="productosService.muestraMov=false" class="cancelbtn">Volver</button>
           <button type="button" (click)="registrar()" class="signupbtn">
             Guardar
             <i class="fa fa-spinner fa-spin" *ngIf="getEnEspera()"></i>

@@ -46,7 +46,8 @@ export class SucursalesService {
     {
       if(unaSucursal.sucursal == sucursal)
       {
-        retorno = unaSucursal;
+        //retorno = unaSucursal;
+        retorno = new Sucursal(unaSucursal.sucursal, unaSucursal.idCollection, unaSucursal.uid, unaSucursal.photoURL, unaSucursal.usuariosSucursal, unaSucursal.movimientosSucursal);
       }
     });
 
@@ -113,7 +114,7 @@ export class SucursalesService {
  
   public updateSucursal(sucursal: Sucursal): Promise<void> 
   {
-    return this.sucursalCollection.doc(sucursal.idCollection).update({ sucursal: sucursal.sucursal, usuariosSucursal: sucursal.usuariosSucursal });
+    return this.sucursalCollection.doc(sucursal.idCollection).update({ sucursal: sucursal.sucursal, usuariosSucursal: sucursal.usuariosSucursal, movimientosSucursal: sucursal.movimientosSucursal.map((obj)=> {return Object.assign({}, obj)}) });
   }
  
   public deleteSucursal(idCollection: string): Promise<void> 

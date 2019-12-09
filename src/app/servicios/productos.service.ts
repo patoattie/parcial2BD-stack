@@ -18,6 +18,7 @@ export class ProductosService
   private productos: Observable<Producto[]>;
   private productoCollection: AngularFirestoreCollection<any>;
   public muestraAbm: boolean;
+  public muestraMov: boolean;
 
   constructor(private afs: AngularFirestore, private authService: AuthService, public storage: AngularFireStorage, public pipe: DatePipe)
   {
@@ -32,6 +33,7 @@ export class ProductosService
       })
     );
     this.muestraAbm = false;
+    this.muestraMov = false;
   }
 
   public getProductos(): Observable<Producto[]>
@@ -39,7 +41,7 @@ export class ProductosService
     return this.productos;
   }
 
-  public getProducto(codigo: string): Producto
+  /*public getProducto(codigo: string): Producto
   {
     let retorno: Producto = null;
 
@@ -52,6 +54,21 @@ export class ProductosService
           retorno = unProducto;
         }
       });
+    });
+
+    return retorno;
+  }*/
+
+  public getProducto(codigo: string, productos: Producto[]): Producto
+  {
+    let retorno: Producto = null;
+
+    productos.forEach((unProducto) =>
+    {
+      if(unProducto.codigo == codigo)
+      {
+        retorno = unProducto;
+      }
     });
 
     return retorno;
@@ -122,7 +139,7 @@ export class ProductosService
  
   public updateProducto(producto: Producto): Promise<void> 
   {
-    return this.productoCollection.doc(producto.idCollection).update({ codigo: producto.codigo, nombre: producto.nombre, descripcion: producto.descripcion, costo: producto.costo, observaciones: producto.observaciones, stock: producto.stock, fechaCreacion: producto.fechaCreacion });
+    return this.productoCollection.doc(producto.idCollection).update({ codigo: producto.codigo, nombre: producto.nombre, descripcion: producto.descripcion, costo: producto.costo, observaciones: producto.observaciones, stock: producto.stock.map((obj)=> {return Object.assign({}, obj)}), fechaCreacion: producto.fechaCreacion, movimientosProducto: producto.movimientosProducto.map((obj)=> {return Object.assign({}, obj)}) });
   }
  
   public deleteProducto(idCollection: string): Promise<void> 

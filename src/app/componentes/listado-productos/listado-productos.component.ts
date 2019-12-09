@@ -12,9 +12,11 @@ import { UsuariosService } from '../../servicios/usuarios.service';
 export class ListadoProductosComponent implements OnInit {
   @Input() productos: Producto[];
   @Input() sucursales: Sucursal[];
+  @Input() esLov: boolean;
   public productoSeleccionado: Producto = null;
   public cols: any[];
   public verStock: boolean = false;
+  public verMov: boolean = false;
 
   constructor(public productosService: ProductosService, public usuariosService: UsuariosService) { }
 
@@ -67,8 +69,18 @@ export class ListadoProductosComponent implements OnInit {
     this.productosService.muestraAbm = true;
   }
 
+  public habilitaMov(): void
+  {
+    this.productosService.muestraMov = true;
+  }
+
   public muestraStock(muestra: boolean): void
   {
     this.verStock = muestra;
+  }
+
+  public muestraMov(muestra: boolean): void
+  {
+    this.verMov = muestra;
   }
 }

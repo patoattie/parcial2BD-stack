@@ -11,6 +11,7 @@ import { Sucursal } from "../../clases/sucursal";
 import { MovimientosService } from '../../servicios/movimientos.service';
 import { Movimiento } from '../../clases/movimiento';
 import { UsuariosService } from '../../servicios/usuarios.service';
+import { Usuario } from '../../clases/usuario';
 
 import {MessageService, SelectItem} from 'primeng/api';
 
@@ -24,7 +25,9 @@ export class AbmMovimientoComponent implements OnInit
   public formRegistro: FormGroup;
   private enEspera: boolean; //Muestra u oculta el spinner
   public tipos: SelectItem[];
-  @Input() movimiento: Movimiento;
+  @Input() sucursales: Sucursal[];
+  @Input() productos: Producto[];
+  @Input() producto: Producto;
 
   constructor(
     private miConstructor: FormBuilder, 
@@ -77,7 +80,7 @@ export class AbmMovimientoComponent implements OnInit
   {
     this.enEspera = false;
 
-    if(this.movimiento != null)
+    /*if(this.movimiento != null)
     {
       this.formRegistro.setValue({
         codigoProducto: this.movimiento.codigoProducto, 
@@ -87,9 +90,9 @@ export class AbmMovimientoComponent implements OnInit
       });
     }
     else
-    {
-      this.formRegistro.setValue({codigoProducto: '', tipo: '', cantidad: '', detalle: ''});
-    }
+    {*/
+      this.formRegistro.setValue({codigoProducto: this.producto.codigo, tipo: '', cantidad: '', detalle: ''});
+    //}
   }
 
   private mostrarMsjErrorDatos(): void
@@ -131,6 +134,11 @@ export class AbmMovimientoComponent implements OnInit
     this.messageService.add({key: 'msjDatos', severity: 'success', summary: 'Actualización Exitosa', detail: 'Se registró correctamente el movimiento'});
   }
 
+  private mostrarMsjErrorStock(): void
+  {
+    this.messageService.add({key: 'msjDatos', severity: 'error', summary: 'Error', detail: 'No hay stock suficiente para realizar la baja'});
+  }
+
   public getEnEspera(): boolean
   {
     return this.enEspera;
@@ -142,17 +150,107 @@ export class AbmMovimientoComponent implements OnInit
 
     if(this.formRegistro.valid)
     {
-      if(this.movimiento != null)
+      /*if(this.movimiento != null)
       {
         await this.movimientosService.updateMovimiento(new Movimiento(this.formRegistro.value.tipo, this.movimiento.sucursal, this.movimiento.fecha, this.convertirEnNumero(this.formRegistro.value.cantidad), this.formRegistro.value.detalle, this.formRegistro.value.codigoProducto, this.movimiento.emailUsuario, this.movimiento.idCollection, this.movimiento.uid));
       }
       else
-      {
-        await this.movimientosService.addMovimiento(new Movimiento(this.formRegistro.value.tipo, this.usuariosService.getSucursal(), this.movimientosService.getFecha(), this.convertirEnNumero(this.formRegistro.value.cantidad), this.formRegistro.value.detalle, this.formRegistro.value.codigoProducto, this.usuariosService.getEmail()));
-      }
+      {*/
+        let movimiento: Movimiento = new Movimiento(this.formRegistro.value.tipo, this.usuariosService.getSucursal(), this.movimientosService.getFecha(), this.convertirEnNumero(this.formRegistro.value.cantidad), this.formRegistro.value.detalle, this.formRegistro.value.codigoProducto, this.usuariosService.getEmail());
+        let stock: Stock = new Stock('', 0);
+        let okStock: boolean = true;
+        
+        //Controlo stock si es baja
+        this.productosService.getProducto(movimiento.codigoProducto, this.productos).stock.forEach((unStock) => 
+        {
+          if(unStock.sucursal == movimiento.sucursal)
+          {
+            if(movimiento.tipo == ETipo.Baja && unStock.cantidad - movimiento.cantidad < 0)
+            {
+              okStock = false; //No hay stock suficiente para realizar el movimiento de baja
+            }
+            else
+            {
+              stock.sucursal = unStock.sucursal;
+              stock.cantidad = (movimiento.tipo == ETipo.Baja) ? (unStock.cantidad - movimiento.cantidad) : (unStock.cantidad + movimiento.cantidad);
+            }
+          }
+        });
+        
+        if(okStock) //Hay stock suficiente
+        {
+          this.movimientosService.addMovimiento(movimiento)
+          .then((doc) =>
+          {
+            this.movimientosService.SetData(doc)
+            .then(() => 
+            {
+              let sucursal: Sucursal;
+              let producto: Producto;
+              let usuario: Usuario;
+              //let movimiento: Movimiento = this.movimientosService.getMovimiento(doc.id)
+              movimiento.idCollection = doc.id;
+              movimiento.uid = this.authService.getUid();
 
-      this.mostrarMsjOk();
-      this.formRegistro.reset();
+              //Asigno el movimiento a la sucursal
+              sucursal = this.sucursalesService.getSucursal(movimiento.sucursal, this.sucursales);
+      
+              if(sucursal.movimientosSucursal == undefined)
+              {
+                sucursal.movimientosSucursal = [];
+              }
+      
+              sucursal.movimientosSucursal.push(movimiento);
+    //console.info('sucursal', sucursal);
+              this.sucursalesService.updateSucursal(sucursal);
+      
+              //Asigno el movimiento al producto
+              producto = this.productosService.getProducto(movimiento.codigoProducto, this.productos);
+      
+              if(producto.movimientosProducto == undefined)
+              {
+                producto.movimientosProducto = [];
+              }
+      
+              producto.movimientosProducto.push(movimiento);
+    
+              //Actualizo el stock del producto
+              producto.stock.forEach((unStock, indice) =>
+              {
+                if(unStock.sucursal == stock.sucursal)
+                {
+                  //unStock = stock;
+                  producto.stock[indice] = stock;
+                }
+              });
+    //console.info('producto', producto);
+              this.productosService.updateProducto(producto);
+      
+              //Asigno el movimiento al producto
+              usuario = this.usuariosService.getUsuario(this.authService.getUid());
+      
+              if(usuario.movimientosUsuario == undefined)
+              {
+                usuario.movimientosUsuario = [];
+              }
+      
+              usuario.movimientosUsuario.push(movimiento);
+    //console.info('usuario', usuario);
+              this.usuariosService.updateUsuario(usuario);
+    
+              this.mostrarMsjOk();
+              this.formRegistro.reset();
+            });
+
+          });
+
+        }
+        else //No hay stock
+        {
+          this.mostrarMsjErrorStock();
+        }
+      //}
+
     }
     else
     {

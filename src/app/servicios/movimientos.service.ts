@@ -46,7 +46,7 @@ export class MovimientosService
     return this.movimientos;
   }
 
-  /*public getMovimiento(codigo: string): Movimiento
+  /*public getMovimiento(idCollection: string): Movimiento
   {
     let retorno: Movimiento = null;
 
@@ -54,14 +54,16 @@ export class MovimientosService
     {
       arrMovimientos.forEach(unMovimiento =>
       {
-        if(unMovimiento.codigo == codigo)
+        if(unMovimiento.idCollection == idCollection)
         {
           retorno = unMovimiento;
         }
       });
+    })
+    .then(() =>
+    {
+      return retorno;
     });
-
-    return retorno;
   }*/
 
   public getMovimientoPorId(idCollection: string): Observable<Movimiento> 
@@ -75,7 +77,7 @@ export class MovimientosService
     );
   }
 
-  public addMovimiento(movimiento: Movimiento): Promise<void | DocumentReference> 
+  public addMovimiento(movimiento: Movimiento): Promise<DocumentReference> 
   {
     return this.movimientoCollection.add(
     {
@@ -86,10 +88,10 @@ export class MovimientosService
       detalle: movimiento.detalle,
       codigoProducto: movimiento.codigoProducto
     })
-    .then((doc) =>
+    /*.then((doc) =>
     {
       this.SetData(doc);
-    });
+    })*/;
   }
  
   public updateMovimiento(movimiento: Movimiento): Promise<void> 

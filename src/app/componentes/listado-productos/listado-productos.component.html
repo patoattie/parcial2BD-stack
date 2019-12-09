@@ -21,13 +21,15 @@
 
 </table> -->
 
-<p-table *ngIf="!productosService.muestraAbm" #dt [columns]="cols" [value]="productos" sortMode="multiple" [paginator]="true" [rows]="6">
+<p-table *ngIf="!productosService.muestraAbm && !productosService.muestraMov" #dt [columns]="cols" [value]="productos" sortMode="multiple" [paginator]="true" [rows]="6">
     <ng-template pTemplate="caption">
       <p-toolbar>
         <div class="ui-toolbar-group-left">
           <button *ngIf="usuariosService.esAdmin()" type="button" #btn pButton icon="pi pi-plus" (click)="habilitaAbm(true)"></button>
           <button *ngIf="productoSeleccionado != null && usuariosService.esAdmin()" type="button" #btn pButton icon="pi pi-pencil" (click)="habilitaAbm(false)" style="margin-left: 2px;"></button>
           <button *ngIf="productoSeleccionado != null" type="button" #btn pButton icon="pi pi-table" (click)="muestraStock(true)" style="margin-left: 2px;"></button>
+          <button *ngIf="productoSeleccionado != null" type="button" #btn pButton icon="pi pi-sort-alt" (click)="habilitaMov()" style="margin-left: 2px;"></button>
+          <button *ngIf="productoSeleccionado != null" type="button" #btn pButton icon="pi pi-search" (click)="muestraMov(true)" style="margin-left: 2px;"></button>
         </div>
         <div class="ui-toolbar-group-right">        
             <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
@@ -70,6 +72,7 @@
 </p-table>
 
 <app-abm-producto *ngIf="productosService.muestraAbm" [producto]="productoSeleccionado" [sucursales]="sucursales"></app-abm-producto>
+<app-abm-movimiento *ngIf="productosService.muestraMov" [producto]="productoSeleccionado" [productos]="productos" [sucursales]="sucursales"></app-abm-movimiento>
 
 <p-dialog *ngIf="productoSeleccionado != null" header="Stock" [(visible)]="verStock" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70" 
         [maximizable]="false" [baseZIndex]="10000">
@@ -78,5 +81,15 @@
 
       <p-footer>
           <button type="button" pButton icon="pi pi-times" (click)="muestraStock(false)" label="Cerrar" class="ui-button-secondary"></button>
+      </p-footer>
+</p-dialog>
+
+<p-dialog *ngIf="productoSeleccionado != null" header="Movimientos" [(visible)]="verMov" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70" 
+        [maximizable]="false" [baseZIndex]="10000">
+
+      <app-listado-movimientos [esLov]="true" [movimientos]="productoSeleccionado.movimientosProducto" [productos]="productos" [sucursales]="sucursales"></app-listado-movimientos>
+
+      <p-footer>
+          <button type="button" pButton icon="pi pi-times" (click)="muestraMov(false)" label="Cerrar" class="ui-button-secondary"></button>
       </p-footer>
 </p-dialog>
