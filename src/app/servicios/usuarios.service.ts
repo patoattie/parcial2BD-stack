@@ -61,6 +61,21 @@ export class UsuariosService
     return retorno;
   }
 
+  public getUsuarioMov(uid: string, usuarios: Usuario[]): Usuario
+  {
+    let retorno: Usuario = null;
+
+    usuarios.forEach((unUsuario) =>
+    {
+      if(unUsuario.uid == uid)
+      {
+        retorno = unUsuario;
+      }
+    });
+
+    return retorno;
+  }
+
   public getUsuarioPorId(uid: string): Observable<Usuario> 
   {
     return this.usuarioCollection.doc<any>(uid).valueChanges().pipe(

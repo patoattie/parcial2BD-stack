@@ -4,6 +4,7 @@
         <div class="ui-toolbar-group-left">
           <!-- <button type="button" #btn pButton icon="pi pi-plus" (click)="habilitaAbm(true)"></button> -->
           <button *ngIf="usuarioSeleccionado != null && usuariosService.esAdmin()" type="button" #btn pButton icon="pi pi-pencil" (click)="habilitaAbm(false)" style="margin-left: 2px;"></button>
+          <button *ngIf="usuarioSeleccionado != null" type="button" #btn pButton icon="pi pi-search" (click)="muestraMov(true)" style="margin-left: 2px;"></button>
         </div>
         <div class="ui-toolbar-group-right">        
             <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
@@ -53,3 +54,13 @@
     </tr>
   </ng-template>
 </p-table>
+
+<p-dialog *ngIf="usuarioSeleccionado != null" header="Movimientos" [(visible)]="verMov" [modal]="true" [responsive]="true" [style]="{width: '1200px', minWidth: '200px'}" [minY]="70" 
+        [maximizable]="false" [baseZIndex]="10000">
+
+      <app-listado-movimientos [esLov]="true" [movimientos]="usuarioSeleccionado.movimientosUsuario" [productos]="productos" [sucursales]="sucursales"></app-listado-movimientos>
+
+      <p-footer>
+          <button type="button" pButton icon="pi pi-times" (click)="muestraMov(false)" label="Cerrar" class="ui-button-secondary"></button>
+      </p-footer>
+</p-dialog>

@@ -27,6 +27,7 @@ export class AbmMovimientoComponent implements OnInit
   public tipos: SelectItem[];
   @Input() sucursales: Sucursal[];
   @Input() productos: Producto[];
+  @Input() usuarios: Usuario[];
   @Input() producto: Producto;
 
   constructor(
@@ -227,7 +228,7 @@ export class AbmMovimientoComponent implements OnInit
               this.productosService.updateProducto(producto);
       
               //Asigno el movimiento al producto
-              usuario = this.usuariosService.getUsuario(this.authService.getUid());
+              usuario = this.usuariosService.getUsuarioMov(this.authService.getUid(), this.usuarios);
       
               if(usuario.movimientosUsuario == undefined)
               {

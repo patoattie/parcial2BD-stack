@@ -72,7 +72,7 @@
 </p-table>
 
 <app-abm-producto *ngIf="productosService.muestraAbm" [producto]="productoSeleccionado" [sucursales]="sucursales"></app-abm-producto>
-<app-abm-movimiento *ngIf="productosService.muestraMov" [producto]="productoSeleccionado" [productos]="productos" [sucursales]="sucursales"></app-abm-movimiento>
+<app-abm-movimiento *ngIf="productosService.muestraMov" [producto]="productoSeleccionado" [productos]="productos" [sucursales]="sucursales" [usuarios]="usuarios"></app-abm-movimiento>
 
 <p-dialog *ngIf="productoSeleccionado != null" header="Stock" [(visible)]="verStock" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70" 
         [maximizable]="false" [baseZIndex]="10000">

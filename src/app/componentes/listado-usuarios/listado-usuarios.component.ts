@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Usuario } from "../../clases/usuario";
 import { UsuariosService } from '../../servicios/usuarios.service';
 import { Sucursal } from '../../clases/sucursal';
+import { Producto } from '../../clases/producto';
 
 @Component({
   selector: 'app-listado-usuarios',
@@ -12,9 +13,11 @@ export class ListadoUsuariosComponent implements OnInit
 {
   @Input() usuarios: Usuario[];
   @Input() sucursales: Sucursal[];
+  @Input() productos: Producto[];
   @Input() esLov: boolean;
   public usuarioSeleccionado: Usuario = null;
   public cols: any[];
+  public verMov: boolean = false;
 
   constructor(public usuariosService: UsuariosService) { }
 
@@ -59,5 +62,10 @@ export class ListadoUsuariosComponent implements OnInit
     }
 
     this.usuariosService.muestraAbm = true;
+  }
+
+  public muestraMov(muestra: boolean): void
+  {
+    this.verMov = muestra;
   }
 }

@@ -3,6 +3,7 @@ import { Producto } from "../../clases/producto";
 import { ProductosService } from '../../servicios/productos.service';
 import { Sucursal } from '../../clases/sucursal';
 import { UsuariosService } from '../../servicios/usuarios.service';
+import { Usuario } from '../../clases/usuario';
 
 @Component({
   selector: 'app-listado-productos',
@@ -12,6 +13,7 @@ import { UsuariosService } from '../../servicios/usuarios.service';
 export class ListadoProductosComponent implements OnInit {
   @Input() productos: Producto[];
   @Input() sucursales: Sucursal[];
+  @Input() usuarios: Usuario[];
   @Input() esLov: boolean;
   public productoSeleccionado: Producto = null;
   public cols: any[];
