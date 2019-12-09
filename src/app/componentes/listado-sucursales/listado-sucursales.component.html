@@ -5,6 +5,7 @@
           <button *ngIf="usuariosService.esAdmin()" type="button" #btn pButton icon="pi pi-plus" (click)="habilitaAbm(true)"></button>
           <button *ngIf="sucursalSeleccionada != null && usuariosService.esAdmin()" type="button" #btn pButton icon="pi pi-pencil" (click)="habilitaAbm(false)" style="margin-left: 2px;"></button>
           <button *ngIf="sucursalSeleccionada != null" type="button" #btn pButton icon="pi pi-users" (click)="muestraUsuarios(true)" style="margin-left: 2px;"></button>
+          <button *ngIf="sucursalSeleccionada != null" type="button" #btn pButton icon="pi pi-search" (click)="muestraMov(true)" style="margin-left: 2px;"></button>
         </div>
         <div class="ui-toolbar-group-right">        
             <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
@@ -44,5 +45,15 @@
 
       <p-footer>
           <button type="button" pButton icon="pi pi-times" (click)="muestraUsuarios(false)" label="Cerrar" class="ui-button-secondary"></button>
+      </p-footer>
+</p-dialog>
+
+<p-dialog *ngIf="sucursalSeleccionada != null" header="Movimientos" [(visible)]="verMov" [modal]="true" [responsive]="true" [style]="{width: '1200px', minWidth: '200px'}" [minY]="70" 
+        [maximizable]="false" [baseZIndex]="10000">
+
+      <app-listado-movimientos [esLov]="true" [movimientos]="sucursalSeleccionada.movimientosSucursal" [productos]="productos" [sucursales]="sucursales"></app-listado-movimientos>
+
+      <p-footer>
+          <button type="button" pButton icon="pi pi-times" (click)="muestraMov(false)" label="Cerrar" class="ui-button-secondary"></button>
       </p-footer>
 </p-dialog>

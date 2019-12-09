@@ -84,7 +84,7 @@
       </p-footer>
 </p-dialog>
 
-<p-dialog *ngIf="productoSeleccionado != null" header="Movimientos" [(visible)]="verMov" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70" 
+<p-dialog *ngIf="productoSeleccionado != null" header="Movimientos" [(visible)]="verMov" [modal]="true" [responsive]="true" [style]="{width: '1200px', minWidth: '200px'}" [minY]="70" 
         [maximizable]="false" [baseZIndex]="10000">
 
       <app-listado-movimientos [esLov]="true" [movimientos]="productoSeleccionado.movimientosProducto" [productos]="productos" [sucursales]="sucursales"></app-listado-movimientos>

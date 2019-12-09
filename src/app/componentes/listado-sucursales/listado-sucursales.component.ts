@@ -2,6 +2,7 @@ import { Component, OnInit, Input} from '@angular/core';
 import { Sucursal } from "../../clases/sucursal";
 import { SucursalesService } from '../../servicios/sucursales.service';
 import { UsuariosService } from '../../servicios/usuarios.service';
+import { Producto } from '../../clases/producto';
 
 @Component({
   selector: 'app-listado-sucursales',
@@ -11,9 +12,11 @@ import { UsuariosService } from '../../servicios/usuarios.service';
 export class ListadoSucursalesComponent implements OnInit 
 {
   @Input() sucursales: Sucursal[];
+  @Input() productos: Producto[];
   public sucursalSeleccionada: Sucursal = null;
   public cols: any[];
   public verUsuarios: boolean = false;
+  public verMov: boolean = false;
 
   constructor(public sucursalesService: SucursalesService, public usuariosService: UsuariosService) { }
 
@@ -50,5 +53,10 @@ export class ListadoSucursalesComponent implements OnInit
   public muestraUsuarios(muestra: boolean): void
   {
     this.verUsuarios = muestra;
+  }
+
+  public muestraMov(muestra: boolean): void
+  {
+    this.verMov = muestra;
   }
 }
